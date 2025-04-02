@@ -7,7 +7,7 @@ output: html_document
 
 ---
 title: "Coraux connectés"
-author: " Amélie Leblanc, Amélie Rochon, Jules Saladzius"
+author: " Amélie Leblanc, Amélie Ironman-Rochon, Jules Saladzius"
 date: "2025-03-20"
 output: html_document
 ---
