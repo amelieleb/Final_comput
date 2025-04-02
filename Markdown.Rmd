@@ -4,9 +4,154 @@ author: "Amélie LeBlanc"
 date: "2025-04-02"
 output: html_document
 ---
+---
+title: "Coraux connectés"
+author: " Amélie Leblanc, Amélie Rochon, Jules Saladzius"
+date: "2025-03-20"
+output: html_document
+---
 
-Essaie markdown
+```{r heart_plot, echo=FALSE}
+library(ggplot2)
 
-Pourquoi tu veux pas???
+t <- seq(0, 2 * pi, length.out = 100)
 
-hellooooooo
+# Formule paramétrique pour dessiner un cœur
+heart <- data.frame(
+  x = 16 * sin(t)^3,
+  y = 13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t)
+)
+
+# Tracé du cœur
+ggplot(heart, aes(x, y)) +
+  geom_path(color = "pink", size = 2, lineend = "round") +  # Couleur rouge
+  theme_void() +
+  theme(panel.background = element_rect(fill = "white")) + # Fond noir
+  ggtitle("Paix dans le monde")
+
+```
+
+# **Partie 1 : Reproduction du modèle de l'article**
+
+## **1. Introduction**
+
+Décrire brièvement l’article choisi et la problématique étudiée.
+
+## **2. Question biologique (1 point)**
+
+Quelle est la question biologique abordée dans l’article ?
+
+## **3. Hypothèses (2 points)**
+
+Lister et expliquer les hypothèses étudiées dans l’article.
+
+## **4. Données ou informations pertinentes (6 points)**
+
+-   Présentation des données utilisées.
+
+-   Organigramme du modèle.
+
+-   Tableau des paramètres étudiés.
+
+## **5. Méthode (2 points)**
+
+-   Définition du modèle et des paramètres.
+
+-   Explication détaillée du modèle mathématique.
+
+## **6. Suppositions (4 points)**
+
+-   Suppositions faites dans l’étude.
+
+-   Suppositions sur les données et/ou sur le modèle.
+
+## **7. Calculs et implémentation en R (12 points)**
+
+```{r}
+# Chargement des bibliothèques nécessaires 
+library(deSolve) 
+library(ggplot2) 
+library(dplyr) 
+```
+
+-   Code R pour reproduire le modèle.
+
+-   Génération des figures du modèle.
+
+-   Ajout de commentaires explicatifs.
+
+## **8. Résultats (4 points)**
+
+-   Présentation des résultats obtenus.
+
+-   Figures et analyses.
+
+## **9. Interprétations biologiques (1 point)**
+
+-   Explication des résultats obtenus.
+
+-   Mise en relation avec les hypothèses de départ.
+
+# **Partie 2 : Proposition d’une nouvelle question** que vous souhaitez approcher qui approfondit l'etude de l'article que vous avez choisi.
+
+Pt faire ca dans word vu que c'est juste un texte ici.
+
+## **1. Titre différent de l'article original**
+
+Définir un titre qui reflète la nouvelle problématique.
+
+## **2. Identification du groupe**
+
+-   Nom du groupe et des membres.
+
+-   Adresses courriel.
+
+## **3. Résumé (5 points)**
+
+CopyEdit
+
+`# Résumé en 100 mots maximum.`
+
+## **4. Introduction (15 points)**
+
+-   Présenter la nouvelle question de recherche.
+
+-   Justifier son importance.
+
+-   Lien avec l’article original.
+
+## **5. Corps du texte (50 points)**
+
+Nommer les sections selon la logique du projet, par exemple :
+
+### **Méthodes**
+
+-   Description du modèle et des nouvelles hypothèses.
+
+-   Paramètres et implémentation en R.
+
+### **Résultats**
+
+-   Figures et analses.
+
+-   Comparaison avec les résultats de l’article original.
+
+## **6. Discussion (25 points)**
+
+-   Interprétation des résultats.
+
+-   Limites et implications biologiques.
+
+-   Perspectives futures.
+
+## **7. Références (5 points)**
+
+CopyEdit
+
+`# Insertion automatique des références avec BibTeX bibliography: Nom_de_groupe.bib`
+
+```{r}
+# Référence
+```
+
+# 
