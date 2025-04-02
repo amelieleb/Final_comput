@@ -4,6 +4,7 @@ author: "Amélie LeBlanc"
 date: "2025-04-02"
 output: html_document
 ---
+
 ---
 title: "Coraux connectés"
 author: " Amélie Leblanc, Amélie Rochon, Jules Saladzius"
@@ -155,3 +156,5 @@ CopyEdit
 ```
 
 # 
+
+ajjloo c'est jules 4H16
