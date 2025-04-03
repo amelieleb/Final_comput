@@ -4,27 +4,6 @@ author: "Arthrite, Jeannot et Acétaminophène"
 date: "2025-03-20"
 output: html_document
 ---
-blablaba
-```{r heart_plot, echo=FALSE}
-library(ggplot2)
-
-t <- seq(0, 2 * pi, length.out = 100)
-
-# Formule paramétrique pour dessiner un cœur
-heart <- data.frame(
-  x = 16 * sin(t)^3,
-  y = 13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t)
-)
-
-# Tracé du cœur
-ggplot(heart, aes(x, y)) +
-  geom_path(color = "pink", size = 2, lineend = "round") +  # Couleur rouge
-  theme_void() +
-  theme(panel.background = element_rect(fill = "white")) + # Fond noir
-  ggtitle("Paix dans le monde")
-
-```
-
 # **Partie 1 : Reproduction du modèle de l'article**
 
 ## **1. Introduction**
@@ -35,47 +14,141 @@ Décrire brièvement l’article choisi et la problématique étudiée.
 
 ## **2. Question biologique (1 point)**
 
-Quelle est l'importance du rôles des trois sources spatialement différentes de larves (allochtone, locale et autochtone) sur la croissance des populations coraliennes de Pocillopora spp. d'avant-récif et d'après-réci de la métapopulation du récif coralien Moorea en Polynésie française, suite à un déclin important de leur abondance.
+Quelle est l'importance du rôle de la croissance asexuée et des trois sources spatialement différentes de larves (allochtone, locale et autochtone) sur la croissance des sous-populations coraliennes d'avant-récif et d'apprès-récif de Pocillopora spp. de la métapopulation du récif coralien Moorea en Polynésie française, entre 2010 et 2019, suite à un déclin important de leur abondance?
 
-*Question*: 1. Est-ce qu'on doit spécifier les différentes sources (ex. échelles spatiale) 2. Spécification des années? 3. "importance" est-ce que c'est un bon terme?
 
 ------------------------------------------------------------------------
 
 ## **3. Hypothèses (2 points)**
 
-Lister et expliquer les hypothèses étudiées dans l’article.
+Hypothèse 1: La croissance de la population est influencée par la croissance asexuée des individus déjà présent dans la sous-population.
 
-Hypothèse 1: La croissance de la population est influencée par la croissance asexuées, du recrutement sexuel soutenu par les larves originaires de la parcelle, par les larves locales et par les larves de coraux plus distants.
+*Explications: Les nouveaux polypes proviennent de la reproduction asexuée chez les individus matures sessiles au sein des populations*
 
-Hypothèse 2: Il est difficile de comprendre la résilience écologique d'un récif sans comprendre les contributions relatives et la dynamique
 
-Hypothèse 3: Une mort locale quasi complète de l'avant-récif en 2010 pour avoir une rôle sur le taux de croissance/rétablissement
 
-*Questions*: 1. Est-ce qu'on doit séparer les hypothèses pour chaque type de provenance des larves, ou ex. reproduction asexué vs sexué? 2. Qu'est-ce que tu entends par expliquer? 3. Hypothèse 2? 4.
+Hypothèse 2: La croissance de la population est influencée par la reproduction sexuée de larves de provenance autochtone, c'est-à-dire située à 1-100m de la sous-population.
+
+*Explication: Les larves proviennent directement de la sous-population*
+
+
+
+Hypothèse 3: La croissance de la population est influencée par la reproduction sexuée de larves de provenance locale, c'est-à-dire située à 100m - 10km de la sous-population.
+
+*Explication: Les larves proviennent de la sous-population adjointe*
+
+
+
+Hypothèse 4: La croissance de la population est influencée par la reproduction sexuée de larves de provenance allochtone, c'est-à-dire situées à 10-100km de la sous-population.
+
+*Explication: Les larves proviennent d'une population plus éloignée en raison de la fragmentation*
+
 
 ------------------------------------------------------------------------
 
 ## **4. Données ou informations pertinentes (6 points)**
 
--   Présentation des données utilisées.
 
--   Organigramme du modèle.
+*Données utilisées* 
 
--   Tableau des paramètres étudiés.
+Les données empiriques utilisées liées aux au récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme (LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018.
 
-*Données utilisées* Utilisation des données empiriques liées aux au récif corallien Moorea en Polynésie française, récoltés dans le cadre d'un projet de séries chronologiques écologiques à long terme (LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018.
+
+*Organigramme du modèle*
+
+
+
 
 *Tableau des paramètres*
 
-\|:------:\|:-----------------:\| \| symboles \| Noms des paramètres \| \| P \| Taille de la population \| \| I \| Immigration nette \| \| K \| Capacité de soutien \| \| r \| Prolifération et mortalité asexuée \| \| \$\sigma \| Classe de taille des recrues \| \| $f$ \| Fécondité \| \| truc bizarre \| Probabilité de maturation larvaire \| \| $\gamma$ \| Dispersion larvaire \| \| $\beta$ \| Probabilité de recrutement \|
+| symboles | Noms des paramètres | 
+|:------:|:-----------------:| 
+| P | Taille de la population | 
+| I | Immigration nette | 
+| K | Capacité de soutien | 
+| r | Prolifération et mortalité asexuée | 
+| $\sigma$ | Classe de taille des recrues | 
+| $f$ | Fécondité | 
+| $\zeta$ | Probabilité de maturation larvaire | 
+| $\gamma$ | Dispersion larvaire | 
+| $\beta$ | Probabilité de recrutement |
 
-*Questions*: 1. Onigramme comme figure 1 dans article? 2. Seulement figure et noms pour les paramètres? --------------------------------------------------------------------------------
+
+Inclure la matrice Cij?
+
+ --------------------------------------------------------------------------------
 
 ## **5. Méthode (2 points)**
 
--   Définition du modèle et des paramètres.
+**Modèle des sous-populations**
 
--   Explication détaillée du modèle mathématique.
+Le modèle comprend les équations suivantes:
+
+Croissance des sous-populations arrière-récif (P~b~)
+
+$$\frac{dP_b}{dt} = (P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} ) + \sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )} P_f + I_b) ( 1 - \frac{P_b}{Kb} )$$
+
+Croissance des sous-populations avant-récif (P~f~)
+
+$$\frac{dP_f}{dt} = (P_b (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} ) + \sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )} P_b + I_f) ( 1 - \frac{P_f}{Kf} )$$
+
+
+Les variables utilisées dans les équations sont:
+
+P = Taille de la population
+
+I = Immigration nette 
+
+K = Capacité de soutien 
+
+r = Prolifération et mortalité asexuée 
+
+$\sigma$ = Classe de taille des recrues 
+
+$f$ = Fécondité 
+
+$\zeta$ = Probabilité de maturation larvaire 
+
+$\gamma$ = Dispersion larvaire 
+
+$\beta$ = Probabilité de recrutement
+
+
+Les indices $b$ et $f$ représentent respectivement les sous-populations d'arrière-récif et d'avant-récif.
+
+La fécondité ($f$), la probabilité de maturation larvaire ($\zeta$), la dispersion larvaire ($\gamma$), la probabilité de recrutement ($\beta$) et la classe de taille des recrues ($\sigma$) influencent l'ampleur de la reproduction sexuée par recrutement (re).
+
+
+
+Les équations peuvent être simplifiée ainsi:
+
+$$\frac{dP}{dt} = [PR + 1](1- \frac{P}{K})$$
+
+où
+
+
+R = taux de croissance $R=r_a+r_e$
+r~e~= $f$$\zeta$$\gamma$$\beta$$\sigma$
+
+
+**Fonction utiliser**
+Simulation avec de Monte Carlo (n=50)
+Utilisation de la fonction odeint (package Scipy)?
+
+$$(C_{ij} P_i(t) + Ii ) (1 - \frac{P_i(t)}{K_i} ) < \rho_i(t)$$
+
+où
+
+C = Matrice d'échange
+
+P = Taille de la population
+
+I = Immigration nette
+
+K = Capacité de soutien
+
+$\rho$ = Flux de recrutement
+
 
 ------------------------------------------------------------------------
 
@@ -85,16 +158,38 @@ Hypothèse 3: Une mort locale quasi complète de l'avant-récif en 2010 pour avo
 
 -   Suppositions sur les données et/ou sur le modèle.
 
+*Données*
+
+*Modèle*
+
+*Autres*
+Il existe une métapopulation stade à laquelle les sous-populations sont reliées de manière constante.
+
+Le susbtrat disponible pour la croissance est limité, la capacité de charge est détermine par une combinaison de facteurs locaux (prédation, maladie et dynamique de compétition)
+
+Tous les paramètres du modèle à l'exception de P sont invariants dans le temps
+
+Les récifs sont périodiquement affectés par des perturbations (ex. étoiles de mer à couronne d'épine, cyclones, blanchissement)
+
+L'avant-récif et l'arrière-récif sont impactés différement (avant-récif à plus de perturbation).
+
+Les sous-populations ont évolué de manière différentes depuis la grosse perturbation (Avant-récif = couverture coralienne plus forte, après-récif = déclin corail et hausse macroalgues)
+
+Avant-récif a eu une récupération rapide en 2011
+
+La moitié de tous les oeufs sont fécondés et produisent des planulas viables.
+
+Utiliser un modèle adimensionnel permet de prendre en compte simultanément la croissance asexuée individuelle et la croissance induite par le recrutement, sans avoir à modéliser les transitions entre les stades de vie.
+
+Il ne peut y avoir plus de recrues issues des populations locales que le nombre de larves disponibles.
+
+Les recrues qui parviennent à maturité en petites colonies doivent également être contrainte ($\beta$<=1).
+
+L'auto-recrutement est identique à la croissance asexuées et il s'agit d'une croissance exponentielle non linéaire.
+
 ------------------------------------------------------------------------
 
 ## **7. Calculs et implémentation en R (12 points)**
-
-```{r}
-# Chargement des bibliothèques nécessaires 
-library(deSolve) 
-library(ggplot2) 
-library(dplyr) 
-```
 
 -   Code R pour reproduire le modèle.
 
@@ -181,6 +276,7 @@ CopyEdit
 ```{r}
 # Référence
 ```
+<<<<<<< HEAD
 ---
 title: "Corail"
 author: "Amélie LeBlanc"
@@ -338,3 +434,5 @@ CopyEdit
 # Référence
 ```
 
+=======
+>>>>>>> c03fab1b12df4372102695b1383e2f950376b554
