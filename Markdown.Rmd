@@ -276,6 +276,284 @@ CopyEdit
 ```{r}
 # Référence
 ```
+---
+title: "Coraux connectés"
+author: "Arthrite, Jeannot et Acétaminophène"
+date: "2025-03-20"
+output: html_document
+---
+# **Partie 1 : Reproduction du modèle de l'article**
+
+## **1. Introduction**
+
+Décrire brièvement l’article choisi et la problématique étudiée.
+
+------------------------------------------------------------------------
+
+## **2. Question biologique (1 point)**
+
+Quelle est l'importance du rôle de la croissance asexuée et des trois sources spatialement différentes de larves (allochtone, locale et autochtone) sur la croissance des sous-populations coraliennes d'avant-récif et d'apprès-récif de Pocillopora spp. de la métapopulation du récif coralien Moorea en Polynésie française, entre 2010 et 2019, suite à un déclin important de leur abondance?
+
+
+------------------------------------------------------------------------
+
+## **3. Hypothèses (2 points)**
+
+Hypothèse 1: La croissance de la population est influencée par la croissance asexuée des individus déjà présent dans la sous-population.
+
+*Explications: Les nouveaux polypes proviennent de la reproduction asexuée chez les individus matures sessiles au sein des populations*
+
+
+
+Hypothèse 2: La croissance de la population est influencée par la reproduction sexuée de larves de provenance autochtone, c'est-à-dire située à 1-100m de la sous-population.
+
+*Explication: Les larves proviennent directement de la sous-population*
+
+
+
+Hypothèse 3: La croissance de la population est influencée par la reproduction sexuée de larves de provenance locale, c'est-à-dire située à 100m - 10km de la sous-population.
+
+*Explication: Les larves proviennent de la sous-population adjointe*
+
+
+
+Hypothèse 4: La croissance de la population est influencée par la reproduction sexuée de larves de provenance allochtone, c'est-à-dire situées à 10-100km de la sous-population.
+
+*Explication: Les larves proviennent d'une population plus éloignée en raison de la fragmentation*
+
+
+------------------------------------------------------------------------
+
+## **4. Données ou informations pertinentes (6 points)**
+
+
+*Données utilisées* 
+
+Les données empiriques utilisées liées aux au récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme (LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018.
+
+
+*Organigramme du modèle*
+
+
+
+
+*Tableau des paramètres*
+
+| symboles | Noms des paramètres | 
+|:------:|:-----------------:| 
+| P | Taille de la population | 
+| I | Immigration nette | 
+| K | Capacité de soutien | 
+| r | Prolifération et mortalité asexuée | 
+| $\sigma$ | Classe de taille des recrues | 
+| $f$ | Fécondité | 
+| $\zeta$ | Probabilité de maturation larvaire | 
+| $\gamma$ | Dispersion larvaire | 
+| $\beta$ | Probabilité de recrutement |
+
+
+Inclure la matrice Cij?
+
+ --------------------------------------------------------------------------------
+
+## **5. Méthode (2 points)**
+
+**Modèle des sous-populations**
+
+Le modèle comprend les équations suivantes:
+
+Croissance des sous-populations arrière-récif (P~b~)
+
+$$\frac{dP_b}{dt} = (P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} ) + \sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )} P_f + I_b) ( 1 - \frac{P_b}{Kb} )$$
+
+Croissance des sous-populations avant-récif (P~f~)
+
+$$\frac{dP_f}{dt} = (P_b (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} ) + \sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )} P_b + I_f) ( 1 - \frac{P_f}{Kf} )$$
+
+
+Les variables utilisées dans les équations sont:
+
+P = Taille de la population
+
+I = Immigration nette 
+
+K = Capacité de soutien 
+
+r = Prolifération et mortalité asexuée 
+
+$\sigma$ = Classe de taille des recrues 
+
+$f$ = Fécondité 
+
+$\zeta$ = Probabilité de maturation larvaire 
+
+$\gamma$ = Dispersion larvaire 
+
+$\beta$ = Probabilité de recrutement
+
+
+Les indices $b$ et $f$ représentent respectivement les sous-populations d'arrière-récif et d'avant-récif.
+
+La fécondité ($f$), la probabilité de maturation larvaire ($\zeta$), la dispersion larvaire ($\gamma$), la probabilité de recrutement ($\beta$) et la classe de taille des recrues ($\sigma$) influencent l'ampleur de la reproduction sexuée par recrutement (re).
+
+
+
+Les équations peuvent être simplifiée ainsi:
+
+$$\frac{dP}{dt} = [PR + 1](1- \frac{P}{K})$$
+
+où
+
+
+R = taux de croissance $R=r_a+r_e$
+r~e~= $f$$\zeta$$\gamma$$\beta$$\sigma$
+
+
+**Fonction utiliser**
+Simulation avec de Monte Carlo (n=50)
+Utilisation de la fonction odeint (package Scipy)?
+
+$$(C_{ij} P_i(t) + Ii ) (1 - \frac{P_i(t)}{K_i} ) < \rho_i(t)$$
+
+où
+
+C = Matrice d'échange
+
+P = Taille de la population
+
+I = Immigration nette
+
+K = Capacité de soutien
+
+$\rho$ = Flux de recrutement
+
+
+------------------------------------------------------------------------
+
+## **6. Suppositions (4 points)**
+
+-   Suppositions faites dans l’étude.
+
+-   Suppositions sur les données et/ou sur le modèle.
+
+*Données*
+
+*Modèle*
+
+*Autres*
+Il existe une métapopulation stade à laquelle les sous-populations sont reliées de manière constante.
+
+Le susbtrat disponible pour la croissance est limité, la capacité de charge est détermine par une combinaison de facteurs locaux (prédation, maladie et dynamique de compétition)
+
+Tous les paramètres du modèle à l'exception de P sont invariants dans le temps
+
+Les récifs sont périodiquement affectés par des perturbations (ex. étoiles de mer à couronne d'épine, cyclones, blanchissement)
+
+L'avant-récif et l'arrière-récif sont impactés différement (avant-récif à plus de perturbation).
+
+Les sous-populations ont évolué de manière différentes depuis la grosse perturbation (Avant-récif = couverture coralienne plus forte, après-récif = déclin corail et hausse macroalgues)
+
+Avant-récif a eu une récupération rapide en 2011
+
+La moitié de tous les oeufs sont fécondés et produisent des planulas viables.
+
+Utiliser un modèle adimensionnel permet de prendre en compte simultanément la croissance asexuée individuelle et la croissance induite par le recrutement, sans avoir à modéliser les transitions entre les stades de vie.
+
+Il ne peut y avoir plus de recrues issues des populations locales que le nombre de larves disponibles.
+
+Les recrues qui parviennent à maturité en petites colonies doivent également être contrainte ($\beta$<=1).
+
+L'auto-recrutement est identique à la croissance asexuées et il s'agit d'une croissance exponentielle non linéaire.
+
+------------------------------------------------------------------------
+
+## **7. Calculs et implémentation en R (12 points)**
+
+-   Code R pour reproduire le modèle.
+
+-   Génération des figures du modèle.
+
+-   Ajout de commentaires explicatifs.
+
+------------------------------------------------------------------------
+
+## **8. Résultats (4 points)**
+
+-   Présentation des résultats obtenus.
+
+-   Figures et analyses.
+
+------------------------------------------------------------------------
+
+## **9. Interprétations biologiques (1 point)**
+
+-   Explication des résultats obtenus.
+
+-   Mise en relation avec les hypothèses de départ.
+
+------------------------------------------------------------------------
+
+# **Partie 2 : Proposition d’une nouvelle question** que vous souhaitez approcher qui approfondit l'etude de l'article que vous avez choisi.
+
+Pt faire ca dans word vu que c'est juste un texte ici.
+
+## **1. Titre différent de l'article original**
+
+Définir un titre qui reflète la nouvelle problématique.
+
+## **2. Identification du groupe**
+
+-   Nom du groupe et des membres.
+
+-   Adresses courriel.
+
+## **3. Résumé (5 points)**
+
+CopyEdit
+
+`# Résumé en 100 mots maximum.`
+
+## **4. Introduction (15 points)**
+
+-   Présenter la nouvelle question de recherche.
+
+-   Justifier son importance.
+
+-   Lien avec l’article original.
+
+## **5. Corps du texte (50 points)**
+
+Nommer les sections selon la logique du projet, par exemple :
+
+### **Méthodes**
+
+-   Description du modèle et des nouvelles hypothèses.
+
+-   Paramètres et implémentation en R.
+
+### **Résultats**
+
+-   Figures et analses.
+
+-   Comparaison avec les résultats de l’article original.
+
+## **6. Discussion (25 points)**
+
+-   Interprétation des résultats.
+
+-   Limites et implications biologiques.
+
+-   Perspectives futures.
+
+## **7. Références (5 points)**
+
+CopyEdit
+
+`# Insertion automatique des références avec BibTeX bibliography: Nom_de_groupe.bib`
+
+```{r}
+# Référence
+```
 <<<<<<< HEAD
 ---
 title: "Corail"
