@@ -36,15 +36,42 @@ ggplot(heart, aes(x, y)) +
 
 ## **1. Introduction**
 
-Décrire brièvement l’article choisi et la problématique étudiée.
+Les récifs coralliens sont grandement affecté par des perturbations anthropique mettant en péril leur survie. Bien qu'il existe déjà plusieurs modèles sur la dynamique démographique applicables à plusieurs populations coralliennes, ceux-ci ne prennent généralement en compte que la naissance, la mortalité et la croissance. 
+
+L'équipe de recherche de Torres et al. ce sont toutefois intéressé sur les facteurs influencant cette dynamique démographique. Ainsi, ils ont pris les choses en main pour créer un modèle qui pourrait expliquer les importance relatives associées à la reproduction asexuée ainsi qu'au recrutement des larves pélagiques de corail en provenance locale ou externe qui pourrait être utiliser sur des communautés de populations hétérogènes et fragmentées. 
+
+L'étude (2010 à 2018) est basée sur l'évolution de deux populations (LTER1 et LTER2) de la côte nord du récif corallien de Moorea en Polynésie française. suite à une diminution presque complète du récif en 2010 après une attaque des étoiles de mers à épines, suivit d'une hausse rapide de l'abondance de corail. 
 
 ## **2. Question biologique (1 point)**
 
+<<<<<<< HEAD
 Quelle est la question biologique abordée dans l’article ?
 
 ## **3. Hypothèses (2 points)**
 
 Lister et expliquer les hypothèses étudiées dans l’article.
+=======
+Quelle est l'importance relative de la croissance asexuée et du recrutement de larves provenant de trois sources spatialement différentes (allochtone, locale et autochtone) sur la croissance des sous-populations coraliennes de Pocillopora spp. d'avant-récif et d'apprès-récif, de la métapopulation du récif coralien Moorea en Polynésie française, entre 2010 et 2019, suite à un déclin important de leur abondance?
+
+
+------------------------------------------------------------------------
+
+## **3. Hypothèses (2 points)**
+
+Hypothèse 1: La croissance de la population est influencée par la croissance asexuée des individus matures déjà présent dans la sous-population.
+
+
+Hypothèse 2: La croissance de la population est influencée par la reproduction sexuée du au recrutement de larves de provenance autochtone, c'est-à-dire située à 1-100m de la sous-population.
+
+
+Hypothèse 3: La croissance de la population est influencée par la reproduction sexuée  du au recrutement de larves de provenance locale, c'est-à-dire située à 100m - 10km de la sous-population (sous-population à proximité).
+
+
+Hypothèse 4: La croissance de la population est influencée par la reproduction sexuée du au recrutement de larves de provenance allochtone, c'est-à-dire situées à 10-100km de la sous-population (sous-population non observé dans la recherche).
+
+
+------------------------------------------------------------------------
+>>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **4. Données ou informations pertinentes (6 points)**
 
@@ -52,20 +79,139 @@ Lister et expliquer les hypothèses étudiées dans l’article.
 
 -   Organigramme du modèle.
 
+<<<<<<< HEAD
 -   Tableau des paramètres étudiés.
+=======
+Les données empiriques utilisées liées aux au récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme du récif corallien Moorea (MCR LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018, puisqu'il y a eu la regénérescence la plus rapide.
+
+Utilisation de donnée du genre Pocillopora spp.
+
+Certains paramètres ont été estimé à partir de données d'ailleurs:
+- Fécondité est une moyenne normalisé de plusieurs récifs coralliens (Maldives, Hawaii, mer Rouge)  F = 95+-28 oeufs / polype / an
+-Google Earth pour l'estimation du substrats durs disponibles
+
+
+*Organigramme du modèle*
+
+![](Organigrame.png)
+
+
+*Tableau des paramètres*
+
+| symboles | Noms des paramètres | 
+|:------:|:-----------------:| 
+| ra | Croissance asexuée | 
+| Au | Recrutement autochtone (comprend $\sigma$, $f$, $\zeta$, $\gamma$, $\beta$ de la population receveuse) | 
+| L | Recrutement local (comprend $\sigma$, $f$, $\zeta$, $\gamma$, $\beta$ de la population donneuse) | 
+| I | Recrutement allochtone | 
+
+
+ --------------------------------------------------------------------------------
+>>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **5. Méthode (2 points)**
 
 -   Définition du modèle et des paramètres.
 
+<<<<<<< HEAD
 -   Explication détaillée du modèle mathématique.
+=======
+Le modèle comprend les équations suivantes:
+
+Croissance des sous-populations arrière-récif (P~b~)
+
+$$\frac{dP_b}{dt} = (P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} ) + \sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )} P_f + I_b) ( 1 - \frac{P_b}{Kb} )$$
+
+Croissance des sous-populations avant-récif (P~f~)
+
+$$\frac{dP_f}{dt} = (P_b (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} ) + \sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )} P_b + I_f) ( 1 - \frac{P_f}{Kf} )$$
+
+
+Les variables utilisées dans les équations sont:
+
+| symboles | Noms des paramètres | 
+|:------:|:-----------------| 
+| P | Taille de la population | 
+| I | Immigration nette | 
+| K | Capacité de soutien | 
+| r | Prolifération et mortalité asexuée | 
+| $\sigma$ | Classe de taille des recrues | 
+| $f$ | Fécondité | 
+| $\zeta$ | Probabilité de maturation larvaire | 
+| $\gamma$ | Dispersion larvaire | 
+| $\beta$ | Probabilité de recrutement |
+
+
+Les indices $b$ et $f$ représentent respectivement les sous-populations d'arrière-récif et d'avant-récif.
+
+La fécondité ($f$), la probabilité de maturation larvaire ($\zeta$), la dispersion larvaire ($\gamma$), la probabilité de recrutement ($\beta$) et la classe de taille des recrues ($\sigma$) influencent l'ampleur de la reproduction sexuée par recrutement (re).
+
+
+
+Les équations peuvent être simplifiée ainsi:
+
+$$\frac{dP}{dt} = [PR + 1](1- \frac{P}{K})$$
+
+où
+
+
+R = taux de croissance $R=r_a+r_e$
+r~e~= $f$$\zeta$$\gamma$$\beta$$\sigma$
+
+
+**Fonction utilisée**
+Simulation avec de Monte Carlo (n=50)
+Utilisation de la fonction odeint (package Scipy)?
+
+$$(C_{ij} P_i(t) + Ii ) (1 - \frac{P_i(t)}{K_i} ) < \rho_i(t)$$
+
+où
+
+C = Matrice d'échange
+
+P = Taille de la population
+
+I = Immigration nette
+
+K = Capacité de soutien
+
+$\rho$ = Flux de recrutement
+
+
+------------------------------------------------------------------------
+>>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **6. Suppositions (4 points)**
 
--   Suppositions faites dans l’étude.
+- Il existe une métapopulation stade à laquelle les sous-populations sont reliées de manière constante.
 
--   Suppositions sur les données et/ou sur le modèle.
+- Le susbtrat disponible pour la croissance est limité, la capacité de charge est détermine par une combinaison de facteurs locaux (prédation, maladie et dynamique de compétition).
 
+<<<<<<< HEAD
+=======
+- Tous les paramètres du modèle à l'exception de P sont invariants dans le temps.
+
+- Les récifs sont périodiquement affectés par des perturbations (ex. étoiles de mer à couronne d'épine, cyclones, blanchissement).
+
+- L'avant-récif et l'arrière-récif sont impactés différement (avant-récif à plus de perturbation).
+
+- Les sous-populations ont évolué de manière différentes depuis la grosse perturbation (avant-récif = couverture coralienne plus forte, après-récif = déclin corail et hausse macroalgues).
+
+- L'avant-récif a eu une récupération rapide en 2011.
+
+- La moitié de tous les oeufs sont fécondés et produisent des planulas viables.
+
+- Utiliser un modèle adimensionnel permet de prendre en compte simultanément la croissance asexuée individuelle et la croissance induite par le recrutement, sans avoir à modéliser les transitions entre les stades de vie.
+
+- Il ne peut y avoir plus de recrues issues des populations locales que le nombre de larves disponibles.
+
+- Les recrues qui parviennent à maturité en petites colonies doivent également être contraintes ($\beta$<=1).
+
+- L'auto-recrutement est identique à la croissance asexuée et il s'agit d'une croissance exponentielle non linéaire.
+
+------------------------------------------------------------------------
+
+>>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 ## **7. Calculs et implémentation en R (12 points)**
 
 ```{r}
@@ -95,7 +241,13 @@ library(dplyr)
 
 # **Partie 2 : Proposition d’une nouvelle question** que vous souhaitez approcher qui approfondit l'etude de l'article que vous avez choisi.
 
-Pt faire ca dans word vu que c'est juste un texte ici.
+
+# *Idées de recherche*
+1. Modélisation sur différente abondance initiale (ampleur de perturbation différente, fréquence) pour évaluer quelle recrutement prend le dessus. Le texte d'écrit déjà un peu les résultats qu'on devrait voir, mais on pourrait modéliser pour avoir un visuel en ajoutant des perturbations d'ampleur différente à différente férquence.
+
+2. Ajout d'une composante de compétition (macroalgue) sur le recrutement ou ancrage des larves. Indiquer que dans l'arrièce-récif, il y a une plus faible croissance de corail du à la présence de microalgue. Est-ce qu'il serait possible de modéliser l'impact d'un prédateur sur la croissance (modèle prédateur-proie?).
+
+
 
 ## **1. Titre différent de l'article original**
 
