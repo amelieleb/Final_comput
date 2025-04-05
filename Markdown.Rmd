@@ -184,13 +184,20 @@ $\rho$ = Flux de recrutement
 
 ------------------------------------------------------------------------
 
-## **9. Interprétations biologiques (1 point)**
+## **9. Interprétation biologique (1 point)**
 
 -   Explication des résultats obtenus.
 
-Avec les graphiques que nous avons obtenu, nous pouvons arriver à diverses interprétations. La figure 2 montre la trajectoire de récupération de la couverture corrallienne, selon la modélisation de deux sous-populations. Ce que l'on peut comprendre de a figure est que l'interaction qui existe entre l'auto-recrutement et l'immigration affecte fortement la trajectoire de la récupération de la couverture corrallienne. Cette trajectoire est représentée par la courbe de la population allochtone. 
-
 -   Mise en relation avec les hypothèses de départ.
+
+La présente étude porte sur une métapopulation de coraux de la Polynésie française. Les chercheurs ont regardé comment les la croissance asexuée des polypes, les populations autochtones, les populations locales et les populations allochtones influençaient la récupération de la population après une perturbation. 
+
+La figure 2 nous démontre les différentes trajectoires non-dimensionnelles de la population. Ce graphique illustre l’interaction entre l’immigration et l’autorecrutement. Nous pouvons comprendre que l’immigration, représentée par la ligne jaune, possède une plus grande influence que la croissance intrinsèque de la population, représentée par la ligne bleue, en ce qui a trait à la récupération après une perturbation. Ce graphique représente simplement un modèle de base, qui nous a permis de créer les autres graphiques pour répondre à notre question de recherche.
+
+Les figures 3a et 3b, représentant deux sites différentes du récif avant nous démontrent la croissance totale de la population (en noir), provenant des sources autochtones (en bleu) et allochtones (en jaune). De plus, les figures 3c et 3d représentent les composants contribuant au changement de la croissance de la population aux deux mêmes sites du récif avant. Les figures 4a et 4b représentent des reconstructions des trajectoires de population sur deux sites du récif arrière. Les figures 4c et 4d représentent les composants contribuant aux changements de la croissance de la population. Si l’on regarde de manière générale à travers ces graphiques, nous pouvons voir que le récif avant est beaucoup plus propice à la prolifération asexuée que le récif arrière. En effet, le récif arrière possède une croissance intrinsèque compensée par la mortalité où la récupération par les autres populations de coraux peut être plus difficile, et ce, même avec une certaine subvention des larves provenant du récif avant. De plus, étant donné que les différents habitats sont connectés de manière hydrodynamique, il est probable que les conditions du récif arrière ne soient pas propices à la fixation et au recrutement des larves. Comme on peut le remarquer dans différents graphiques du récif arrière, la couverture corallienne diminue plus le temps avance jusqu’à se stabiliser, et la mortalité de la population augmente jusqu’à se stabiliser également. Pour ce qui est du récif avant, nous pouvons voir dans les graphiques 3a et 3b, autant l’apport allochtone que l’apport autochtone contribue à l’accroissement de la population. D’autre part, les figures 3c et 3d nous démontrent que dans les premières années, c’est l’immigration qui permet un apport plus grand à la population. Or, précisément en 2013, la croissance asexuée des polypes domine largement la récupération, et l’autorecrutement des populations produites localement surpasse la subvention de l’immigration. 
+
+Avec l’observation des graphiques et l’interprétation biologique découlant de ceux-ci, nous pouvons confirmer notre première hypothèse soutenant que la croissance de la population est influencée davantage par la croissance asexuée des individus matures déjà présents dans la sous-population. Ce type de croissance surpasse largement l’immigration. L’autorecrutement dépasse également l’immigration à long terme, mais c’est tout de même la croissance asexuée des polypes qui est la plus influente.
+
 
 ------------------------------------------------------------------------
 
