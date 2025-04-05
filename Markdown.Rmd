@@ -78,11 +78,11 @@ Le modèle comprend les équations suivantes:
 
 Croissance des sous-populations arrière-récif (P~b~)
 
-$$\frac{dP_b}{dt} = (P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} ) + \sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )} P_f + I_b) ( 1 - \frac{P_b}{Kb} )$$
+$$\frac{dP_b}{dt} = ( [P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} )] + [P_f (\sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )}) ] + I_b) ( 1 - \frac{P_b}{Kb} )$$
 
 Croissance des sous-populations avant-récif (P~f~)
 
-$$\frac{dP_f}{dt} = (P_b (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} ) + \sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )} P_b + I_f) ( 1 - \frac{P_f}{Kf} )$$
+$$\frac{dP_f}{dt} = ([P_f (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} )] + [P_b(\sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )})] + I_f) ( 1 - \frac{P_f}{Kf} )$$
 
 
 Les variables utilisées dans les équations sont:
@@ -210,13 +210,20 @@ Définir un titre qui reflète la nouvelle problématique.La première figure re
 
 ## **2. Identification du groupe**
 
--   Nom du groupe et des membres.
+Arthrite, Jeannot et Acétaminophène
 
--   Adresses courriel.
+Amélie LeBlanc
+*Amelie.LeBlanc5@USherbrooke.ca*
+
+Jules Saladzius
+*Jules.Saladzius@USherbrooke.ca*
+
+Amélie Ironman-Rochon
+*Amelie.Ironmam-Rochon@USherbrooke.ca*
+
+
 
 ## **3. Résumé (5 points)**
-
-CopyEdit
 
 `# Résumé en 100 mots maximum.`
 
