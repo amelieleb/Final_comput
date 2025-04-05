@@ -1,37 +1,9 @@
 ---
-title: "Corail"
-author: "Amélie LeBlanc"
-date: "2025-04-02"
-output: html_document
----
-
----
 title: "Coraux connectés"
-author: " Amélie Leblanc, Amélie Rochon, Jules Saladzius"
+author: "Arthrite, Jeannot et Acétaminophène"
 date: "2025-03-20"
 output: html_document
 ---
-
-```{r heart_plot, echo=FALSE}
-library(ggplot2)
-
-t <- seq(0, 2 * pi, length.out = 100)
-
-# Formule paramétrique pour dessiner un cœur
-heart <- data.frame(
-  x = 16 * sin(t)^3,
-  y = 13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t)
-)
-
-# Tracé du cœur
-ggplot(heart, aes(x, y)) +
-  geom_path(color = "pink", size = 2, lineend = "round") +  # Couleur rouge
-  theme_void() +
-  theme(panel.background = element_rect(fill = "white")) + # Fond noir
-  ggtitle("Paix dans le monde")
-
-```
-
 # **Partie 1 : Reproduction du modèle de l'article**
 
 ## **1. Introduction**
@@ -42,15 +14,10 @@ L'équipe de recherche de Torres et al. ce sont toutefois intéressé sur les fa
 
 L'étude (2010 à 2018) est basée sur l'évolution de deux populations (LTER1 et LTER2) de la côte nord du récif corallien de Moorea en Polynésie française. suite à une diminution presque complète du récif en 2010 après une attaque des étoiles de mers à épines, suivit d'une hausse rapide de l'abondance de corail. 
 
+------------------------------------------------------------------------
+
 ## **2. Question biologique (1 point)**
 
-<<<<<<< HEAD
-Quelle est la question biologique abordée dans l’article ?
-
-## **3. Hypothèses (2 points)**
-
-Lister et expliquer les hypothèses étudiées dans l’article.
-=======
 Quelle est l'importance relative de la croissance asexuée et du recrutement de larves provenant de trois sources spatialement différentes (allochtone, locale et autochtone) sur la croissance des sous-populations coraliennes de Pocillopora spp. d'avant-récif et d'apprès-récif, de la métapopulation du récif coralien Moorea en Polynésie française, entre 2010 et 2019, suite à un déclin important de leur abondance?
 
 
@@ -71,17 +38,12 @@ Hypothèse 4: La croissance de la population est influencée par la reproduction
 
 
 ------------------------------------------------------------------------
->>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **4. Données ou informations pertinentes (6 points)**
 
--   Présentation des données utilisées.
 
--   Organigramme du modèle.
+*Données utilisées* 
 
-<<<<<<< HEAD
--   Tableau des paramètres étudiés.
-=======
 Les données empiriques utilisées liées aux au récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme du récif corallien Moorea (MCR LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018, puisqu'il y a eu la regénérescence la plus rapide.
 
 Utilisation de donnée du genre Pocillopora spp.
@@ -107,15 +69,11 @@ Certains paramètres ont été estimé à partir de données d'ailleurs:
 
 
  --------------------------------------------------------------------------------
->>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **5. Méthode (2 points)**
 
--   Définition du modèle et des paramètres.
+**Modèle des sous-populations**
 
-<<<<<<< HEAD
--   Explication détaillée du modèle mathématique.
-=======
 Le modèle comprend les équations suivantes:
 
 Croissance des sous-populations arrière-récif (P~b~)
@@ -179,7 +137,6 @@ $\rho$ = Flux de recrutement
 
 
 ------------------------------------------------------------------------
->>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 
 ## **6. Suppositions (4 points)**
 
@@ -187,8 +144,6 @@ $\rho$ = Flux de recrutement
 
 - Le susbtrat disponible pour la croissance est limité, la capacité de charge est détermine par une combinaison de facteurs locaux (prédation, maladie et dynamique de compétition).
 
-<<<<<<< HEAD
-=======
 - Tous les paramètres du modèle à l'exception de P sont invariants dans le temps.
 
 - Les récifs sont périodiquement affectés par des perturbations (ex. étoiles de mer à couronne d'épine, cyclones, blanchissement).
@@ -211,15 +166,7 @@ $\rho$ = Flux de recrutement
 
 ------------------------------------------------------------------------
 
->>>>>>> 52794acae5a651246aedfa5d4514e50abbc36f18
 ## **7. Calculs et implémentation en R (12 points)**
-
-```{r}
-# Chargement des bibliothèques nécessaires 
-library(deSolve) 
-library(ggplot2) 
-library(dplyr) 
-```
 
 -   Code R pour reproduire le modèle.
 
@@ -227,17 +174,25 @@ library(dplyr)
 
 -   Ajout de commentaires explicatifs.
 
+------------------------------------------------------------------------
+
 ## **8. Résultats (4 points)**
 
 -   Présentation des résultats obtenus.
 
 -   Figures et analyses.
 
+------------------------------------------------------------------------
+
 ## **9. Interprétations biologiques (1 point)**
 
 -   Explication des résultats obtenus.
 
+Avec les graphiques que nous avons obtenu, nous pouvons arriver à diverses interprétations. La figure 2 montre la trajectoire de récupération de la couverture corrallienne, selon la modélisation de deux sous-populations. Ce que l'on peut comprendre de a figure est que l'interaction qui existe entre l'auto-recrutement et l'immigration affecte fortement la trajectoire de la récupération de la couverture corrallienne. Cette trajectoire est représentée par la courbe de la population allochtone. 
+
 -   Mise en relation avec les hypothèses de départ.
+
+------------------------------------------------------------------------
 
 # **Partie 2 : Proposition d’une nouvelle question** que vous souhaitez approcher qui approfondit l'etude de l'article que vous avez choisi.
 
@@ -251,7 +206,7 @@ library(dplyr)
 
 ## **1. Titre différent de l'article original**
 
-Définir un titre qui reflète la nouvelle problématique.
+Définir un titre qui reflète la nouvelle problématique.La première figure représente la récupération de la couverture corrallienne. 
 
 ## **2. Identification du groupe**
 
@@ -313,7 +268,3 @@ CopyEdit
 ```{r}
 # Référence
 ```
-
-# 
-
-ajjloo c'est jules 4H16
