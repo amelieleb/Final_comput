@@ -255,3 +255,157 @@ ggplot(df, aes(x = Year, y = PercentK, linetype = Component)) +
     axis.title.y = element_text(angle = 0, vjust = 0.5),
     plot.title = element_text(hjust = 0.4, face = "bold", size = 8)
   )
+
+
+
+#FIGURES 4c & 4d
+
+#---------- Figure 4c ----------
+#Aller chercher les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+#Paramètres
+years <- 2011:2018   #Années de l'étude
+n <- length(years)
+
+# Populations
+Pf <- seq(0.05, 0.6, length.out = n)  #Population forereef
+Pb <- seq(0.2, 0.5, length.out = n)   #Population backreef
+Pf[1] <- 0   #Forcer à commencer à 0
+Pb[1] <- 0
+
+#Paramètres biologiques
+Kb <- 0.8   #Capacité de soutien (backreef)
+rb <- 0.1   #Croissance asexuée (backreef)
+sigma_f <- 0.05   #Taux de reproduction larvaire
+
+zeta_bb <- seq(0.2, 0.7, length.out = n)  #Autorecrutement backreef vers backreef
+zeta_fb <- rep(0.01, n)  #Échange forereef vers backreef
+
+#Calcul des composantes dPb/dt
+intrinsic <- Pb * (rb + sigma_f * zeta_bb)  #Croissance et autorecrutement
+exchange <- Pf * sigma_f * zeta_fb          #Recrutement d’échange local
+immigration <- rep(0.0007, n)   #Immigration
+
+#Facteur de densité-dépendance
+density_factor <- (1 - Pb / Kb)
+
+#Ajustement de chaque composante par le facteur de densité-dépendance
+intrinsic_adj <- intrinsic * density_factor
+exchange_adj <- exchange * density_factor
+immigration_adj <- immigration   #L'immigragtion reste constante peu importe la densité de la population
+
+#Variation totale
+total_change <- intrinsic_adj + exchange_adj + immigration_adj
+
+#Estimation de la courbe de mortalité
+mortalite <- -0.003 + 0.0022 * (years - min(years)) / ((years - min(years)) + 4)
+
+#Création du dataframe pour le graphique
+df_backreef <- data.frame(
+  Year = rep(years, 2),
+  Component = rep(c("Immigration", "Mortality"), each = n),
+  Value = c(immigration_adj, mortalite)
+)
+
+#Mise en forme des données en pourcentage de la capacité de charge par an
+df_backreef$PercentKb <- 100 * df_backreef$Value / Kb
+
+#Graphique lissé
+ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
+  geom_smooth(se = FALSE, method = "loess", size = 1.2, color = "black") +
+  scale_linetype_manual(values = c("Immigration" = "dashed", "Mortality" = "solid")) +
+  labs(
+    title = "Components contributing to population change (LTER 1 Backreef)",
+    y = expression("%K"[b] * " / yr"),
+    x = NULL,
+    linetype = NULL
+  ) +
+  coord_cartesian(ylim = c(min(df_backreef$PercentKb), max(df_backreef$PercentKb))) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "right",
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 10),
+    panel.grid.minor = element_blank(),
+    axis.title.y = element_text(angle = 0, vjust = 0.5),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 10)
+  )
+
+
+
+#---------- Figure 4d ----------
+#Aller chercher les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+#Paramètres
+years <- 2011:2018   #Années de l'étude
+n <- length(years)
+
+# Populations
+Pf <- seq(0.05, 0.6, length.out = n)  #Population forereef
+Pb <- seq(0.2, 0.5, length.out = n)   #Population backreef
+Pf[1] <- 0   #Forcer à commencer à 0
+Pb[1] <- 0
+
+#Paramètres biologiques
+Kb <- 0.8   #Capacité de soutien (backreef)
+rb <- 0.1   #Croissance asexuée (backreef)
+sigma_f <- 0.05   #Taux de reproduction larvaire
+
+zeta_bb <- seq(0.2, 0.7, length.out = n)  #Autorecrutement backreef vers backreef
+zeta_fb <- rep(0.01, n)  #Échange forereef vers backreef
+
+#Calcul des composantes dPb/dt
+intrinsic <- Pb * (rb + sigma_f * zeta_bb)  #Croissance et autorecrutement
+exchange <- Pf * sigma_f * zeta_fb          #Recrutement d’échange local
+immigration <- rep(0.0005, n)   #Immigration
+
+#Facteur de densité-dépendance
+density_factor <- (1 - Pb / Kb)
+
+#Ajustement de chaque composante par le facteur de densité-dépendance
+intrinsic_adj <- intrinsic * density_factor
+exchange_adj <- exchange * density_factor
+immigration_adj <- immigration   #L'immigragtion reste constante peu importe la densité de la population
+
+#Variation totale
+total_change <- intrinsic_adj + exchange_adj + immigration_adj
+
+#Estimation de la courbe de mortalité
+mortalite <- -0.003 + 0.0022 * (years - min(years)) / ((years - min(years)) + 1.5)
+
+#Création du dataframe pour le graphique
+df_backreef <- data.frame(
+  Year = rep(years, 2),
+  Component = rep(c("Immigration", "Mortality"), each = n),
+  Value = c(immigration_adj, mortalite)
+)
+
+#Mise en forme des données en pourcentage de la capacité de charge par an
+df_backreef$PercentKb <- 100 * df_backreef$Value / Kb
+
+#Graphique lissé
+ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
+  geom_smooth(se = FALSE, method = "loess", size = 1.2, color = "black") +
+  scale_linetype_manual(values = c("Immigration" = "dashed", "Mortality" = "solid")) +
+  labs(
+    title = "Components contributing to population change (LTER 2 Backreef)",
+    y = expression("%K"[b] * " / yr"),
+    x = NULL,
+    linetype = NULL
+  ) +
+  coord_cartesian(ylim = c(min(df_backreef$PercentKb), max(df_backreef$PercentKb))) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "right",
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 10),
+    panel.grid.minor = element_blank(),
+    axis.title.y = element_text(angle = 0, vjust = 0.5),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 10)
+  )
