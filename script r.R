@@ -146,7 +146,7 @@ self_recruit_adj <- self_recruit * density_factor
 local_exchange_adj <- local_exchange * density_factor
 immigration_adj <- immigration * density_factor
 
-#Cération du dataframe pour le graphique
+#Création du dataframe pour le graphique
 df <- data.frame(
   Year = rep(years, 4),
   Component = rep(c("Asexual Growth", "Self-Recruitment", "Local Exchange", "Immigration"), each = n),
@@ -220,7 +220,7 @@ self_recruit_adj <- self_recruit * density_factor
 local_exchange_adj <- local_exchange * density_factor
 immigration_adj <- immigration * density_factor
 
-#Cération du dataframe pour le graphique
+#Création du dataframe pour le graphique
 df <- data.frame(
   Year = rep(years, 4),
   Component = rep(c("Asexual Growth", "Self-Recruitment", "Local Exchange", "Immigration"), each = n),
