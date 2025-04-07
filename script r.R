@@ -392,22 +392,22 @@ library(tidyr)
 #Paramètres du modèle
 params <- list(
   rb = 0.2,   #Taux de croissance autochtone de la population backreef
-  rf = 0.1,  #Taux de croissance autochtone de la population forereef
-  sigma_f = 0.2,   #Intensité de la croissance larvaire
+  rf = 0.5,  #Taux de croissance autochtone de la population forereef
+  sigma_f = 0.8,   #Intensité de la croissance larvaire
   
   #Coefficients d’interactions (ζ(γβ))
   zeta_bb = 0.02,   #Influence de backreef sur backreef
   zeta_fb = 0.3,    #Influence de forereef sur backreef
-  zeta_ff = 0.01,    #Influence de forereef sur forereef
+  zeta_ff = 0.2,    #Influence de forereef sur forereef
   zeta_bf = 0.05,   #Influence de backreef sur forereef
   
-  #Apports externes
-  Ib = 0.001,   #Immigration du backreef
-  If = 1.2,       #Immigration du forereef
+  #Apports externes constants
+  Ib = 0.03,   #Immigration du backreef
+  If = 0.05,       #Immigration du forereef
   
-  #Capacités de soutien
-  Kb = 100,     #Capacité de soutien du backreef
-  Kf = 100      #Capacité de soutien du forereef
+  #Capacités de soutien en proportion?
+  Kb = 0.9,     #Capacité de soutien du backreef
+  Kf = 0.9     #Capacité de soutien du forereef
 )
 
 #Équations différentielles selon les équations 4
@@ -420,7 +420,7 @@ model <- function(time, state, parameters) {
 }
 
 #Conditions initiales de nos populations
-state <- c(Pb = 1, Pf = 1)
+state <- c(Pb = 0.01, Pf = 0.01)
 
 #Intervalle de temps en années
 times <- seq(0, 6, by = 0.1)
@@ -430,11 +430,21 @@ out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 
 #Calcul des contributions à la croissance de la population forereef (Pf)
-out <- out %>%
+#out <- out %>%
   mutate(
     allo_f = (params$sigma_f * params$zeta_bf * Pb + params$If) * (1 - Pf / params$Kf),   
     auto_f = (Pf * (params$rf + params$sigma_f * params$zeta_ff)) * (1 - Pf / params$Kf), 
-    total_f = allo_f + auto_f   #Croissance totale = autochtone + allochthone
+    dPf_dt = ((Pf * (params$rf + params$sigma_f * params$zeta_ff)) + 
+                params$sigma_f * params$zeta_bf * Pb + params$If) * (1 - Pf / params$Kf),
+    total_f = dPf_dt   #Croissance totale = autochtone + allochthone
+  )
+
+#VERSION 2 des contributions à la croissance de la population forereef (Pf)
+out <- out %>%
+  mutate(
+    total_f =  Pf,
+    auto_f =  (Pf * (params$rf + params$sigma_f * params$zeta_ff)) * (1 - Pf / params$Kf), 
+    allo_f =   Pf - auto_f  #Croissance totale = autochtone + allochthone
   )
 
 #Mise en forme pour ggplot
@@ -460,6 +470,21 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   labs(
     title = "Croissance de la population corallienne (Pf)",
     x = "Temps (années)",
-    y = "Couverture corallienne (%)"
+    y = "Couverture corallienne proportion"
   ) +
   theme_minimal(base_size = 14)
+
+#graphique du output du modele (out)
+#ggplot(out, aes(x = time)) +
+  geom_line(aes(y = Pf, color = "Pf"), size = 1.4) +
+  geom_line(aes(y = Pb, color = "Pb"), size = 1.4) +
+  labs(
+    title = "Évolution des populations Pf et Pb",
+    x = "Temps (années)",
+    y = "Proportion de la capacité de soutien",
+    color = "Population"
+  ) +
+  scale_color_manual(values = c("Pf" = "firebrick", "Pb" = "steelblue")) +
+  theme_minimal(base_size = 14)
+
+  
