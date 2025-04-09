@@ -1,36 +1,3 @@
-# modele en r
-
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    dPb <-   Pb (Rb + omeg * Fe * Mp *(YBbb))   +    omeg * Fe * Mp * (YBfb) * Pf + Ib   *   (1- (Pb/Kb))
-    dPf <-   Pb (Rf + omeg * Fe * Mp *(YBff))   +    omeg * Fe * Mp * (YBbf) * Pb + If   *   (1- (Pf/Kf))                                                        
-                                                                               
-                                                                               
-                                                                               
-  }
-
-parameters <- c(
-  Rb   =
-  Rf   =
-  Mp   = 0.5
-  Fe   = fixe
-  omeg = fixe
-  Ib   =
-  If   =
-  Kb   = fixe
-  Kf   = fixe
-)
-
-state <- c(Pb = 0.01, Pf = 0.01)
-times <- seq(0, 50, by = 0.1) 
-
-
-out <- ode(y = state, times = times, func = model, parms = parameters)
-out <- as.data.frame(out)
-
-
-
-
 #FIGURE 2
 #Installer et charger les bibliothèques nécessaires
 install.packages("deSolve")
@@ -102,8 +69,8 @@ ggplot() +
   labs(x = "Time (τ)", y = expression(P^"*"), color = "Population Type") +
   theme_minimal() +
   ggtitle("Nondimensional population recovery trajectories") +
-  scale_color_manual(values = c("Γ → ∞" = "blue", "Γ → 0" = "goldenrod", 
-                                "Total" = "black", "Allochthonous" = "goldenrod", "Autochthonous" = "blue"))
+  scale_color_manual(values = c("Γ → ∞" = "steelblue", "Γ → 0" = "goldenrod", 
+                                "Total" = "black", "Allochthonous" = "goldenrod", "Autochthonous" = "steelblue"))
 
 
 
@@ -125,7 +92,7 @@ Pf[1] <- 0   #Forcer à commencer à 0
 Pb[1] <- 0   #Force à commencer à 0
 
 Kf <- 0.8   #Capacité de charge de 80%
-rf <- 0.12   #Taux de croissance asexuée (estimée)
+rf <- 0.12   #Taux de croissance asexuée 
 sigma_f <- 0.05   #Taux de reproduction larvaire (estimé)
 
 zeta_ff <- seq(0.2, 0.8, length.out = n)   #Autorecrutement (forereef vers forereef)
