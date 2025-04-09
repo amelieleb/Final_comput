@@ -382,7 +382,7 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
 
 #FIGURES 3a & 3b
 
-#---------- Figure 3a ----------
+#---------- Figure 3a -frontreef---------
 #Aller chercher dans les bibliothèques
 library(deSolve)
 library(ggplot2)
@@ -392,13 +392,13 @@ library(tidyr)
 
 #Paramètres du modèle
 params <- list(
-  rb = 0.1,   #Taux de croissance autochtone de la population backreef
+  rb = 0.05,   #Taux de croissance autochtone de la population backreef
   rf = 0.1,  #Taux de croissance autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
   
   #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.02,   #Influence de backreef sur backreef
-  zeta_fb = 0.3,    #Influence de forereef sur backreef
+  zeta_bb = 0.01,   #Influence de backreef sur backreef
+  zeta_fb = 0.002,    #Influence de forereef sur backreef
   zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
   zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
@@ -427,7 +427,7 @@ model <- function(time, state, parameters) {
 state <- c(pFallo = 0.01, pFauto = 0.01, pFtotal = 0.01, pBallo = 0.01, pBauto = 0.01, pBtotal = 0.01)
 
 #Intervalle de temps en années
-times <- seq(0, 6, by = 0.1)
+times <- seq(0, 30, by = 0.1)
 
 #Résolution numérique du système
 out <- ode(y = state, times = times, func = model, parms = params)
@@ -462,8 +462,207 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 
 
+###---  Figure 4a -backreef- ---###
+#Différences: ajout de mortalité, baisser le taux de croissance de la pop backreef, le recrutement front->back, l'immigration à 0.08 comme indiqué. et état initial
+
+params <- list(
+  mortal <- 0.3,  #taux de mortalité du backreef. 
+  
+  rb = 0.05,   #Taux de croissance autochtone de la population backreef
+  rf = 0.1,  #Taux de croissance autochtone de la population forereef
+  sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  
+  #Coefficients d’interactions (ζ(γβ))
+  zeta_bb = 0.01,   #Influence de backreef sur backreef
+  zeta_fb = 0.002,    #Influence de forereef sur backreef #faible
+  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  
+  #Apports externes constants
+  Ib = 0.08,   #Immigration du backreef  tiré du graphique 4c
+  If = 0.1,       #Immigration du forereef
+  
+  #Capacités de soutien en proportion?
+  Kb = 0.64,     #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8     #Capacité de soutien du forereef  0.8 dans article
+)
+
+# MODELE 2 - Équations différentielles selon les équations 4
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dFallo  <- sigma_f * zeta_bf * pBtotal + If * (1 - pFtotal / Kf)
+    dFauto  <- pFtotal * (rf + sigma_f * zeta_ff) * (1 - pFtotal / Kf)
+    dFtotal <- dFallo + dFauto
+    dBallo  <- sigma_f * zeta_fb * pFtotal + Ib * (1 - pBtotal / Kb)
+    dBauto  <- pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)
+    dBtotal <- dBallo + dBauto - mortal * pBtotal
+    list(c(dFallo, dFauto, dFtotal, dBallo, dBauto, dBtotal))
+  })
+}
+#Conditions initiales  MODELE 2 de nos populations
+state <- c(pFallo = 0.01, pFauto = 0.01, pFtotal = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
+
+#Intervalle de temps en années
+times <- seq(0, 6, by = 0.1)
+
+#Résolution numérique du système
+out <- ode(y = state, times = times, func = model, parms = params)
+out <- as.data.frame(out)
+
+#graphique qui reproduit la figure 4a
+ggplot(out, aes(x = time, y = pBtotal)) +
+  geom_line(color = "red", size = 1.4) +
+  labs(
+    title = "Couverture corallienne totale du backreef",
+    x = "Temps (années)",
+    y = "Proportion de couverture (pBtotal)"
+  ) +
+  theme_minimal(base_size = 14)
 
 
+#Si on veux afficher vraiment toutes les courbes. 
+backreef_data <- out %>%
+  select(time, pBallo, pBauto, pBtotal) %>%
+  rename(
+    Allochthonous = pBallo,
+    Autochthonous = pBauto,
+    Total = pBtotal
+  ) %>%
+  pivot_longer(-time, names_to = "Source", values_to = "Value")
+
+# Graphique
+ggplot(backreef_data, aes(x = time, y = Value, color = Source)) +
+  geom_line(size = 1.4) +
+  scale_color_manual(
+    values = c(
+      "Total" = "black",
+      "Allochthonous" = "goldenrod",
+      "Autochthonous" = "steelblue"
+    )
+  ) +
+  labs(
+    title = "Dynamique de la population corallienne — Backreef",
+    subtitle = "Contributions autochtone, allochone et totale",
+    x = "Temps (années)",
+    y = "Couverture corallienne (proportion)",
+    color = "Source"
+  ) +
+  theme_minimal(base_size = 14)
+
+
+###------ SECTION 2--AJOUT MORTALITÉ PÉRIODIQUE et visualisation des deux pops ensemble-----########
+
+#fonction qui représente la variation de mortalité aux 7 ans
+taux_perte <- function(t, peak = 0.99, period = 7, pulse_width = 1) {
+  if ((t %% period) < pulse_width) {
+    return(peak)
+  } else {
+    return(0)
+  }
+}
+#visualisation de la fonction
+plot(times, sapply(times, taux_perte), type = "l",
+     ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
+
+
+#Paramètres du modèle
+params <- list(
+  mortal <- 0.6,  #taux de mortalité constante du backreef pck c difficile la vie.
+  
+  rb = 0.05,   #Taux de croissance autochtone de la population backreef
+  rf = 0.1,  #Taux de croissance autochtone de la population forereef
+  sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  
+  #Coefficients d’interactions (ζ(γβ))
+  zeta_bb = 0.01,   #Influence de backreef sur backreef
+  zeta_fb = 0.002,    #Influence de forereef sur backreef
+  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  
+  #Apports externes constants
+  Ib = 0.08,   #Immigration du backreef
+  If = 0.05,       #Immigration du forereef
+  
+  #Capacités de soutien en proportion?
+  Kb = 0.64,     #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8     #Capacité de soutien du forereef  0.8 dans article
+)
+
+# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    pertes_t <- taux_perte(time)
+    
+    dFallo  <- sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf) - pertes_t * (pFauto + pFallo)
+    dFauto  <- (pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf) - pertes_t * (pFauto + pFallo)
+    
+    dBallo  <- sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)
+    dBauto  <- pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)
+    dBtotal <- dBallo + dBauto - mortal * pBtotal - pertes_t * pBtotal
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+#Conditions initiales  MODELE 2 de nos populations
+state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
+
+#Intervalle de temps en années
+times <- seq(0, 20, by = 0.1)
+
+#Résolution numérique du système
+out <- ode(y = state, times = times, func = model, parms = params)
+out <- as.data.frame(out)
+out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
+#Mise en forme pour ggplot
+plot_data <- out %>%
+  select(time, pFallo,pFauto,pFtotal) %>%
+  rename(
+    Total = pFtotal,
+    Allochthonous = pFallo,
+    Autochthonous = pFauto
+  ) %>%
+  pivot_longer(-time, names_to = "Source", values_to = "Value")
+
+#Graphique
+ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
+  geom_line(size = 1.4) +
+  scale_color_manual(
+    values = c(
+      "Total" = "black",
+      "Allochthonous" = "goldenrod",
+      "Autochthonous" = "steelblue"  
+    )
+  ) +
+  labs(
+    title = "Suivi de la population corallienne frontreef",
+    x = "Temps (années)",
+    y = "Couverture corallienne en proportion"
+  ) +
+  theme_minimal(base_size = 14)
+
+# Préparer les données des deux populations
+reef_data <- out %>%
+  select(time, pFtotal, pBtotal) %>%
+  rename(
+    Forereef = pFtotal,
+    Backreef = pBtotal
+  ) %>%
+  pivot_longer(-time, names_to = "Reef", values_to = "Value")
+
+# Tracer
+ggplot(reef_data, aes(x = time, y = Value, color = Reef)) +
+  geom_line(size = 1.4) +
+  scale_color_manual(values = c(
+    "Forereef" = "firebrick",
+    "Backreef" = "darkgreen"
+  )) +
+  labs(
+    title = "Dynamique des populations coralliennes : Forereef vs Backreef",
+    x = "Temps (années)",
+    y = "Couverture corallienne (proportion)",
+    color = "Récif"
+  ) +
+  theme_minimal(base_size = 14)
 
 ###----###-----SCRAP-----###-------###
 
