@@ -16,14 +16,14 @@ L'étude (2010 à 2018) est basée sur l'évolution de deux populations (LTER1 e
 
 ------------------------------------------------------------------------
 
-## **2. Question biologique (1 point)**
+## **2. Question biologique**
 
 Quelle est l'importance relative de la croissance asexuée et du recrutement de larves provenant de trois sources spatialement différentes (allochtone, locale et autochtone) sur la croissance des sous-populations coraliennes de Pocillopora spp. d'avant-récif et d'apprès-récif, de la métapopulation du récif coralien Moorea en Polynésie française, entre 2010 et 2019, suite à un déclin important de leur abondance?
 
 
 ------------------------------------------------------------------------
 
-## **3. Hypothèses (2 points)**
+## **3. Hypothèses**
 
 Hypothèse 1: La croissance de la population est influencée par la croissance asexuée des individus matures déjà présent dans la sous-population.
 
@@ -39,21 +39,22 @@ Hypothèse 4: La croissance de la population est influencée par la reproduction
 
 ------------------------------------------------------------------------
 
-## **4. Données ou informations pertinentes (6 points)**
+## **4. Données ou informations pertinentes**
 
 
-*Données utilisées* 
+**Données utilisées**
 
-Les données empiriques utilisées liées aux au récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme du récif corallien Moorea (MCR LTER), et se concentre sur les événements survenus sur la côte nord entre 2010 et 2018, puisqu'il y a eu la regénérescence la plus rapide.
+Les données empiriques utilisées liées au genre Pocillopora spp. du récif corallien Moorea en Polynésie française ont été récolté dans le cadre d'un projet de séries chronologiques écologiques à long terme du récif corallien Moorea (MCR LTER).
 
-Utilisation de donnée du genre Pocillopora spp.
+L'étude se concentre sur les événements survenus sur la côte nord entre 2010 et 2018, puisque c'est à cet endroit qu'il y a eu la regénérescence la plus rapide dans dans le récif.
 
-Certains paramètres ont été estimé à partir de données d'ailleurs:
-- Fécondité est une moyenne normalisé de plusieurs récifs coralliens (Maldives, Hawaii, mer Rouge)  F = 95+-28 oeufs / polype / an
--Google Earth pour l'estimation du substrats durs disponibles
+Certains paramètres de l'étude ont été estimé à partir de données recueillis sur divers sites et études:
+- La valeur de fécondité est une moyenne normalisé de plusieurs données d'études fait sur le genre Pocillopora spp. dans plusieurs récifs coralliens (Maldives, Hawaï et la mer Rouge).
+-L'estimation du substrats durs disponibles dans les sous-populations ont été estimé à partir d'images de Google Earth analysées sur le logiciel ImageJ
 
 
-*Organigramme du modèle*
+
+**Organigramme du modèle général des populations**
 
 ![](Organigrame.png)
 
@@ -70,19 +71,46 @@ Certains paramètres ont été estimé à partir de données d'ailleurs:
 
  --------------------------------------------------------------------------------
 
-## **5. Méthode (2 points)**
+## **5. Méthode**
+
+**Modèle de cas-limite**
+
+Afin de calculer les possibilités limites et intermédiaire d'une population, voici le modèle utilisé:
+
+$$\frac{dP^*_1}{d\tau} = (P^*_1 + P^*_2 + \frac{I^*}{\Gamma} )(1-P^*_1) $$
+
+
+L'équation de la croissance de la populaion normalisé (dP*~1~) sur une échelle de temps intrinsèque (d$\tau$) utilise les paramètres suivants:
+
+| symboles | Noms des paramètres | 
+|:------:|:-----------------| 
+| P*~1~ | Taille noramlisée de la population 1 | 
+| P*~2~ | Taille noramlisée de la population 2 |
+| I* | Immigration nette normalisée |
+| $\Gamma$ |  Croissance net du processus asexuel et de la mortalité |
+
+
+
+$$P^*_1 = \frac{P_1}{K_1}$$
+$$P^*_2 = \frac{P_2}{K_2}$$
+$$I^* = \frac{I_}{SK}$$
+$$\tau = Rt$$
+$$\Gamma = \frac{R}{S}=\frac{C}{S}$$
 
 **Modèle des sous-populations**
 
-Le modèle comprend les équations suivantes:
+Le modèle comprend deux équations, soit une équation pour chaque sous-population d'un récif (avant-récif et après-récif).
 
-Croissance des sous-populations arrière-récif (P~b~)
+
+*Croissance des sous-populations avant-récif (P~f~)*
+
+$$\frac{dP_f}{dt} = ([P_f (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} )] + [P_b(\sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )})] + I_f) ( 1 - \frac{P_f}{Kf} )$$
+
+
+*Croissance des sous-populations arrière-récif (P~b~)*
 
 $$\frac{dP_b}{dt} = ( [P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} )] + [P_f (\sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )}) ] + I_b) ( 1 - \frac{P_b}{Kb} )$$
 
-Croissance des sous-populations avant-récif (P~f~)
-
-$$\frac{dP_f}{dt} = ([P_f (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} )] + [P_b(\sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )})] + I_f) ( 1 - \frac{P_f}{Kf} )$$
 
 
 Les variables utilisées dans les équations sont:
@@ -92,7 +120,7 @@ Les variables utilisées dans les équations sont:
 | P | Taille de la population | 
 | I | Immigration nette | 
 | K | Capacité de soutien | 
-| r | Prolifération et mortalité asexuée | 
+| r | Prolifération et mortalité asexuée (reproduction asexuée) | 
 | $\sigma$ | Classe de taille des recrues | 
 | $f$ | Fécondité | 
 | $\zeta$ | Probabilité de maturation larvaire | 
@@ -102,38 +130,8 @@ Les variables utilisées dans les équations sont:
 
 Les indices $b$ et $f$ représentent respectivement les sous-populations d'arrière-récif et d'avant-récif.
 
-La fécondité ($f$), la probabilité de maturation larvaire ($\zeta$), la dispersion larvaire ($\gamma$), la probabilité de recrutement ($\beta$) et la classe de taille des recrues ($\sigma$) influencent l'ampleur de la reproduction sexuée par recrutement (re).
+La fécondité ($f$), la probabilité de maturation larvaire ($\zeta$), la dispersion larvaire ($\gamma$), la probabilité de recrutement ($\beta$) et la classe de taille des recrues ($\sigma$) influencent l'ampleur de la reproduction sexuée par recrutement ($r_e$).
 
-
-
-Les équations peuvent être simplifiée ainsi:
-
-$$\frac{dP}{dt} = [PR + 1](1- \frac{P}{K})$$
-
-où
-
-
-R = taux de croissance $R=r_a+r_e$
-r~e~= $f$$\zeta$$\gamma$$\beta$$\sigma$
-
-
-**Fonction utilisée**
-Simulation avec de Monte Carlo (n=50)
-Utilisation de la fonction odeint (package Scipy)?
-
-$$(C_{ij} P_i(t) + Ii ) (1 - \frac{P_i(t)}{K_i} ) < \rho_i(t)$$
-
-où
-
-C = Matrice d'échange
-
-P = Taille de la population
-
-I = Immigration nette
-
-K = Capacité de soutien
-
-$\rho$ = Flux de recrutement
 
 
 ------------------------------------------------------------------------
@@ -190,7 +188,7 @@ $\rho$ = Flux de recrutement
 
 -   Mise en relation avec les hypothèses de départ.
 
-La présente étude porte sur une métapopulation de coraux de la Polynésie française. Les chercheurs ont regardé comment les la croissance asexuée des polypes, les populations autochtones, les populations locales et les populations allochtones influençaient la récupération de la population après une perturbation. 
+La présente étude porte sur une métapopulation de coraux de la Polynésie française. Les chercheurs ont regardé comment la croissance asexuée des polypes, les populations autochtones, les populations locales et les populations allochtones influençaient la récupération de la population après une perturbation. 
 
 La figure 2 nous démontre les différentes trajectoires non-dimensionnelles de la population. Ce graphique illustre l’interaction entre l’immigration et l’autorecrutement. Nous pouvons comprendre que l’immigration, représentée par la ligne jaune, possède une plus grande influence que la croissance intrinsèque de la population, représentée par la ligne bleue, en ce qui a trait à la récupération après une perturbation. Ce graphique représente simplement un modèle de base, qui nous a permis de créer les autres graphiques pour répondre à notre question de recherche.
 
@@ -244,10 +242,9 @@ Amélie Ironman-Rochon
 
 Il est de plus en plus difficile pour les populations de coraux de survivre aux perturbations en raison des changements climatiques et des conditions environnementales de plus en plus contradictoires (Huang, 2012). Sur toute la planète, le réchauffement des océans par les changements climatiques et l’acidification des eaux peuvent entraîner le blanchissement du corail et plusieurs maladies (Huang, 2012). Avec plusieurs années consécutives de blanchissement, les probabilités que ces populations de coraux meurent et s’éteignent localement sont très élevées (Holstein et al., 2022). Les événements de blanchissement, la pollution et autres perturbations continueront de se produire de plus en plus fréquemment avec les années qui suivent (Holstein et al., 2022). La dégénération par l’anthropisation humaine du corail peut donc mener à sa fragmentation, et cette situation amène une difficulté encore plus grande récupérer (Torres et al., 2025). 
 
-La récupération du corail peut se faire de multiples manières (Torres et al 2025). Les coraux étant des métapopulations, des échanges entre ces métapopulations peut se faire via la migration de larves (Torres et al., 2025). La récupération d’une métapopulation de corail peut se faire de différentes manières; l’immigration de sous-populations venant de loin, l’autorecrutement de sa propre population, des échanges locaux et la croissance asexuée (Torres et al., 2025). Cependant, une bonne récupération après une forte perturbation demande du temps, et la population se retrouve en bonne proportion après plusieurs années (Torres et al., 2025). 
+La récupération du corail peut se faire de multiples manières (Torres et al 2025). Les coraux étant des métapopulations, des échanges entre ces métapopulations peut se faire via la migration de larves (Torres et al., 2025). La récupération d’une métapopulation de corail peut se faire de différentes manières; l’immigration de sous-populations venant de loin, l’autorecrutement de sa propre population, des échanges locaux et la croissance asexuée (Torres et al., 2025). Cependant, une bonne récupération après une forte perturbation demande du temps, et la population se retrouve en bonne proportion après plusieurs années (Torres et al., 2025). Le temps spécifique afin que la population récupère varie selon la proportion d’individus, soit la proportion de polypes viables, qui n’ont pas été affecté après la perturbation.
 
-L’article de Torres et al (2025) évaluait les variations et les différents apports de sources de la récupération du corail à travers plusieurs années, soit de 2011 à 2019, où la perturbation venait tout juste d’arriver. Les abondances des populations commençaient donc à une très petite échelle et récupéraient jusqu’en 2019. Or, avec les résultats de cette recherche, nous nous sommes intéressés aux réactions des sous-populations de coraux à la suite de perturbations fréquentes. En effet, avec des épisodes plus fréquents de phénomènes climatiques comme El Niño, une perturbation entraînant un réchauffement des eaux de surface, nous nous sommes questionnés à savoir comment une sous-population de corail peut se rétablir. Plus précisément, comment la sous-population avant-récif réagit face à des perturbations périodiques de fréquence et d’ampleur variées? Nous considérons que cette nouvelle perspective de recherche est importante puisqu’avec les changements climatiques ainsi qu’autres perturbations et phénomènes environnementaux de plus en plus fréquentes et d’ampleur grandissante, regarder comme les sous-populations réagissent est primordiale pour permettre une meilleure compréhension de celles-ci. Cette perspective de recherche permettrait également de prédire comment les sous-populations réagiront dans les années futures, et nous pourrions potentiellement tirer des solutions de cela. 
-
+L’article de Torres et al (2025) évaluait les variations et les différents apports de sources de la récupération du corail à travers plusieurs années, soit de 2010 à 2018, où la perturbation venait tout juste d’arriver. Les abondances des populations commençaient donc à une très petite échelle et récupéraient jusqu’en 2018. Or, avec les résultats de cette recherche, nous nous sommes intéressés aux différentes abondances de population après une perturbation, plus précisément aux différences qu’il peut exister entre la récupération d’une sous-population de coraux après une perturbation plus forte, et moins forte. Autrement dit, comment la grandeur de l’abondance de coraux à la suite d’une perturbation plus ou moins forte change les courbes de récupération des différentes sources (croissance asexuée, immigration, autorecrutement, échange local)? Nous considérons que cette perspective est importante afin de pousser la recherche puisque ce ne sont pas toutes les perturbations qui affectent la même grandeur de population de coraux. En effet, être en mesure de modéliser la récupération avec des abondances différentes pourrait nous permettre d’avoir une meilleure idée de la réaction des sous-populations de coraux à la suite de perturbations d’ampleur différentes.
 
 
 ## **5. Corps du texte (50 points)**
