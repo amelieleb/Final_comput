@@ -133,27 +133,52 @@ plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
   rename(
     Total = pFtotal,
-    Allochthonous = pFallo,
-    Autochthonous = pFauto
+    Allochtone = pFallo,
+    Autochtone = pFauto
+  ) %>%
+  mutate(
+    Total = Total*100,
+    Allochtone = Allochtone*100,
+    Autochtone = Autochtone*100
   ) %>%
   pivot_longer(-time, names_to = "Source", values_to = "Value")
 
 #Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  scale_x_continuous(
+    breaks = c(1,3,5,7),
+    labels= c(2012, 2014, 2016, 2018)
+  ) +
+  scale_y_continuous(
+    limits=c(0,75),
+    breaks = c(0, 25, 50, 75)
+  ) +
   scale_color_manual(
     values = c(
       "Total" = "black",
-      "Allochthonous" = "goldenrod",
-      "Autochthonous" = "steelblue"  
+      "Allochtone" = "goldenrod",
+      "Autochtone" = "steelblue"  
     )
   ) +
   labs(
-    title = "Croissance de la population corallienne (Pf)",
-    x = "Temps (années)",
-    y = "Couverture corallienne proportion"
+    title = "Croissance de la sous-population avant-récif corallienne (Pf)",
+    x = NULL,
+    y = "Couverture corallienne (%)",
+    color = NULL
   ) +
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = c(0.05, 0.95),
+    legend.justification = c("left","top"),
+    legend.text = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black"),
+    axis.ticks.length = unit(5, "pt")
+  ) +
+  coord_cartesian(expand = FALSE)
 
 
 
