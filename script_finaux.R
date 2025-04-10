@@ -22,7 +22,7 @@ model <- function(t, state, parameters) {
   #Équations différentielles du modèle, basées sur les équations 3 de l'article
   #On additionne les deux populations pour le facteur de densité-dépendance pour que notre échelle des y soit sur 1, et non 2
   dP_auto <- (P_auto_norm + P_allo_norm + I/Gamma) * (1 - (P_auto_norm + P_allo_norm))  
-  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  
+  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  #On prend seulement I/Gamma, car cette population est seulement immigratrice
   
   list(c(dP_auto, dP_allo))
 }
@@ -85,15 +85,17 @@ library(tidyr)
 
 #Paramètres du modèle
 params <- list(
-  rb = 0.05,   #Taux de croissance autochtone de la population backreef
-  rf = 0.15,  #Taux de croissance autochtone de la population forereef
+  rb = 0.05,   #Reproduction autochtone de la population backreef
+  rf = 0.15,  #Reproduction autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef
-  zeta_ff = 0.02,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO (négligeable)
+  #Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
+  gamma_beta_ff = 0.02,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO (négligeable)
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef
@@ -107,11 +109,11 @@ params <- list(
 # MODELE 2 - Équations différentielles selon les équations 4
 model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
-    dFallo  <- sigma_f * zeta_bf * pBtotal + If * (1 - pFtotal / Kf)
-    dFauto  <- pFtotal * (rf + sigma_f * zeta_ff) * (1 - pFtotal / Kf)
+    dFallo  <- sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - pFtotal / Kf)
+    dFauto  <- pFtotal * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - pFtotal / Kf)
     dFtotal <- dFallo + dFauto
-    dBallo  <- sigma_f * zeta_fb * pFtotal + Ib * (1 - pBtotal / Kb)
-    dBauto  <- pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)
+    dBallo  <- sigma_f * gamma_beta_fb * fecondity * zeta * pFtotal + Ib * (1 - pBtotal / Kb)
+    dBauto  <- pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)
     dBtotal <- dBallo + dBauto
     list(c(dFallo, dFauto, dFtotal, dBallo, dBauto, dBtotal))
   })
@@ -156,7 +158,6 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 
 
-
 # Script graphiques avant-récif 3c----
 #Aller chercher dans les bibliothèques
 library(ggplot2)
@@ -176,14 +177,14 @@ Kf <- 0.8   #Capacité de charge de 80%
 rf <- 0.12   #Taux de croissance asexuée 
 sigma_f <- 0.05   #Taux de reproduction larvaire (estimé)
 
-zeta_ff <- seq(0.2, 0.8, length.out = n)   #Autorecrutement (forereef vers forereef)
-zeta_bf <- seq(0.01, 0.01, length.out = n)   #Recrutement d'échange (forereef vers backreef)
+gamma_beta_ff <- seq(0.2, 0.8, length.out = n)   #Autorecrutement (forereef vers forereef)
+gamma_beta_bf <- seq(0.01, 0.01, length.out = n)   #Recrutement d'échange (forereef vers backreef)
 If <- c(0.0075, 0.0095, 0.0085, 0.008, 0.007, 0.006, 0.005, 0.002)   #Immigration externe (données modélisées)
 
 #Calcul des composantes dPf/dt 
 asexual <- Pf * rf   #Croissance asexuée
-self_recruit <- Pf * sigma_f * zeta_ff   #Autorecrutement (autochtone)
-local_exchange <- Pb * sigma_f * zeta_bf   #Échange local
+self_recruit <- Pf * sigma_f * gamma_beta_ff   #Autorecrutement (autochtone)
+local_exchange <- Pb * sigma_f * gamma_beta_bf   #Échange local
 immigration <- If   #Immigration (allochtone)
 
 density_factor <- (1 - Pf / Kf)   #Facteur de densité-dépendance
@@ -242,12 +243,14 @@ params <- list(
   rb = 0.05,   #Taux de croissance autochtone de la population backreef
   rf = 0.15,  #Taux de croissance autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef #faible
-  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  #Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef #faible
+  gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef  tiré du graphique 4c
@@ -261,11 +264,11 @@ params <- list(
 # MODELE 2 - Équations différentielles selon les équations 4
 model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
-    dFallo  <- sigma_f * zeta_bf * pBtotal + If * (1 - pFtotal / Kf)
-    dFauto  <- pFtotal * (rf + sigma_f * zeta_ff) * (1 - pFtotal / Kf)
+    dFallo  <- sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - pFtotal / Kf)
+    dFauto  <- pFtotal * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - pFtotal / Kf)
     dFtotal <- dFallo + dFauto
-    dBallo  <- sigma_f * zeta_fb * pFtotal + Ib * (1 - pBtotal / Kb)
-    dBauto  <- pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)
+    dBallo  <- sigma_f * gamma_beta_fb * fecondity * zeta * pFtotal + Ib * (1 - pBtotal / Kb)
+    dBauto  <- pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)
     dBtotal <- dBallo + dBauto - mortal * pBtotal           ####ici, ajout du paramètre de mortalité
     list(c(dFallo, dFauto, dFtotal, dBallo, dBauto, dBtotal))
   })
@@ -345,12 +348,12 @@ Kb <- 0.8   #Capacité de soutien (backreef)
 rb <- 0.1   #Croissance asexuée (backreef)
 sigma_f <- 0.05   #Taux de reproduction larvaire
 
-zeta_bb <- seq(0.2, 0.7, length.out = n)  #Autorecrutement backreef vers backreef
-zeta_fb <- rep(0.01, n)  #Échange forereef vers backreef
+gamma_beta_bb <- seq(0.2, 0.7, length.out = n)  #Autorecrutement backreef vers backreef
+gamma_beta_fb <- rep(0.01, n)  #Échange forereef vers backreef
 
 #Calcul des composantes dPb/dt
-intrinsic <- Pb * (rb + sigma_f * zeta_bb)  #Croissance et autorecrutement
-exchange <- Pf * sigma_f * zeta_fb          #Recrutement d’échange local
+intrinsic <- Pb * (rb + sigma_f * gamma_beta_bb)  #Croissance et autorecrutement
+exchange <- Pf * sigma_f * gamma_beta_fb          #Recrutement d’échange local
 immigration <- rep(0.0007, n)   #Immigration
 
 #Facteur de densité-dépendance
@@ -421,20 +424,21 @@ taux_perte <- function(t, peak = 1, period = 7, pulse_width = 1) {   #peak=ampli
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
-
 #Paramètres du modèle
 params <- list(
-  mortal <- 0.6,  #taux de mortalité constante du backreef pck c difficile la vie.
+  mortal = 0.6,  #taux de mortalité constante du backreef
   
-  rb = 0.05,   #Taux de croissance autochtone de la population backreef
-  rf = 0.15,  #Taux de croissance autochtone de la population forereef
+  rb = 0.05,   #Reproduction autochtone de la population backreef
+  rf = 0.15,  #Reproduction autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef
-  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  #Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef
@@ -445,16 +449,17 @@ params <- list(
   Kf = 0.8     #Capacité de soutien du forereef  0.8 dans article
 )
 
-# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
+
+
 model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     pertes_t <- taux_perte(time)
     
-    dFallo  <- (sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
     
-    dBallo  <- (sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
     dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
     
     list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
@@ -502,6 +507,8 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 
 
+
+
 # Script graphique peak=1 period=2----
 #fonction qui représente la variation de mortalité aux 7 ans
 times <- seq(0,30, by=1)
@@ -528,12 +535,14 @@ params <- list(
   rb = 0.05,   #Taux de croissance autochtone de la population backreef
   rf = 0.15,  #Taux de croissance autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef
-  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  #Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef
@@ -549,11 +558,11 @@ model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     pertes_t <- taux_perte(time)
     
-    dFallo  <- (sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
     
-    dBallo  <- (sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
     dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
     
     list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
@@ -598,12 +607,16 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   ) +
   theme_minimal(base_size = 12)
 
+
+
+
+
 # Script graphique peak=5 period=7----
-#fonction qui représente la variation de mortalité aux 7 ans
-#fonction qui représente la variation de mortalité aux 7 ans
+#Fonction qui représente la variation de mortalité aux 7 ans
+#Fonction qui représente la variation de mortalité aux 7 ans
 times <- seq(0,30, by=1)
 
-#voir photo chatgpt pour comprendre que pour une vrai chute de 99%, il faut peak=5.
+#Pour une vrai chute de 99%, il faut peak=5.
 taux_perte <- function(t, peak = 5, period = 7, pulse_width = 1) {   #peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
   if ((t %% period) < pulse_width) { 
     return(peak)
@@ -625,12 +638,14 @@ params <- list(
   rb = 0.05,   #Taux de croissance autochtone de la population backreef
   rf = 0.15,  #Taux de croissance autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef
-  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  #Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef
@@ -646,11 +661,11 @@ model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     pertes_t <- taux_perte(time)
     
-    dFallo  <- (sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
     
-    dBallo  <- (sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
     dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
     
     list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
@@ -695,6 +710,11 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   ) +
   theme_minimal(base_size = 12)
 
+
+
+
+
+
 # Script graphique peak=5 period=2----
 #fonction qui représente la variation de mortalité aux 7 ans
 times <- seq(0,30, by=1)
@@ -721,12 +741,14 @@ params <- list(
   rb = 0.05,   #Taux de croissance autochtone de la population backreef
   rf = 0.15,  #Taux de croissance autochtone de la population forereef
   sigma_f = 0.5,   #Intensité de la croissance larvaire (829 polypes/colonie)
+  fecondity = 1,   #Fécondité
+  zeta = 1,   #Probabilité de croissance larvaire
   
   #Coefficients d’interactions (ζ(γβ))
-  zeta_bb = 0.01,   #Influence de backreef sur backreef
-  zeta_fb = 0.002,    #Influence de forereef sur backreef
-  zeta_ff = 0.2,    #Influence de forereef sur forereef AUTO
-  zeta_bf = 0.1,   #Influence de backreef sur forereef ALLO
+  gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,   #Influence de backreef sur forereef ALLO
   
   #Apports externes constants
   Ib = 0.08,   #Immigration du backreef
@@ -742,11 +764,11 @@ model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     pertes_t <- taux_perte(time)
     
-    dFallo  <- (sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
     
-    dBallo  <- (sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
     dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
     
     list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
