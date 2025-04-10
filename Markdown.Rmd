@@ -295,7 +295,7 @@ params <- list(
   fecondity = 1,   #Fécondité
   zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
+  #Coefficients d’interactions (γβ)
   gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
   gamma_beta_fb = 0.002,    #Influence de forereef sur backreef
   gamma_beta_ff = 0.02,    #Influence de forereef sur forereef AUTO
@@ -447,7 +447,7 @@ params <- list(
   fecondity = 1,   #Fécondité
   zeta = 1,   #Probabilité de maturation larvaire
   
-  #Coefficients d’interactions (ζ(γβ))
+  #Coefficients d’interactions (γβ)
   gamma_beta_bb = 0.01,   #Influence de backreef sur backreef
   gamma_beta_fb = 0.002,    #Influence de forereef sur backreef #faible
   gamma_beta_ff = 0.2,    #Influence de forereef sur forereef AUTO
