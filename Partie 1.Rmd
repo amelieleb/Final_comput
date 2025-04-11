@@ -45,20 +45,20 @@ leur abondance?
 
 ## **Hypothèses**
 
-Hypothèse 1: La croissance de la population est influencée par la
+Hypothèse 1 : La croissance de la population est influencée par la
 croissance asexuée des individus matures déjà présents dans la
 sous-population.
 
-Hypothèse 2: La croissance de la population est influencée par la
+Hypothèse 2 : La croissance de la population est influencée par la
 reproduction sexuée dûe au recrutement de larves de provenance
 autochtone, c'est-à-dire situées à 1-100m de la sous-population.
 
-Hypothèse 3: La croissance de la population est influencée par la
+Hypothèse 3 : La croissance de la population est influencée par la
 reproduction sexuée dûe au recrutement de larves de provenance locale,
 c'est-à-dire situées à 100m - 10km de la sous-population (sous-population
 à proximité).
 
-Hypothèse 4: La croissance de la population est influencée par la
+Hypothèse 4 : La croissance de la population est influencée par la
 reproduction sexuée dûe au recrutement de larves de provenance
 allochtone, c'est-à-dire situées à 10-100km de la sous-population
 (sous-population non observé dans la recherche).
