@@ -1,50 +1,69 @@
 # PARTIE 1----
 # Script des cas limites----
 # Script de trajectoires de population sans dimension - figure 2
-#Installer et charger les bibliothèques nécessaires
-install.packages("deSolve")
-install.packages("ggplot2")
+# ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(deSolve)
 library(ggplot2)
 
-#Modèle d'équations différentielles
-model <- function(t, state, parameters) {
-  P_auto <- state[1]  #Population autochtone
-  P_allo <- state[2]  #Population allochthone
-  K <- parameters$K   #Capacité de soutien
-  I <- parameters$I   #Immigration
-  Gamma <- parameters$Gamma   #Taux de regénération intrinsèque (facteur de croissance)
+
+# DÉFINITION DES PARAMÈTRES DU MODÈLE
+#Paramètres du modèle (Gamma [taux de regénération intrinsèque] pas inclus, car il a plusieurs valeur)
+parameters <- list(K = 1,     #Capacité de soutien
+                   I = 1)     #Immigration nette
+
+#Conditions initiales (ces conditions sont les mêmes que dans le graphique de l'article)
+state <- c(P_auto = 0.01,     #Population autochtone
+           P_allo = 0.01)     #Population allochtone
+
+#Temps de simulation
+times <- seq(0, 5, by = 0.1)
+
+
+# CRÉATION DU MODÈLE DE CAS LIMITES
+model_cas_limite <- function(t, state, parameters) {
+  #Objet des paramètres utilisés
+  P_auto <- state[1]
+  P_allo <- state[2]
+  K <- parameters$K
+  I <- parameters$I
+  Gamma <- parameters$Gamma
   
   #Normalisation des paramètres par la capacité de soutien
   P_auto_norm <- P_auto / K
   P_allo_norm <- P_allo / K
   
+  
   #Équations différentielles du modèle, basées sur les équations 3 de l'article
   #On additionne les deux populations pour le facteur de densité-dépendance pour que notre échelle des y soit sur 1, et non 2
+  
+  #Croissance normalisée de la population du au recrutement autochtone
   dP_auto <- (P_auto_norm + P_allo_norm + I/Gamma) * (1 - (P_auto_norm + P_allo_norm))  
-  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  #On prend seulement I/Gamma, car cette population est seulement immigratrice
+  
+  #Croissance normalisée de la population du au recrutement allochtone
+  #On prend seulement I/Gamma, car cette population est seulement immigratrice
+  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  
   
   list(c(dP_auto, dP_allo))
 }
 
-#Paramètres du modèle
-parameters <- list(K = 1, I = 1)  
 
-#Conditions initiales (ces conditions sont les mêmes que dans le graphique de l'article)
-state <- c(P_auto = 0.01, P_allo = 0.01)
-
-#Temps de simulation
-times <- seq(0, 5, by = 0.1)
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 
 #Résoudre l'ODE pour différents Gamma
-parameters$Gamma <- 10   #Cas intermédiaire
-out_intermediate <- ode(y = state, times = times, func = model, parms = parameters)
 
-parameters$Gamma <- 0.1   #Immigration dominante (Γ → 0)
-out_immigration <- ode(y = state, times = times, func = model, parms = parameters)
+#Cas intermédiaire
+parameters$Gamma <- 10
+out_intermediate <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
 
-parameters$Gamma <- 100   #Croissance intrinsèque dominante (Γ → ∞)
-out_intrinsic <- ode(y = state, times = times, func = model, parms = parameters)
+
+#Immigration dominante (Γ → 0)
+parameters$Gamma <- 0.1
+out_immigration <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+
+#Croissance intrinsèque dominante (Γ → ∞)
+parameters$Gamma <- 100
+out_intrinsic <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
 
 #Convertir les résultats en dataframes
 df_intermediate <- as.data.frame(out_intermediate)
@@ -56,6 +75,10 @@ df_intermediate$Total <- df_intermediate$P_auto + df_intermediate$P_allo
 df_intrinsic$Total <- df_intrinsic$P_auto + df_intrinsic$P_allo
 df_immigration$Total <- df_immigration$P_auto + df_immigration$P_allo
 
+
+
+
+# GRAPHIQUE
 #Tracer la figure avec inversion des couleurs des lignes pleines
 ggplot() +
   #Courbes en pointillés pour les cas limites (pas modifiées)
@@ -64,15 +87,46 @@ ggplot() +
   
   #Courbes solides pour Γ = 10 
   geom_line(data = df_intermediate, aes(x = time, y = Total, color = "Total"), size = 1) +
-  geom_line(data = df_intermediate, aes(x = time, y = P_allo, color = "Autochthonous"), size = 1) +  
-  geom_line(data = df_intermediate, aes(x = time, y = P_auto, color = "Allochthonous"), size = 1) +  
+  geom_line(data = df_intermediate, aes(x = time, y = P_allo, color = "Autochtone"), size = 1) +  
+  geom_line(data = df_intermediate, aes(x = time, y = P_auto, color = "Allochtone"), size = 1) +  
   
-  #Personnalisation avec couleurs corrigées
-  labs(x = "Time (τ)", y = expression(P^"*"), color = "Population Type") +
+  #Définition des titres
+  labs(
+    title = "Trajectoires adimensionnelle du rétablissement d'une population",
+    x = "Time (τ)", 
+    y = expression(P^"*"), 
+    color = NULL
+  ) +
+  
+  #Définition des couleurs
+  scale_color_manual(values = c(
+    "Γ → ∞" = "steelblue", 
+    "Γ → 0" = "goldenrod", 
+    "Total" = "black", 
+    "Allochtone" = "goldenrod", 
+    "Autochtone" = "steelblue"
+  )) +
+  
   theme_minimal() +
-  ggtitle("Nondimensional population recovery trajectories") +
-  scale_color_manual(values = c("Γ → ∞" = "steelblue", "Γ → 0" = "goldenrod", 
-                                "Total" = "black", "Allochthonous" = "goldenrod", "Autochthonous" = "steelblue"))
+  
+  #Ajustement de certains paramètres visuels
+  theme(
+    legend.position = c(0.8, 0.5),
+    legend.justification = c("left","top"),    
+    legend.text = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black"),
+    axis.ticks.length = unit(5, "pt"),
+    plot.title = element_text(hjust = 0.5),
+    plot.margin = margin(10, 50, 10, 10)
+  ) +
+  
+  #Aligner l'axe des x avec le 0 de l'axe des y
+  coord_cartesian(expand = FALSE)
+
+
 
 
 #Script graphiques avant-récif 3a ----

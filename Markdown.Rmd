@@ -91,10 +91,15 @@ recueillis sur divers sites et études:
 -   L'estimation du substrats durs disponibles dans les sous-populations
     ont été estimé à partir d'images de Google Earth analysées sur le
     logiciel ImageJ
+    
+<br>
+<br>
 
 **Organigramme du modèle général des populations**
 
 ![](Organigrame.png)
+
+<br>
 
 | symboles | Noms des paramètres |
 |:--------------------:|:------------------------------------------------:|
@@ -114,9 +119,13 @@ modèle utilisé:
 
 $$\frac{dP^*_1}{d\tau} = (P^*_1 + P^*_2 + \frac{I^*}{\Gamma} )(1-P^*_1) $$
 
+<br>
+
 L'équation permet d'évaluer la proportion de la croissance de la
 populaion normalisé (dP\*~1~) sur un échelle de temps intrinsèque
 (d$\tau$) en utilisant les paramètres suivants:
+
+<br>
 
 | symboles |                  Noms des paramètres                   |
 |:--------:|:------------------------------------------------------:|
@@ -125,6 +134,10 @@ populaion normalisé (dP\*~1~) sur un échelle de temps intrinsèque
 |   I\*    |              Immigration nette normalisée              |
 | $\Gamma$ | Croissance net du processus asexuel et de la mortalité |
 |  $\tau$  |             Temps intrinsèque (en années)              |
+
+
+<br>
+<br>
 
 Chacun de ses paramètres peut déterminés à partir des équestion
 suivantes:
@@ -140,6 +153,8 @@ population:* $$\Gamma = \frac{R}{S}$$
 
 *Temps intrinsèque:* $$\tau = Rt$$
 
+<br>
+
 | symboles |                    Noms des paramètres                    |
 |:--------:|:---------------------------------------------------------:|
 |    P     |                  Taille de la population                  |
@@ -149,19 +164,28 @@ population:* $$\Gamma = \frac{R}{S}$$
 |    R     | Reproduction (reproduction asexuée + reproduction sexuée) |
 |   $t$    |                     Temps (en années)                     |
 
+<br>
+<br>
+
 **Modèle des sous-populations**
 
 Le modèle dynamique des sous-populations comprend deux équations, soit
 une équation pour chaque sous-population d'un récif (avant-récif et
 après-récif).
 
+<br>
+
 *Croissance de sous-population avant-récif (P~f~)*
 
 $$\frac{dP_f}{dt} = ([P_f (r_f + \sigma f \zeta ( \gamma \beta )_{f \rightarrow f} )] + [P_b(\sigma f \zeta ( \gamma \beta ) _{b \rightarrow f )})] + I_f) ( 1 - \frac{P_f}{Kf} )$$
 
+<br>
+
 *Croissance de sous-population arrière-récif (P~b~)*
 
 $$\frac{dP_b}{dt} = ( [P_b (r_b + \sigma f \zeta ( \gamma \beta )_{b \rightarrow b} )] + [P_f (\sigma f \zeta ( \gamma \beta ) _{f \rightarrow b )}) ] + I_b) ( 1 - \frac{P_b}{Kb} )$$
+
+<br>
 
 Les variables utilisées dans les équations sont les suivantes:
 
@@ -197,11 +221,13 @@ locaux tels que la prédation, les maladie et la compétition.
 Selon les différentes études, environ la moitié des oeufs sont fécondés
 et viables.
 
+<br>
+
 *Modèles de cas limites*
 
-Pour le modèle des cas-limites, sont considère que le taux de croissance
-$r$ est identique dans le deux population
-(\$r$1=$r$2=1), tout comme la capacité de soutien ($K$1=$K\$2=1).
+Pour le modèle des cas-limites, sont considère que le taux de croissance $r$ est identique dans le deux population (r1=r2=1), tout comme la capacité de soutien (K1=K2=1).
+
+<br>
 
 *Modèles de croissance des sous-populations*
 
@@ -240,17 +266,142 @@ de celle-ci.
 
 ## **Calculs et implémentation en R**
 
--   Ajout de commentaires explicatifs.
+### Script de cas limites et intermédiaire (reproduction de la figure 2)
 
-*Script pour la reproduction de la figure 2*
+```{r, warning=FALSE, message=FALSE}
+# ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(deSolve)
+library(ggplot2)
 
-```{r}
+
+# DÉFINITION DES PARAMÈTRES DU MODÈLE
+#Paramètres du modèle (Gamma [taux de regénération intrinsèque] pas inclus, car il a plusieurs valeur)
+parameters <- list(K = 1,     #Capacité de soutien
+                   I = 1)     #Immigration nette
+
+#Conditions initiales (ces conditions sont les mêmes que dans le graphique de l'article)
+state <- c(P_auto = 0.01,     #Population autochtone
+           P_allo = 0.01)     #Population allochtone
+
+#Temps de simulation
+times <- seq(0, 5, by = 0.1)
+
+
+# CRÉATION DU MODÈLE DE CAS LIMITES
+model_cas_limite <- function(t, state, parameters) {
+  #Objet des paramètres utilisés
+  P_auto <- state[1]
+  P_allo <- state[2]
+  K <- parameters$K
+  I <- parameters$I
+  Gamma <- parameters$Gamma
+  
+  #Normalisation des paramètres par la capacité de soutien
+  P_auto_norm <- P_auto / K
+  P_allo_norm <- P_allo / K
+  
+  
+  #Équations différentielles du modèle, basées sur les équations 3 de l'article
+  #On additionne les deux populations pour le facteur de densité-dépendance pour que notre échelle des y soit sur 1, et non 2
+  
+  #Croissance normalisée de la population du au recrutement autochtone
+  dP_auto <- (P_auto_norm + P_allo_norm + I/Gamma) * (1 - (P_auto_norm + P_allo_norm))  
+  
+  #Croissance normalisée de la population du au recrutement allochtone
+  #On prend seulement I/Gamma, car cette population est seulement immigratrice
+  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  
+  
+  list(c(dP_auto, dP_allo))
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
+
+#Résoudre l'ODE pour différents Gamma
+
+#Cas intermédiaire
+parameters$Gamma <- 10
+out_intermediate <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+
+#Immigration dominante (Γ → 0)
+parameters$Gamma <- 0.1
+out_immigration <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+
+#Croissance intrinsèque dominante (Γ → ∞)
+parameters$Gamma <- 100
+out_intrinsic <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+#Convertir les résultats en dataframes
+df_intermediate <- as.data.frame(out_intermediate)
+df_immigration <- as.data.frame(out_immigration)
+df_intrinsic <- as.data.frame(out_intrinsic)
+
+#Calculer la population totale
+df_intermediate$Total <- df_intermediate$P_auto + df_intermediate$P_allo
+df_intrinsic$Total <- df_intrinsic$P_auto + df_intrinsic$P_allo
+df_immigration$Total <- df_immigration$P_auto + df_immigration$P_allo
+
+
+
+
+# GRAPHIQUE
+#Tracer la figure avec inversion des couleurs des lignes pleines
+ggplot() +
+  #Courbes en pointillés pour les cas limites (pas modifiées)
+  geom_line(data = df_intrinsic, aes(x = time, y = Total, color = "Γ → ∞"), linetype = "dashed", size = 1) +
+  geom_line(data = df_immigration, aes(x = time, y = Total, color = "Γ → 0"), linetype = "dashed", size = 1) +
+  
+  #Courbes solides pour Γ = 10 
+  geom_line(data = df_intermediate, aes(x = time, y = Total, color = "Total"), size = 1) +
+  geom_line(data = df_intermediate, aes(x = time, y = P_allo, color = "Autochtone"), size = 1) +  
+  geom_line(data = df_intermediate, aes(x = time, y = P_auto, color = "Allochtone"), size = 1) +  
+  
+  #Définition des titres
+  labs(
+    title = "Trajectoires adimensionnelle du rétablissement d'une population",
+    x = "Time (τ)", 
+    y = expression(P^"*"), 
+    color = NULL
+  ) +
+  
+  #Définition des couleurs
+  scale_color_manual(values = c(
+    "Γ → ∞" = "steelblue", 
+    "Γ → 0" = "goldenrod", 
+    "Total" = "black", 
+    "Allochtone" = "goldenrod", 
+    "Autochtone" = "steelblue"
+  )) +
+  
+  theme_minimal() +
+  
+  #Ajustement de certains paramètres visuels
+  theme(
+    legend.position = c(0.8, 0.5),
+    legend.justification = c("left","top"),    
+    legend.text = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black"),
+    axis.ticks.length = unit(5, "pt"),
+    plot.title = element_text(hjust = 0.5),
+    plot.margin = margin(10, 50, 10, 10)
+  ) +
+  
+  #Aligner l'axe des x avec le 0 de l'axe des y
+  coord_cartesian(expand = FALSE)
 
 ```
 
-*Script pour la reproduction de la figure 3a*
+<br>
+<br>
 
-```{r}
+### Script de la croissance de la sous-population avant-récif (reproduction de la figure 3a)
+
+```{r, warning=FALSE, message=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(deSolve)
 library(ggplot2)
@@ -400,7 +551,7 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
     axis.line = element_line(color = "black", linewidth = 0.8),
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size=10),
     plot.margin = margin(10, 30, 10, 10)
   ) +
   
@@ -409,9 +560,12 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 ```
 
-*Script pour la reproduction de la figure 3c*
+<br>
+<br>
 
-```{r}
+### Script des facteurs de croissance de l'avant-récif (reproduction de la figure 3c)
+
+```{r, warning=FALSE, message=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(ggplot2)
 library(dplyr)
@@ -419,7 +573,6 @@ library(tidyr)
 
 
 # DÉFINITION DES PARAMÈTRES UTILISÉS
-
 #Paramètres de temps
 years <- 2011:2018   #Années de l'étude
 n <- length(years)
@@ -435,7 +588,7 @@ Kf <- 0.8            #Capacité de charge de 80%
 
 #Paramètres de reproduction
 rf <- 0.12           #Reproduction asexuée 
-sigma_f <- 0.05      #Intensité de la croissance larvaire
+sigma <- 0.05        #Intensité de la croissance larvaire
 
 #Coefficients d'interaction (γβ)
 gamma_beta_ff <- seq(0.2, 0.8, length.out = n)   #forereef vers forereef
@@ -455,11 +608,11 @@ asexual <- Pf * rf
 asexual_adj <- asexual * density_factor
 
 #Auto-recrutement (autochtone)
-self_recruit <- Pf * sigma_f * gamma_beta_ff
+self_recruit <- Pf * sigma * gamma_beta_ff
 self_recruit_adj <- self_recruit * density_factor
 
 #Échange local
-local_exchange <- Pb * sigma_f * gamma_beta_bf
+local_exchange <- Pb * sigma * gamma_beta_bf
 local_exchange_adj <- local_exchange * density_factor
 
 #Immigration nette (allochtone)
@@ -522,7 +675,7 @@ ggplot(df, aes(x = Year, y = PercentK, linetype = Component)) +
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
     axis.title.y = element_text(angle = 90, vjust = 0.5),
-    plot.title = element_text(hjust = 0.4, face = "bold", size = 20),
+    plot.title = element_text(hjust = 0.4, face = "bold", size = 10),
     plot.margin = margin(10, 30, 10, 10)
   )+
   
@@ -530,9 +683,12 @@ ggplot(df, aes(x = Year, y = PercentK, linetype = Component)) +
   coord_cartesian(expan = FALSE)
 ```
 
-*Script pour la reproduction de la figure 4a*
+<br>
+<br>
 
-```{r}
+### Script de la croissance de la sous-population après-récif (reproduction de la figure 4a)
+
+```{r, warning=FALSE, message=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(deSolve)
 library(ggplot2)
@@ -660,7 +816,7 @@ ggplot(out, aes(x = time, y = pBtotal_pourcentage)) +
     axis.line = element_line(color = "black", linewidth = 0.8),
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size=10),
     plot.margin = margin(10, 30, 10, 10)
   ) +
   
@@ -669,9 +825,12 @@ ggplot(out, aes(x = time, y = pBtotal_pourcentage)) +
 
 ```
 
-*Script pour la reproduction de la figure 4c*
+<br>
+<br>
+ 
+### Script des facteurs de croissance de l'après-récif (reproduction de la figure 4c)
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(ggplot2)
 library(dplyr)
@@ -694,7 +853,7 @@ Kb <- 0.8            #Capacité de charge de 80%
 
 #Paramètres de reproduction
 rb <- 0.1            #Reproduction asexuée
-sigma_f <- 0.05      #Intensité de la croissance larvaire
+sigma <- 0.05        #Intensité de la croissance larvaire
 
 #Coefficients d'interaction (γβ)
 gamma_beta_bb <- seq(0.2, 0.7, length.out = n)  #backreef vers backreef
@@ -707,11 +866,11 @@ gamma_beta_fb <- rep(0.01, lenght.out = n)      #forereef vers backreef
 density_factor <- (1 - Pb / Kb)
 
 #Croissance asexuée et auto-recrutement (autochtone)
-intrinsic <- Pb * (rb + sigma_f * gamma_beta_bb)
+intrinsic <- Pb * (rb + sigma * gamma_beta_bb)
 intrinsic_adj <- intrinsic * density_factor
 
 #Échange local
-exchange <- Pf * sigma_f * gamma_beta_fb
+exchange <- Pf * sigma * gamma_beta_fb
 exchange_adj <- exchange * density_factor
 
 #Immigration nette (allochtone)
@@ -773,7 +932,7 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
     axis.title.y = element_text(angle = 90, vjust = 0.5),
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 15),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 10),
     plot.margin = margin(10, 30, 10, 10)
   )+
   
@@ -786,11 +945,153 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
 
 ## **Résultats**
 
--   Présentation des résultats obtenus.
+Le graphique des cas limites et intermédiaires représente des trajectoires de rétablissement de populations de coraux lorsque les deux sous-populations sont supposés identiques, donc que leur abondance initiales sont de P1=P2=1, que K1=K2=1 et que r1=r2=1. Ainsi, lorsque les paramètres sont invariants dans le temps la taille de la population devrait être relié à différents facteurs selon la croissance nette ($\Gamma$).
 
--   Figures et analyses.
+Lorsque $\Gamma$ = 0, le recrutement de larve allochtone devrait avoir un plus grand impact sur la croissance, en faisant augmenter la taille de la population très rapidement avant de s'immobiliser seuil K.
+
+Lorsque $\Gamma$ = Infinie, c'est plutôt le recrutement de larve autochtone qui domine.
+
+Lorsque $\Gamma$ = 10, donc dans un cas intermédiaire, les deux types de recrutement larvaire sont observés, quoiqu'il y ait tout de même un recrutement pour les larves allochtones plus fort que pour les larves autochtones.
+
+
 
 ![](Figure 2.png) 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(deSolve)
+library(ggplot2)
+
+
+# DÉFINITION DES PARAMÈTRES DU MODÈLE
+#Paramètres du modèle (Gamma [taux de regénération intrinsèque] pas inclus, car il a plusieurs valeur)
+parameters <- list(K = 1,     #Capacité de soutien
+                   I = 1)     #Immigration nette
+
+#Conditions initiales (ces conditions sont les mêmes que dans le graphique de l'article)
+state <- c(P_auto = 0.01,     #Population autochtone
+           P_allo = 0.01)     #Population allochtone
+
+#Temps de simulation
+times <- seq(0, 5, by = 0.1)
+
+
+# CRÉATION DU MODÈLE DE CAS LIMITES
+model_cas_limite <- function(t, state, parameters) {
+  #Objet des paramètres utilisés
+  P_auto <- state[1]
+  P_allo <- state[2]
+  K <- parameters$K
+  I <- parameters$I
+  Gamma <- parameters$Gamma
+  
+  #Normalisation des paramètres par la capacité de soutien
+  P_auto_norm <- P_auto / K
+  P_allo_norm <- P_allo / K
+  
+  
+  #Équations différentielles du modèle, basées sur les équations 3 de l'article
+  #On additionne les deux populations pour le facteur de densité-dépendance pour que notre échelle des y soit sur 1, et non 2
+  
+  #Croissance normalisée de la population du au recrutement autochtone
+  dP_auto <- (P_auto_norm + P_allo_norm + I/Gamma) * (1 - (P_auto_norm + P_allo_norm))  
+  
+  #Croissance normalisée de la population du au recrutement allochtone
+  #On prend seulement I/Gamma, car cette population est seulement immigratrice
+  dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  
+  
+  list(c(dP_auto, dP_allo))
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
+
+#Résoudre l'ODE pour différents Gamma
+
+#Cas intermédiaire
+parameters$Gamma <- 10
+out_intermediate <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+
+#Immigration dominante (Γ → 0)
+parameters$Gamma <- 0.1
+out_immigration <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+
+#Croissance intrinsèque dominante (Γ → ∞)
+parameters$Gamma <- 100
+out_intrinsic <- ode(y = state, times = times, func = model_cas_limite, parms = parameters)
+
+#Convertir les résultats en dataframes
+df_intermediate <- as.data.frame(out_intermediate)
+df_immigration <- as.data.frame(out_immigration)
+df_intrinsic <- as.data.frame(out_intrinsic)
+
+#Calculer la population totale
+df_intermediate$Total <- df_intermediate$P_auto + df_intermediate$P_allo
+df_intrinsic$Total <- df_intrinsic$P_auto + df_intrinsic$P_allo
+df_immigration$Total <- df_immigration$P_auto + df_immigration$P_allo
+
+
+
+
+# GRAPHIQUE
+#Tracer la figure avec inversion des couleurs des lignes pleines
+ggplot() +
+  #Courbes en pointillés pour les cas limites (pas modifiées)
+  geom_line(data = df_intrinsic, aes(x = time, y = Total, color = "Γ → ∞"), linetype = "dashed", size = 1) +
+  geom_line(data = df_immigration, aes(x = time, y = Total, color = "Γ → 0"), linetype = "dashed", size = 1) +
+  
+  #Courbes solides pour Γ = 10 
+  geom_line(data = df_intermediate, aes(x = time, y = Total, color = "Total"), size = 1) +
+  geom_line(data = df_intermediate, aes(x = time, y = P_allo, color = "Autochtone"), size = 1) +  
+  geom_line(data = df_intermediate, aes(x = time, y = P_auto, color = "Allochtone"), size = 1) +  
+  
+  #Définition des titres
+  labs(
+    title = "Trajectoires adimensionnelle du rétablissement d'une population",
+    x = "Time (τ)", 
+    y = expression(P^"*"), 
+    color = NULL
+  ) +
+  
+  #Définition des couleurs
+  scale_color_manual(values = c(
+    "Γ → ∞" = "steelblue", 
+    "Γ → 0" = "goldenrod", 
+    "Total" = "black", 
+    "Allochtone" = "goldenrod", 
+    "Autochtone" = "steelblue"
+  )) +
+  
+  theme_minimal() +
+  
+  #Ajustement de certains paramètres visuels
+  theme(
+    legend.position = c(0.8, 0.5),
+    legend.justification = c("left","top"),    
+    legend.text = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black"),
+    axis.ticks.length = unit(5, "pt"),
+    plot.title = element_text(hjust = 0.5),
+    plot.margin = margin(10, 50, 10, 10)
+  ) +
+  
+  #Aligner l'axe des x avec le 0 de l'axe des y
+  coord_cartesian(expand = FALSE)
+
+```
+
+<br>
+
+Pour le cas d'une sous-population d'avant-récif qui est très efficace pour se rétablir après une perturbation forte, le modèle `model_proportion_forereef` a permis d'évaluer la dynamique d'un récif corallien qui croît grâce à différentes sources larvaires. Dans ce cas, on observe que le pourcentage de recouvrement en corail du subtrat est principalement du au recrutement larvaire des sous-populations autres, grâce à l'immigration via l'après-récif et d'ailleurs.
+
+Toutefois, le graphique du pourcentage de la capacité de charge des populations par an permet d'évaluer la contribution de chaque facteurs de croissance pendant le rétablissement de la sous-population. Pour ce qui est de l'appart extérieur, on remarque alors que les échanges locaux, donc entre l'avant et l'après-récif, ont très peu d'impact, contrairement à l'immigration nette qui est le plus important directement après la perturbation. Pour ce qui est de l'appart intrinsèque, la croissance asexuelle et l'auto-recrutement en larves dominent les autres facteurs contribuant 2 à 3 ans après la perturbation.
+
+<br>
+
 ![](Figure 3a.png)
 ```{r, echo=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
@@ -951,6 +1252,8 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 ```
 
+<br>
+
 ![](Figure 3c.png)
 ```{r, echo=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
@@ -1063,13 +1366,20 @@ ggplot(df, aes(x = Year, y = PercentK, linetype = Component)) +
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
     axis.title.y = element_text(angle = 90, vjust = 0.5),
-    plot.title = element_text(hjust = 0.4, face = "bold", size = 20),
+    plot.title = element_text(hjust = 0.4, face = "bold", size = 10),
     plot.margin = margin(10, 30, 10, 10)
   )+
   
   #Aligner l'axe
   coord_cartesian(expan = FALSE)
 ```
+
+<br>
+<br>
+
+L'arrière récif a aussi été modélisé avec `model_proportion_backreef`, puisque les deux sous-populations réagissent différement aux perturbations. En effet, plutôt que de croître comme la sous-population d'avant-récif, l'arrière-récif a un pourcentage de recouvrement corallien qui diminue. Et bien que l'immigration reste constant et très faible (%K/yr < 0.1), la courbe de mortalité augmente plus les années passent. 
+
+
 ![](Figure 4a.png) 
 ```{r, echo=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
@@ -1199,7 +1509,7 @@ ggplot(out, aes(x = time, y = pBtotal_pourcentage)) +
     axis.line = element_line(color = "black", linewidth = 0.8),
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size=10),
     plot.margin = margin(10, 30, 10, 10)
   ) +
   
@@ -1207,6 +1517,10 @@ ggplot(out, aes(x = time, y = pBtotal_pourcentage)) +
   coord_cartesian(expand = FALSE)
 
 ```
+
+
+<br>
+
 ![](Figure 4c.png)
 ```{r, echo=FALSE}
 # ALLER CHERCHER LES PACKAGES NÉCESSAIRES
@@ -1310,7 +1624,7 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
     axis.ticks = element_line(color = "black"),
     axis.ticks.length = unit(5, "pt"),
     axis.title.y = element_text(angle = 90, vjust = 0.5),
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 15),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 10),
     plot.margin = margin(10, 30, 10, 10)
   )+
   
@@ -1323,15 +1637,13 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
 
 ## **Interprétation biologique**
 
--   Explication des résultats obtenus.
-
--   Mise en relation avec les hypothèses de départ.
-
 La présente étude porte sur une métapopulation de coraux de la Polynésie
 française. Les chercheurs ont regardé comment la croissance asexuée des
 polypes, les populations autochtones, les populations locales et les
 populations allochtones influençaient la récupération de la population
 après une perturbation.
+
+L'utilisation de différent modèles de dynamique des populations ont permis d'évaluer les différentes importances relatives des facteurs contribuants à la regénérescence d'une sous-population après avoir été fortement perturbée par les étoiles de mers, faisant alors diminuer drastiquement l'abondance de coraux dans les récifs.
 
 La figure 2 nous démontre les différentes trajectoires
 non-dimensionnelles de la population. Ce graphique illustre
@@ -1341,46 +1653,35 @@ une plus grande influence que la croissance intrinsèque de la
 population, représentée par la ligne bleue, en ce qui a trait à la
 récupération après une perturbation. Ce graphique représente simplement
 un modèle de base, qui nous a permis de créer les autres graphiques pour
-répondre à notre question de recherche.
+répondre à notre question de recherche. Les résultats de ce graphique représentent donc un monde idéaliste où les populations sont identiques et les paramètres invariables dans le temps.
 
-Les figures 3a et 3b, représentant deux sites différentes du récif avant
-nous démontrent la croissance totale de la population (en noir),
-provenant des sources autochtones (en bleu) et allochtones (en jaune).
-De plus, les figures 3c et 3d représentent les composants contribuant au
-changement de la croissance de la population aux deux mêmes sites du
-récif avant. Les figures 4a et 4b représentent des reconstructions des
-trajectoires de population sur deux sites du récif arrière. Les figures
-4c et 4d représentent les composants contribuant aux changements de la
-croissance de la population. Si l’on regarde de manière générale à
-travers ces graphiques, nous pouvons voir que le récif avant est
-beaucoup plus propice à la prolifération asexuée que le récif arrière.
-En effet, le récif arrière possède une croissance intrinsèque compensée
-par la mortalité où la récupération par les autres populations de coraux
-peut être plus difficile, et ce, même avec une certaine subvention des
-larves provenant du récif avant. De plus, étant donné que les différents
+La figure 3a représentent l'évolution d'une sous-population d'avant-récif qui a un fort pour de rétablissement après une population. De manière générale entre les années, le recrutement larvaire allochtone jumelé à l'immigration nette a un plus fort impact que le recrutement larvaire autochtone et la reproduction sexuée. Toutes les composantes influence quand même la croissance de la population.
+
+Toutefois, la figure 3c démontrent l'importance relative de chacun des facteurs (reproduction asexuée, recrutement autochtone, recrutement locale et recrutement allochtone) dans le rétablissement de la population. Au début, c'est l'immigration nette qui a un grand impact sur la repopulation de l'avant-récif, mais il semble qu'une fois que l'abondance s'élève, ce sera plutôt la reproduction asexuée et le recrutement autochtone qui joueront un rôle dans le maintien d'une population croissante. Or, précisément en 2013, la croissance asexuée
+des polypes domine largement la récupération, et l’autorecrutement des
+populations produites localement surpasse la subvention de
+l’immigration. 
+
+Quant à elle, la figure 4a représente une reconstruction de trajectoire de population sur un site de l'après-récif qui est en déclin. Comme il est expliquer dans l'article de Torres et al., il y a une forte compétition entre les coraux et les microalgues dans l'après-récif, ne facilitant donc pas l'augmentation de l'abondance de coraux. 
+
+La figure 4c représente les composants contribuant aux changements de la
+croissance de la population, soit l'immigration et un facteur de mortalité constant. 
+
+De plus, étant donné que les différents
 habitats sont connectés de manière hydrodynamique, il est probable que
 les conditions du récif arrière ne soient pas propices à la fixation et
 au recrutement des larves. Comme on peut le remarquer dans différents
 graphiques du récif arrière, la couverture corallienne diminue plus le
 temps avance jusqu’à se stabiliser, et la mortalité de la population
-augmente jusqu’à se stabiliser également. Pour ce qui est du récif
-avant, nous pouvons voir dans les graphiques 3a et 3b, autant l’apport
-allochtone que l’apport autochtone contribue à l’accroissement de la
-population. D’autre part, les figures 3c et 3d nous démontrent que dans
-les premières années, c’est l’immigration qui permet un apport plus
-grand à la population. Or, précisément en 2013, la croissance asexuée
-des polypes domine largement la récupération, et l’autorecrutement des
-populations produites localement surpasse la subvention de
-l’immigration.
+augmente jusqu’à se stabiliser également. 
 
-Avec l’observation des graphiques et l’interprétation biologique
-découlant de ceux-ci, nous pouvons confirmer notre première hypothèse
-soutenant que la croissance de la population est influencée davantage
-par la croissance asexuée des individus matures déjà présents dans la
-sous-population. Ce type de croissance surpasse largement l’immigration.
-L’autorecrutement dépasse également l’immigration à long terme, mais
-c’est tout de même la croissance asexuée des polypes qui est la plus
-influente.
+Si l’on regarde de manière générale à
+travers ces graphiques, nous pouvons voir que l'avant-récif est
+beaucoup plus propice à la prolifération asexuée que l'après-récif.
+En effet, le récif arrière possède une croissance intrinsèque compensée
+par la mortalité où la récupération par les autres populations de coraux
+peut être plus difficile, et ce, même avec une certaine subvention des
+larves provenant du récif avant. Cette abondance faible de coraux dans l'arrière récif peut donc expliquer en partie pourquoi le recrutement local de larve est si bas dans l'avant-récif, comme on peut le voir dans la figure 3c.
 
 ------------------------------------------------------------------------
 

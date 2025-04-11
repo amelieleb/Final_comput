@@ -427,7 +427,7 @@ model <- function(time, state, parameters) {
 state <- c(pFallo = 0.01, pFauto = 0.01, pFtotal = 0.01, pBallo = 0.01, pBauto = 0.01, pBtotal = 0.01)
 
 #Intervalle de temps en années
-times <- seq(0, 30, by = 0.1)
+times <- seq(0, 8, by = 0.1)
 
 #Résolution numérique du système
 out <- ode(y = state, times = times, func = model, parms = params)
@@ -462,7 +462,7 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
 
 
 
-###---  Figure 4a -backreef- ---###
+###---  Figure 4a -backreef- ---###----
 #Différences: ajout de mortalité, baisser le taux de croissance de la pop backreef, le recrutement front->back, l'immigration à 0.08 comme indiqué. et état initial
 
 params <- list(
@@ -550,13 +550,17 @@ ggplot(backreef_data, aes(x = time, y = Value, color = Source)) +
   theme_minimal(base_size = 14)
 
 
-###------ SECTION 2--AJOUT MORTALITÉ PÉRIODIQUE et visualisation des deux pops ensemble-----########
+###------ SECTION 2--AJOUT MORTALITÉ PÉRIODIQUE et visualisation des deux pops ensemble-----########----
 
 #fonction qui représente la variation de mortalité aux 7 ans
-taux_perte <- function(t, peak = 0.99, period = 7, pulse_width = 1) {
+times <- seq(0,100, by=1)
+
+taux_perte <- function(t, peak = 0.5, period = 10, pulse_width = 1) {
   if ((t %% period) < pulse_width) {
     return(peak)
   } else {
+    
+    
     return(0)
   }
 }
@@ -593,12 +597,12 @@ model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     pertes_t <- taux_perte(time)
     
-    dFallo  <- sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf) - pertes_t * (pFauto + pFallo)
-    dFauto  <- (pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf) - pertes_t * (pFauto + pFallo)
+    dFallo  <- (sigma_f * zeta_bf * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * zeta_ff) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
     
-    dBallo  <- sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)
-    dBauto  <- pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)
-    dBtotal <- dBallo + dBauto - mortal * pBtotal - pertes_t * pBtotal
+    dBallo  <- (sigma_f * zeta_fb * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    dBauto  <- (pBtotal * (rb + sigma_f * zeta_bb) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
     
     list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
   })
@@ -607,7 +611,7 @@ model <- function(time, state, parameters) {
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
 
 #Intervalle de temps en années
-times <- seq(0, 20, by = 0.1)
+times <- seq(0, 100, by = 0.1)
 
 #Résolution numérique du système
 out <- ode(y = state, times = times, func = model, parms = params)
@@ -640,7 +644,14 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   ) +
   theme_minimal(base_size = 14)
 
-# Préparer les données des deux populations
+
+
+
+
+
+
+
+# Préparer les données des deux populations----
 reef_data <- out %>%
   select(time, pFtotal, pBtotal) %>%
   rename(
@@ -664,7 +675,13 @@ ggplot(reef_data, aes(x = time, y = Value, color = Reef)) +
   ) +
   theme_minimal(base_size = 14)
 
-###----###-----SCRAP-----###-------###
+
+
+
+
+
+
+###----###-----SCRAP-----###-------###----
 
 #Équations différentielles selon les équations 4
 model <- function(time, state, parameters) {
