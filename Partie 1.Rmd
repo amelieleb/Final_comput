@@ -9,23 +9,23 @@ output: html_document
 
 ## **Résumé de l'article**
 
-Les récifs coralliens sont grandement affecté par des perturbations
-anthropique mettant en péril leur survie. Bien qu'il existe déjà
+Les récifs coralliens sont grandement affectés par des perturbations
+anthropiques mettant en péril leur survie. Bien qu'il existe déjà
 plusieurs modèles sur la dynamique démographique applicables à plusieurs
 populations coralliennes, ceux-ci ne prennent généralement en compte que
 la naissance, la mortalité et la croissance.
 
-L'équipe de recherche de Torres et al. ce sont toutefois intéressé sur
+L'équipe de recherche de Torres et al. se sont toutefois intéressé sur
 les facteurs influencant cette dynamique démographique. Ainsi, ils ont
 pris les choses en main pour créer un modèle qui pourrait expliquer les
-importance relatives associées à la reproduction asexuée ainsi qu'au
+importances relatives associées à la reproduction asexuée ainsi qu'au
 recrutement des larves pélagiques de corail en provenance locale ou
-externe qui pourrait être utiliser sur des communautés de populations
+externe qui pourrait être utilisé sur des communautés de populations
 hétérogènes et fragmentées.
 
 L'étude (2010 à 2018) est basée sur l'évolution de deux populations
 (LTER1 et LTER2) de la côte nord du récif corallien de Moorea en
-Polynésie française. suite à une diminution presque complète du récif en
+Polynésie française. à la suite d'une diminution presque complète du récif en
 2010 après une attaque des étoiles de mers à épines, suivit d'une hausse
 rapide de l'abondance de corail.
 
@@ -37,8 +37,8 @@ Quelle est l'importance relative de la croissance asexuée et du
 recrutement de larves provenant de trois sources spatialement
 différentes (allochtone, locale et autochtone) sur la croissance des
 sous-populations coraliennes de Pocillopora spp. d'avant-récif et
-d'apprès-récif, de la métapopulation du récif coralien Moorea en
-Polynésie française, entre 2010 et 2019, suite à un déclin important de
+d'apprès-récif de la métapopulation du récif coralien Moorea, en
+Polynésie française, entre 2010 et 2019, à la suite d'un déclin important de
 leur abondance?
 
 ------------------------------------------------------------------------
@@ -46,20 +46,20 @@ leur abondance?
 ## **Hypothèses**
 
 Hypothèse 1: La croissance de la population est influencée par la
-croissance asexuée des individus matures déjà présent dans la
+croissance asexuée des individus matures déjà présents dans la
 sous-population.
 
 Hypothèse 2: La croissance de la population est influencée par la
-reproduction sexuée du au recrutement de larves de provenance
-autochtone, c'est-à-dire située à 1-100m de la sous-population.
+reproduction sexuée dûe au recrutement de larves de provenance
+autochtone, c'est-à-dire situées à 1-100m de la sous-population.
 
 Hypothèse 3: La croissance de la population est influencée par la
-reproduction sexuée du au recrutement de larves de provenance locale,
-c'est-à-dire située à 100m - 10km de la sous-population (sous-population
+reproduction sexuée dûe au recrutement de larves de provenance locale,
+c'est-à-dire situées à 100m - 10km de la sous-population (sous-population
 à proximité).
 
 Hypothèse 4: La croissance de la population est influencée par la
-reproduction sexuée du au recrutement de larves de provenance
+reproduction sexuée dûe au recrutement de larves de provenance
 allochtone, c'est-à-dire situées à 10-100km de la sous-population
 (sous-population non observé dans la recherche).
 
@@ -70,8 +70,8 @@ allochtone, c'est-à-dire situées à 10-100km de la sous-population
 **Données utilisées**
 
 Les données empiriques utilisées liées au genre Pocillopora spp. du
-récif corallien Moorea en Polynésie française ont été récolté dans le
-cadre d'un projet de séries chronologiques écologiques à long terme du
+récif corallien Moorea en Polynésie française ont été récoltées dans le
+cadre d'un projet de séries chronologiques et écologiques à long terme du
 récif corallien Moorea (MCR LTER).
 
 L'étude se concentre sur les événements survenus sur la côte nord entre
@@ -79,9 +79,9 @@ L'étude se concentre sur les événements survenus sur la côte nord entre
 la plus rapide dans dans le récif.
 
 Certains paramètres de l'étude ont été estimé à partir de données
-recueillis sur divers sites et études:
+recueillies sur divers sites et études:
 
--   La valeur de fécondité est une moyenne normalisé de plusieurs
+-   La valeur de fécondité est une moyenne normalisée de plusieurs
     données d'études fait sur le genre Pocillopora spp. dans plusieurs
     récifs coralliens (Maldives, Hawaï et la mer Rouge).
 
@@ -111,7 +111,7 @@ recueillis sur divers sites et études:
 
 **Modèle de cas-limite**
 
-Afin de calculer d' limites et intermédiaire d'une population, voici le
+Afin de calculer les cas limites et intermédiaires d'une population, voici le
 modèle utilisé:
 
 $$\frac{dP^*_1}{d\tau} = (P^*_1 + P^*_2 + \frac{I^*}{\Gamma} )(1-P^*_1) $$
@@ -119,7 +119,7 @@ $$\frac{dP^*_1}{d\tau} = (P^*_1 + P^*_2 + \frac{I^*}{\Gamma} )(1-P^*_1) $$
 <br>
 
 L'équation permet d'évaluer la proportion de la croissance de la
-populaion normalisé (dP\*~1~) sur un échelle de temps intrinsèque
+populaion normalisée (dP\*~1~) sur un échelle de temps intrinsèque
 (d$\tau$) en utilisant les paramètres suivants:
 
 <br>
@@ -136,16 +136,16 @@ populaion normalisé (dP\*~1~) sur un échelle de temps intrinsèque
 <br>
 <br>
 
-Chacun de ses paramètres peut déterminés à partir des équestion
+Chacun de ces paramètres peuvent être déterminés à partir des équations
 suivantes:
 
 *Taille normalisée de la population 1:* $$P^*_1 = \frac{P_1}{K_1}$$
 
 *Taille normalisée de la populatioin 2:* $$P^*_2 = \frac{P_2}{K_2}$$
 
-*Immigration nette normalisés:* $$I^* = \frac{I}{SK}$$
+*Immigration nette normalisée:* $$I^* = \frac{I}{SK}$$
 
-*Croissance nette du processus asexuel et de la mortalité de la
+*Croissance nette du processus asexué et de la mortalité de la
 population:* $$\Gamma = \frac{R}{S}$$
 
 *Temps intrinsèque:* $$\tau = Rt$$
@@ -212,21 +212,21 @@ la reproduction sexuée par recrutement ($r_e$).
 
 *Données*
 
-La capacité de soutien est déterminé par une combinaison de facteurs
-locaux tels que la prédation, les maladie et la compétition.
+La capacité de soutien est déterminée par une combinaison de facteurs
+locaux tels que la prédation, les maladies et la compétition.
 
 Selon les différentes études, environ la moitié des oeufs sont fécondés
 et viables.
 
 <br>
 
-*Modèles de cas limites*
+*Modèle de cas limites*
 
-Pour le modèle des cas-limites, sont considère que le taux de croissance $r$ est identique dans le deux population (r1=r2=1), tout comme la capacité de soutien (K1=K2=1).
+Pour le modèle des cas-limites, nous considérons que le taux de croissance $r$ est identique dans le deux population (r1=r2=1), tout comme la capacité de soutien (K1=K2=1).
 
 <br>
 
-*Modèles de croissance des sous-populations*
+*Modèle de croissance des sous-populations*
 
 L'utilisation d'un modèle adimensionnel (modèle dynamique de croissance
 des sous-populations) permet de prendre en compte simultanément la
@@ -234,8 +234,8 @@ croissance asexuée individuelle et la croissance induite par le
 recrutement, sans avoir à modéliser les transitions entre les stades de
 vie.
 
-Les sous-populations incluses dans le modèle sont lié à une
-métapopulation stable qui permet un apport constante de larves dans une
+Les sous-populations inclues dans le modèle sont liées à une
+métapopulation stable qui permet un apport constant de larves dans une
 population locale spécifique, ne permettant donc pas une perte
 d'abondance totale dans une sous-population, d'où l'ajout d'une valeur
 d'immigration nette (I).
@@ -249,12 +249,12 @@ des variations du recrutement coralliens et du succès post-installation.
 Tous les paramètres de ce modèle, à l'exception de $P$, sont invariants
 dans le temps.
 
-Le substrat dispobible pour la croissance est limité.
+Le substrat disponible pour la croissance est limité.
 
 Il ne peut y avoir plus de recrues issues des populations locales que le
 nombre de larves disponibles dans ces populations, tout comme il ne peut
 pas y avoir plus de recrues qui parviennent à maturité que le nombre de
-larve disponibles ($\beta$\<=1).
+larves disponibles ($\beta$\<=1).
 
 Les facteurs intrinsèques à une sous-population dépendent de la densité
 de celle-ci.
@@ -304,7 +304,7 @@ model_cas_limite <- function(t, state, parameters) {
   #Croissance normalisée de la population du au recrutement autochtone
   dP_auto <- (P_auto_norm + P_allo_norm + I/Gamma) * (1 - (P_auto_norm + P_allo_norm))  
   
-  #Croissance normalisée de la population du au recrutement allochtone
+  #Croissance normalisée de la population dû au recrutement allochtone
   #On prend seulement I/Gamma, car cette population est seulement immigratrice
   dP_allo <- I/Gamma * (1 - (P_auto_norm + P_allo_norm))  
   
@@ -944,9 +944,9 @@ ggplot(df_backreef, aes(x = Year, y = PercentKb, linetype = Component)) +
 
 ### Cas limites
 
-Le graphique des cas limites et intermédiaires représente des trajectoires de rétablissement de populations de coraux lorsque les deux sous-populations sont supposés identiques, donc que leur abondance initiales sont de P1=P2=1, que K1=K2=1 et que r1=r2=1. Ainsi, lorsque les paramètres sont invariants dans le temps la taille de la population devrait être relié à différents facteurs selon la croissance nette ($\Gamma$).
+Le graphique des cas limites et intermédiaires représente des trajectoires de rétablissement de populations de coraux lorsque les deux sous-populations sont supposées être identiques, donc que leur abondances initiales sont de P1=P2=1, que K1=K2=1 et que r1=r2=1. Ainsi, lorsque les paramètres sont invariants dans le temps, la taille de la population devrait être reliée à différents facteurs selon la croissance nette ($\Gamma$).
 
-Lorsque $\Gamma$ = 0, le recrutement de larve allochtone devrait avoir un plus grand impact sur la croissance, en faisant augmenter la taille de la population très rapidement avant de s'immobiliser seuil K.
+Lorsque $\Gamma$ = 0, le recrutement de larve allochtone devrait avoir un plus grand impact sur la croissance, en faisant augmenter la taille de la population très rapidement avant de s'immobiliser au seuil K.
 
 Lorsque $\Gamma$ = Infinie, c'est plutôt le recrutement de larve autochtone qui domine.
 
@@ -1087,9 +1087,9 @@ ggplot() +
 
 ### Avant-récif
 
-Pour le cas d'une sous-population d'avant-récif qui est très efficace pour se rétablir après une perturbation forte, le modèle `model_proportion_forereef` a permis d'évaluer la dynamique d'un récif corallien qui croît grâce à différentes sources larvaires. Dans ce cas, on observe que le pourcentage de recouvrement en corail du subtrat est principalement du au recrutement larvaire des sous-populations autres, grâce à l'immigration via l'après-récif et d'ailleurs.
+Pour le cas d'une sous-population d'avant-récif qui est très efficace pour se rétablir après une perturbation forte, le modèle `model_proportion_backreef` a permis d'évaluer la dynamique d'un récif corallien qui croît grâce à différentes sources larvaires. Dans ce cas, on observe que le pourcentage de recouvrement en corail du subtrat est principalement dû au recrutement larvaire des sous-populations autres, grâce à l'immigration via l'après-récif et d'ailleurs.
 
-Toutefois, le graphique du pourcentage de la capacité de charge des populations par an permet d'évaluer la contribution de chaque facteurs de croissance pendant le rétablissement de la sous-population. Pour ce qui est de l'appart extérieur, on remarque alors que les échanges locaux, donc entre l'avant et l'après-récif, ont très peu d'impact, contrairement à l'immigration nette qui est le plus important directement après la perturbation. Pour ce qui est de l'appart intrinsèque, la croissance asexuelle et l'auto-recrutement en larves dominent les autres facteurs contribuant 2 à 3 ans après la perturbation.
+Toutefois, le graphique du pourcentage de la capacité de charge des populations par an permet d'évaluer la contribution de chaque facteurs de croissance pendant le rétablissement de la sous-population. Pour ce qui est de l'apport extérieur, on remarque alors que les échanges locaux, donc entre l'avant-récif et l'après-récif, ont très peu d'impact contrairement à l'immigration nette qui est la plus importante directement après la perturbation. Pour ce qui est de l'apport intrinsèque, la croissance asexuée et l'auto-recrutement en larves dominent les autres facteurs contribuant 2 à 3 ans après la perturbation.
 
 <br>
 
@@ -1380,7 +1380,7 @@ ggplot(df, aes(x = Year, y = PercentK, linetype = Component)) +
 
 ### Après-récif
 
-L'après-récif a aussi été modélisé avec `model_proportion_backreef`, puisque les deux sous-populations réagissent différement aux perturbations. En effet, plutôt que de croître comme la sous-population d'avant-récif, l'arrière-récif a un pourcentage de recouvrement corallien qui diminue. Et bien que l'immigration reste constant et très faible (%K/yr < 0.1), la courbe de mortalité augmente plus les années passent. 
+L'après-récif a aussi été modélisé avec `model_proportion_backreef`, puisque les deux sous-populations réagissent différement aux perturbations. En effet, plutôt que de croître comme la sous-population d'avant-récif, l'arrière-récif a un pourcentage de recouvrement corallien qui diminue. Et bien que l'immigration reste constante et très faible (%K/yr < 0.1), la courbe de mortalité augmente plus les années passent. 
 
 
 ![](Figure 4a.png) 
@@ -1646,7 +1646,7 @@ polypes, les populations autochtones, les populations locales et les
 populations allochtones influençaient la récupération de la population
 après une perturbation.
 
-L'utilisation de différent modèles de dynamique des populations ont permis d'évaluer les différentes importances relatives des facteurs contribuants à la regénérescence d'une sous-population après avoir été fortement perturbée par les étoiles de mers, faisant alors diminuer drastiquement l'abondance de coraux dans les récifs.
+L'utilisation de différents modèles de dynamique des populations ont permis d'évaluer les différentes importances relatives des facteurs contribuants à la regénérescence d'une sous-population après avoir été fortement perturbée par les étoiles de mers, faisant alors diminuer drastiquement l'abondance de coraux dans les récifs.
 
 La figure 2 nous démontre les différentes trajectoires
 non-dimensionnelles de la population. Ce graphique illustre
@@ -1658,14 +1658,14 @@ récupération après une perturbation. Ce graphique représente simplement
 un modèle de base, qui nous a permis de créer les autres graphiques pour
 répondre à notre question de recherche. Les résultats de ce graphique représentent donc un monde idéaliste où les populations sont identiques et les paramètres invariables dans le temps.
 
-La figure 3a représentent l'évolution d'une sous-population d'avant-récif qui a un fort pour de rétablissement après une population. De manière générale entre les années, le recrutement larvaire allochtone jumelé à l'immigration nette a un plus fort impact que le recrutement larvaire autochtone et la reproduction sexuée. Toutes les composantes influence quand même la croissance de la population.
+La figure 3a représentent l'évolution d'une sous-population d'avant-récif qui a un fort effet de rétablissement après une population. De manière générale entre les années, le recrutement larvaire allochtone jumelé à l'immigration nette a un plus fort impact que le recrutement larvaire autochtone et la reproduction asexuée. Toutes les composantes influencent quand même la croissance de la population.
 
-Toutefois, la figure 3c démontrent l'importance relative de chacun des facteurs (reproduction asexuée, recrutement autochtone, recrutement locale et recrutement allochtone) dans le rétablissement de la population. Au début, c'est l'immigration nette qui a un grand impact sur la repopulation de l'avant-récif, mais il semble qu'une fois que l'abondance s'élève, ce sera plutôt la reproduction asexuée et le recrutement autochtone qui joueront un rôle dans le maintien d'une population croissante. Or, précisément en 2013, la croissance asexuée
+Toutefois, la figure 3c démontre l'importance relative de chacun des facteurs (reproduction asexuée, recrutement autochtone, recrutement local et recrutement allochtone) dans le rétablissement de la population. Au début, c'est l'immigration nette qui a un grand impact sur la repopulation de l'avant-récif, mais il semble qu'une fois que l'abondance s'élève, ce sera plutôt la reproduction asexuée et le recrutement autochtone qui joueront un rôle dans le maintien d'une population croissante. Or, précisément en 2013, la croissance asexuée
 des polypes domine largement la récupération, et l’autorecrutement des
 populations produites localement surpasse la subvention de
 l’immigration. 
 
-Quant à elle, la figure 4a représente une reconstruction de trajectoire de population sur un site de l'après-récif qui est en déclin. Comme il est expliquer dans l'article de Torres et al., il y a une forte compétition entre les coraux et les microalgues dans l'après-récif, ne facilitant donc pas l'augmentation de l'abondance de coraux. 
+Quant à elle, la figure 4a représente une reconstruction de trajectoire de population sur un site de l'après-récif qui est en déclin. Comme il est expliqué dans l'article de Torres et al., il y a une forte compétition entre les coraux et les microalgues dans l'après-récif, ne facilitant donc pas l'augmentation de l'abondance de coraux. 
 
 La figure 4c représente les composants contribuant aux changements de la
 croissance de la population, soit l'immigration et un facteur de mortalité constant. 
