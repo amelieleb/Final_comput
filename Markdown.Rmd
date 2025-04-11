@@ -133,7 +133,7 @@ plasticité ou d'adaptations.
 - Les taux d'immigrations restent constants.
 
 - Toutes ces sources et ces paramètres (autochtone et allochtones) sont
-les seuls qui déterminent la dynamique vital de cette population. Il n'y
+les seuls qui déterminent la dynamique vitale de cette population. Il n'y
 a donc pas de mortalité, d'interactions biotiques, ou d'autres
 paramètres pertinants.
 
@@ -755,12 +755,12 @@ croissance initiale à la suite de perturbations ponctuelles d’étoile de
 mer et d'un cyclone. Un phénomène climatique comme El Niño, en
 réchauffant les eaux du Pacifique, risque d’affecter simultanément
 plusieurs régions récifales, incluant à la fois les populations locales
-et les sources distantes de larves. AUtrement dit, un phénomème
+et les sources distantes de larves. Autrement dit, un phénomème
 climatique peut atteindre toute la métapopulation de coraux, et non
 seulement une sous-population. Nous avons donc, pour cette dernière
 simulation, baissé l'immigration provenant de la métapopulation,
 assumant qu’elle soit également affectée par le fort réchauffement des
-eaux. Dans cette simulation, le taux d'immigration Ib et If est donc
+eaux. Dans cette simulation, les taux d'immigration Ib et If sont donc
 diminué de 80%. Les perturbations sont également aux 7 ans. La force de
 la perte réelle est de 99%, similaire à l'épisode de 2010. Cette section
 vise donc à simuler la récupération du récif dans l'éventualité d'une
@@ -926,15 +926,15 @@ atteintes dans chaque simulation.
 
 ## **Discussion**
 
-Avec les changements climatiques et les phénomènes de débalancements environnementaux qui se font de plus en présents, nous nous sommes intéressés à comment les sous-populations de coraux sont en mesure de se rétablir selon différents paramètres fixes. Nous nous sommes également intéressés à la différence entre la fréquence des perturbations, et leur ampleur. Notre nouveau modèle consistait à regarder comment une sous-population de corail pouvait se rétablir à travers un environnement où il y a des perturbations répétitives et d’ampleur différentes. Nous avons donc testé plusieurs duos de paramètres afin de comprendre et de différencier la manière dont la population se rétablit à travers le temps.
+Avec les changements climatiques et les phénomènes de débalancements environnementaux qui se font de plus en présents, nous nous sommes intéressés à comment les sous-populations de coraux sont en mesure de se rétablir selon différents paramètres fixes. Nous nous sommes également intéressés à la différence entre la fréquence des perturbations et leur ampleur. Notre nouveau modèle consistait à regarder comment une sous-population de corail pouvait se rétablir à travers un environnement où il y a des perturbations répétitives et d’ampleur différentes. Nous avons donc testé plusieurs duos de paramètres afin de comprendre et de différencier la manière dont la population se rétablit à travers le temps.
 
 Tout d’abord, il est important de mentionner que de manière générale, dans les graphiques que nous avons modélisés, la population se rétablit de manière très rapide. Il en ainsi puisque nos équations sont basées sur l’article de Torres et al (2024), et ces chercheurs ont modélisé avec une sous-population qui est en mesure de récupérer très rapidement après une perturbation.
 
 Le premier graphique indique le rétablissement de la sous-population lorsqu’une perturbation se produit à chaque sept ans, et où la perturbation est de moyenne ampleur, soit qu’elle enlève environ 63% des polypes présents. Nous pouvons apercevoir que la sous-population est en mesure de rétablir jusqu’à 72% de sa capacité maximale. Nous pouvons apercevoir qu’au tout début, dès les premières perturbations, c’est la population allochtone qui soutient les sous-populations puisqu’elle reçoit des polypes migrateurs, ce qui l’aide à se rétablir de manière très rapide. 
 
-Or, après quelques perturbations, c’est plutôt l’apport autochtone qui vient soutenir davantage cette sous-population; l’apport allochtone est encore présent, mais de moins grande importance. En effet, comme dans l’article de Torres et al (2024), les pentes de récupération de la sous-population sur la figure 3a peuvent nous indiquer que c’est l’apport allochtone qui grandit généralement de manière plus fréquente après une perturbation. Or, plus l’on avance dans le temps, plus nous pouvons constater qu’il y a une augmentation de l’apport autochtone, et une diminution de l’apport allochtone. Les courbes d’autorecrutement et d’immigration de la figure 3c de l’article de Torres et al (2024) peuvent expliquer en partie ce phénomène. 
+Or, après quelques perturbations, c’est plutôt l’apport autochtone qui vient soutenir davantage cette sous-population; l’apport allochtone est encore présent, mais de moins grande importance. En effet, comme dans l’article de Torres et al (2024), les pentes de récupération de la sous-population sur la figure 3a peuvent nous indiquer que c’est l’apport allochtone qui grandit généralement de manière plus fréquente après une perturbation. Cependant, plus l’on avance dans le temps, plus nous pouvons constater qu’il y a une augmentation de l’apport autochtone, et une diminution de l’apport allochtone. Les courbes d’autorecrutement et d’immigration de la figure 3c de l’article de Torres et al (2024) peuvent expliquer en partie ce phénomène. 
 
-Dans cette figure, nous pouvons apercevoir que plus les années avancent, plus l’immigration diminue, alors que l’autorecrutement augmente. Cependant, la figure 3c représente la récupération de la sous-population seulement après une seule perturbation, alors que notre modèle présente des perturbations répétitives. Le changement de la source première à la récupération peut s’expliquer du fait que lorsque la sous-population totale atteint un seuil, hypothétiquement situé autour de 60%, cela permet à la population autochtone de recoloniser et de subvenir à elle-même sans apport allochtone nécessairement. 
+En effet, dans la figure 3c, nous pouvons apercevoir que plus les années avancent, plus l’immigration diminue, alors que l’autorecrutement augmente. En revanche, cette figure représente la récupération de la sous-population seulement après une seule perturbation, alors que notre modèle présente des perturbations répétitives. Le changement de la source première à la récupération peut s’expliquer du fait que lorsque la sous-population totale atteint un seuil, hypothétiquement situé autour de 60%, cela permet à la population autochtone de recoloniser et de subvenir à elle-même sans apport allochtone nécessairement. 
 
 Ainsi, dans les premières perturbations, l’apport allochtone est de plus grande importance, mais c’est rapidement l’apport autochtone qui va dominer dans les années futures puisque la perturbation n’est pas assez grande pour que la sous-population ne soit pas en mesure de récupérer par elle-même.
 
