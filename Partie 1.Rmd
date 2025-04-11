@@ -7,7 +7,7 @@ output: html_document
 
 # **Partie 1 : Reproduction du modèle de l'article**
 
-## **Introduction**
+## **Résumé de l'article**
 
 Les récifs coralliens sont grandement affecté par des perturbations
 anthropique mettant en péril leur survie. Bien qu'il existe déjà

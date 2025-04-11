@@ -3,11 +3,12 @@ title: "Coraux connectés"
 author: "Arthrite, Jeannot et Acétaminophène"
 date: "2025-03-20"
 output: html_document
+bibliography: Final_mod.bib
 editor_options: 
   markdown: 
     wrap: 72
 ---
-
+# Partie 2
 # Dynamiques de rétablissement de coraux connectés à la suite de perturbations récurrentes
 
 Arthrite, Jeannot et Acétaminophène
@@ -23,31 +24,34 @@ Amélie Ironman-Rochon
 
 ## **Résumé**
 
-Nous avons modifié le modèle de Torres et al. (2025) pour évaluer la capacité de récupération d’une sous-population coralienne (avant-récif) soumise à des perturbations périodiques, inspirées des événements El Niño. En comparant différentes fréquences (2 ans vs 7 ans) et intensités (pertes de 63% vs 99%), nous avons constaté que l’apport allochtone provenant de la métapopulation lointaine domine lorsque les perturbations sont fortes ou fréquentes, tandis que l’apport autochtone ne devient dominant que lorsque la population atteint un certain seuil de couverture. Également, nous démontrons qu'une réduction de l’immigration ralenti beaucoup le rétablissement, démontrant l’importance des adaptations locales pour la survie.
+Nous avons modifié le modèle de Torres et al. (2024) pour évaluer la capacité de récupération d’une sous-population coralienne (avant-récif) soumise à des perturbations périodiques, inspirées des événements El Niño. En comparant différentes fréquences (2 ans vs 7 ans) et intensités (pertes de 63% vs 99%), nous avons constaté que l’apport allochtone provenant de la métapopulation lointaine domine lorsque les perturbations sont fortes ou fréquentes, tandis que l’apport autochtone ne devient dominant que lorsque la population atteint un certain seuil de couverture. Également, nous démontrons qu'une réduction de l’immigration ralenti beaucoup le rétablissement, démontrant l’importance des adaptations locales pour la survie.
+
+--------------------------------------------------------------------------------
 
 ## **Introduction**
 
-Il est de plus en plus difficile pour les populations de coraux de survivre aux perturbations en raison des changements climatiques et des conditions environnementales de plus en plus contradictoires (Huang, 2012). Sur toute la planète, le réchauffement des océans par les changements climatiques et l’acidification des eaux peuvent entraîner le blanchissement du corail et plusieurs maladies (Huang, 2012). Avec plusieurs années consécutives de blanchissement, les probabilités que ces populations de coraux meurent et s’éteignent localement sont très élevées (Holstein et al., 2022). Les événements de blanchissement, la pollution et autres perturbations continueront de se produire de plus en plus fréquemment avec les années qui suivent (Holstein et al., 2022). La dégénération par l’anthropisation humaine du corail peut donc mener à sa fragmentation, et cette situation amène une difficulté encore plus grande récupérer (Torres et al., 2025). 
+Il est de plus en plus difficile pour les populations de coraux de survivre aux perturbations en raison des changements climatiques et des conditions environnementales de plus en plus contradictoires (@huang_threatened_2012). Sur toute la planète, le réchauffement des océans par les changements climatiques et l’acidification des eaux peuvent entraîner le blanchissement du corail et plusieurs maladies (@huang_threatened_2012). Avec plusieurs années consécutives de blanchissement, les probabilités que ces populations de coraux meurent et s’éteignent localement sont très élevées (@holstein_predicting_2022). Les événements de blanchissement, la pollution et autres perturbations continueront de se produire de plus en plus fréquemment avec les années qui suivent (@holstein_predicting_2022). La dégénération par l’anthropisation humaine du corail peut donc mener à sa fragmentation, et cette situation amène une difficulté encore plus grande pour la récupération (@torres_post-disturbance_2024). 
 
-La récupération du corail peut se faire de multiples manières (Torres et al 2025). Les coraux étant des métapopulations, des échanges entre ces métapopulations peut se faire via la migration de larves (Torres et al., 2025). La récupération d’une métapopulation de corail peut se faire de différentes manières; l’immigration de sous-populations venant de loin, l’autorecrutement de sa propre population, des échanges locaux et la croissance asexuée (Torres et al., 2025). Cependant, une bonne récupération après une forte perturbation demande du temps, et la population se retrouve en bonne proportion après plusieurs années (Torres et al., 2025). 
+La récupération du corail peut se faire de multiples manières (@torres_post-disturbance_2024). Les coraux étant des métapopulations, des échanges entre les populations peuvent se faire via la migration de larves, dont l’immigration de sous-populations venant de loin, l’autorecrutement de sa propre population, des échanges locaux et la croissance asexuée (@torres_post-disturbance_2024). Cependant, une bonne récupération après une forte perturbation demande du temps, et la population se retrouve en bonne proportion seulement après plusieurs années (@torres_post-disturbance_2024). 
 
-L’article de Torres et al (2025) évaluait les variations et les différents apports de sources de la récupération du corail à travers plusieurs années, soit de 2011 à 2019, où la perturbation venait tout juste d’arriver. Les abondances des populations commençaient donc à une très petite échelle et récupéraient jusqu’en 2019. Or, avec les résultats de cette recherche, nous nous sommes intéressés aux réactions des sous-populations de coraux à la suite de perturbations fréquentes. En effet, avec des épisodes plus fréquents de phénomènes climatiques comme El Niño, une perturbation entraînant un réchauffement des eaux de surface, nous nous sommes questionnés à savoir comment une sous-population de corail peut se rétablir. Plus précisément, comment la sous-population avant-récif réagit face à des perturbations périodiques de fréquence et d’ampleur variées? Nous considérons que cette nouvelle perspective de recherche est importante puisqu’avec les changements climatiques ainsi qu’autres perturbations et phénomènes environnementaux de plus en plus fréquentes et d’ampleur grandissante, regarder comme les sous-populations réagissent est primordiale pour permettre une meilleure compréhension de celles-ci. Cette perspective de recherche permettrait également de prédire comment les sous-populations réagiront dans les années futures, et nous pourrions potentiellement tirer des solutions de cela. 
+L’article de Torres et al (2024) évaluait les variations et les différents apports de sources de la récupération du corail à travers plusieurs années, soit de 2011 à 2019, où la perturbation venait tout juste d’arriver. Les abondances des populations commençaient donc à une très petite échelle et récupéraient jusqu’en 2019, avant de rechuter. Or, avec les résultats de cette recherche, nous nous sommes intéressés aux réactions des sous-populations de coraux à la suite de perturbations fréquentes. En effet, avec des épisodes plus fréquents de phénomènes climatiques comme El Niño, une perturbation entraînant un réchauffement des eaux de surface, nous nous sommes questionnés à savoir comment une sous-population de corail peut se rétablir. Plus précisément, comment la sous-population avant-récif réagit face à des perturbations périodiques de fréquence et d’ampleur variées? Nous considérons que cette nouvelle perspective de recherche est importante puisqu’avec les changements climatiques ainsi que d'autres perturbations et phénomènes environnementaux de plus en plus fréquentes et d’ampleur grandissante, regarder comme les sous-populations réagissent est primordiale pour permettre une meilleure compréhension de celles-ci. Cette perspective de recherche permettrait également de prédire comment les sous-populations réagiront dans les années futures, et nous pourrions potentiellement tirer des solutions de cela. 
 
+--------------------------------------------------------------------------------
 
 ## **Méthodes **
 
-En nous basant sur les modèles de Torres et al (2025), nous avons
+En nous basant sur les modèles de Torres et al (2024), nous avons
 élaboré un modèle concernant deux populations différentes en interaction. La
-première population est celle du récif-avant (*forereef*); elle est située à l'avant
-du récif corallien, elle reçoit directement un flux de larves
-migratrices, ses conditions sont plus propices à la croissance (moins
-de mortalité et meilleure croissance asexuée), son rétablissement est
+première population est celle du récif-avant (*forereef*). Comment son nom l'indique, elle est située à l'avant
+du récif corallien et elle reçoit donc directement un flux de larves
+migratrices favorisant ses conditions sont à la croissance (moins
+de mortalité et meilleure croissance asexuée). Son rétablissement est
 rapide à la suite de la grande perturbation de 2010, elle est bien modélisée et ses
-paramètres vitaux sont isolés. La seconde population, celle du récif-arrière (*backreef*), est
-moins adaptée; elle recoit moins de larves de colonies lointaines et subit
-une mortalité. Il existe un échange local entre ces deux populations, et nous avons donc considéré ces échanges dans notre modélisation. 
+paramètres vitaux sont isolés. La seconde population, celle du récif-arrière (*backreef*), est toutefois
+moins adaptée, puisqu'elle recoit moins de larves de colonies lointaines et subit
+une mortalité beaucoup plus importante. Il existe un échange local entre ces deux sous-populations, et nous avons donc considéré ces échanges dans notre modélisation. 
 
-Notre modélisation consiste en la récupération d'une sous-population sous des perturbations fréquentes possédant une certaine ampleur. Afin de pousser légèrement plus loin la recherche de Torres et al (2025), nous avons décidé de former un modèle basé sur les deux équations de base de ces chercheurs, mais en ajoutant des perturbations d'ampleur et de périodes différentes afin d'observer la récupération de la sous-population dans différentes situations. Nous avons décidé de modéliser seulement la population de l'avant-récif puisqu'elle est la plus dynamique, et elle reçoit notammenent plus d'immigration. Nous ne trouvions pas pertinent d'inclure la population d'arrière-récif dans nos résultats.
+Notre modélisation consiste en la récupération d'une sous-population sous des perturbations fréquentes possédant une certaine ampleur. Afin de pousser légèrement plus loin la recherche de Torres et al (2024), nous avons décidé de former un modèle basé sur les deux équations de base de ces chercheurs, mais en ajoutant un facteur de perturbations d'ampleur et de périodes différentes afin d'observer la récupération de la sous-population dans différentes situations. Nous avons décidé de modéliser seulement la population de l'avant-récif puisqu'elle est la plus dynamique, et elle reçoit notammenent plus d'immigration. Nous ne trouvions pas pertinent d'inclure la population d'arrière-récif dans nos résultats.
 
 Pour implémenter les perturbations périodiques, nous avons ajouté au
 modèle un effet périodique qui soustrait une proportion des coraux
@@ -56,144 +60,149 @@ paramètres suivants : hauteur (amplitude maximale des pertes), une périodicit�
 (fréquence des évènements), et une longeur de marche (durée de la
 perturbation). Voici son implémentation et sa représentation.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # Fonction qui représente la variation de mortalité aux 7 ans
+
+# Paramètre de temps
 times <- seq(0,30, by=0.1)
 
 
-taux_perte <- function(t, peak = 0.99, period = 7, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,99/ans appliqué sur [width] ans.
+# Définition de la fonction de perturbation récurrente
+# Peak=amplitude de la perturbation. C'est une perte continue de 0.99/ans appliqué sur [width] ans.
+taux_perte <- function(t, peak = 0.99, period = 7, pulse_width = 1) { 
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
     
-                  # Donc si le temps est pas dans la période de perturbation, on retourne 0
+    # Si le temps est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 ```
+
+<br>
 
 Bien que le taux de perte maximal inscrit soit de 0,99, il est important de
 comprendre que la fonction applique pour chaque pas de temps
 (0,1 ans) un retrait continu avec un taux de 99%/an. Le fait de
 l'appliquer en continu implique que cela ne correspond pas à une perte réelle
-de 99%. La perte réelle est plutôt de +\_63% (calculée). Un point maximal de 5
+de 99%. La perte réelle calculé est plutôt de +\_63%. Un point maximal de 5
 appliqué sur 1 an correspondrait à une perte réelle de 99%.
 
 Cette fonction est ensuite insérée dans chaque dérivée pour affecter
-toutes les populations à la fois.
+toutes les populations à la fois, car elle impacte le recrutement autochtone tout comme le recrutement allochtone.
 
 Notre modèle est une modification des équations 4 de Torres et Al
-(2025), en séparant les sources d'approvisionnement en différentes
+(2024), en séparant les sources d'approvisionnement en différentes
 dérivées pour calculer leurs effets séparément. Il compte donc deux
 équations (autochtone et allochtone) par population (forereef et
 backreef). L'effectif total de chaque population est donc simplement
 calculé par la somme des deux sources.
 
 Nos valeurs de paramètres vitaux sont basés sur différentes sources,
-toutes indiquées dans Torres et Al (2025). Pour ce qui est du taux de
-croissance asexué (ra), du taux d'immigration pour chaque sous-pop (If et
-Ib), et de la part du transport larvaire et du recrutement (γ ⊙ β), ils ont été déterminés par Torres et Al (2025) en ajustant le modèle
+toutes indiquées dans Torres et Al (2024). Pour ce qui est du taux de
+croissance asexué (ra), du taux d'immigration nette pour chaque sous-populatopm (If et
+Ib), et de la part du transport larvaire et du recrutement (γ ⊙ β), ils ont été déterminés par Torres et Al (2024) en ajustant le modèle
 aux données empiriques des séries chronologiques à long terme du récif
-corallien Moorea, en Polynésie française (MCR LTER). Ils ont implémenté des
-simulations de Monte-Carlo (n=50) et une optimisation via la méthode de
-Differential Evolution (Virtanen et Al. 2020).
+corallien Moorea, en Polynésie française (MCR LTER) grâce à des simulations de Monte-Carlo (n=50) et une optimisation via la méthode de
+Differential Evolution (@virtanen_scipy_2020).
 
-Les différentes suppositions de notre modèle :
+Le modèle que nous proposons suppose que :
 
--Les paramètres sont représentatifs et constants dans le temps.
+- Les paramètres sont représentatifs et constants dans le temps.
 
--Le rétablissement à la suite de nouvelles perturbations serait comme celui
+- Le rétablissement à la suite de nouvelles perturbations serait comme celui
 de la période 2010-2018.
 
--Les perturbations sont localisées.
+- Les perturbations sont localisées directement sur la population étudiée.
 
--Les taux d'immigrations restent constants.
+- Les taux d'immigrations restent constants.
 
+--------------------------------------------------------------------------------
 
 ## **Calculs et résultats **
 
 Pour évaluer les différents scénarios, nous allons construire 4 figures
 représentant des cas de perturbations différentes. Nous allons tester
 deux intensités de perturbation. La plus faible, à +-63%, et la plus
-forte, à environ 99% de perte de biomasse. Nous allons tester ces deux
-tailles de perturbation dans deux scénarios. Le premier représente des
-perturbations qui reviennent aux 7 ans (scénario conservateur), et le
-second, où les perturbations surviennent tous les 2 ans. Chaque perturbation dure en moyenne un an, ce qui signifie que pour une perturbation survenant aux 2 ans, elle peut croître seulement pendant une année. Ces périodes ont été déterminées par un exemple de phénomène climatique se faisant de plus en plus présent, soit celui de El Niño. En effet, les épisodes de El Niño ne surviennent pas avec une
+forte, à environ 99% de perte de biomasse. Chacun de ses intensités sera aussi testé sur des pertubations périodiques tous les 2 ans et de 7ans (scénario conservateur). Chaque perturbation dure en moyenne un an, ce qui signifie que pour une perturbation survenant aux 2 ans, elle peut croître seulement pendant une année. 
+
+Ces périodes ont été déterminées par un exemple de phénomène climatique se faisant de plus en plus présent, soit celui de El Niño. En effet, les épisodes de El Niño ne surviennent pas avec une
 période stable. Ils durent environ de 9 à 12 mois et surviennent tous les
 2 à 7 ans, avec une tendance à devenir plus fréquents dans les dernières
 années. ([https://oceanservice.noaa.gov/facts/ninonina.html](#0))
 
 
-Seul les calculs pour la première situation sont affichés. Pour les
-figures suivantes, l'argument *peek* de la fonction perte passe à 5, et
+Seul les calculs pour la première situation sont affichés. 
+
+Pour les figures suivantes, l'argument *peek* de la fonction perte passe à 5, et
 l'argument *period* est à 2. Le premier graphique présenté est celui d'une pertubation survienant aux 7 ans et d'ampleur d'environ 63%.
 
-```{r Graph 1, warning=FALSE}
+```{r Graph 1, warning=FALSE, message=FALSE}
+
+#ALLER CHERCHER LES PACKAGES NÉCESSAIRES
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(deSolve)
-# Fonction qui représente la variation de mortalité aux 7 ans
+
+
+# DÉFINITION DE LA FONCTION DE PERTURBATION
+# Temps de simulation
 times <- seq(0,30, by=0.1)
 
-# Fonction avec peak = 5
-taux_perte <- function(t, peak = 1, period = 7, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
+
+# Perturbation aux 7 ans
+# Fonction avec peak = 5 (amplitude de la perturbation équivalente à une perte continue de 0,50/an appliqué sur [width] ans.)
+taux_perte <- function(t, peak = 1, period = 7, pulse_width = 1) {
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
-    
-                  # Donc si le temps n'est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
+
+# DÉFINITION DES PARAMÈTRES DU MODÈLE DYNAMIQUE
 # Paramètres du modèle
 params <- list(
-  mortal = 0.6,  # Taux de mortalité constante du backreef
   
-  rb = 0.05,   # Reproduction autochtone de la population backreef
-  rf = 0.15,  # Reproduction autochtone de la population forereef
-  sigma_f = 0.5,   # Intensité de la croissance larvaire (829 polypes/colonie)
-  fecondity = 1,   # Fécondité
-  zeta = 1,   # Probabilité de maturation larvaire
+  #Taux de mortalité constante du backreef
+  mortal = 0.6,
+  
+  #Paramètres de reproduction asexuée
+  rb = 0.05,         # Reproduction asexuée de la population backreef
+  rf = 0.15,         # Reproduction asexuée de la population forereef
+  
+  #Paramètres de reproduction sexuée
+  sigma_f = 0.5,     # Intensité de la croissance larvaire 
+  fecondity = 1,     # Fécondité
+  zeta = 1,          # Probabilité de maturation larvaire
   
   # Coefficients d’interactions (γβ)
-  gamma_beta_bb = 0.01,   # Influence de backreef sur backreef
-  gamma_beta_fb = 0.002,    # Influence de forereef sur backreef
-  gamma_beta_ff = 0.2,    # Influence de forereef sur forereef AUTO
-  gamma_beta_bf = 0.1,   # Influence de backreef sur forereef ALLO
+  gamma_beta_bb = 0.01,    # Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,   # Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,     # Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,     # Influence de backreef sur forereef ALLO
   
-  # Apports externes constants
-  Ib = 0.08,   # Immigration du backreef
-  If = 0.09,       # Immigration du forereef
+  # Immigration nette (apports externes constants)
+  Ib = 0.08,     # Immigration du backreef
+  If = 0.09,     # Immigration du forereef
   
   # Capacités de soutien en proportion (basé sur étendue max observée, tiré de l'article)
-  Kb = 0.64,     # Capacité de soutien du backreef 0.64 dans article (observé)
-  Kf = 0.8     # Capacité de soutien du forereef  0.8 dans article
+  Kb = 0.64,  #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8    # Capacité de soutien du forereef  0.8 dans article
 )
-
-
-
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    pertes_t <- taux_perte(time)
-    
-    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
-    
-    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
-    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
-    
-    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
-  })
-}
 
 # Conditions initiales  MODELE 2 de nos populations
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
@@ -201,14 +210,51 @@ state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0
 # Intervalle de temps en années
 times <- seq(0, 30, by = 0.1)
 
-# Résolution numérique du système
+
+# CRÉATION DU MODÈLE DYNAMIQUE
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    
+    #Intégration de la fonction de perturbation récurente
+    pertes_t <- taux_perte(time)
+    
+    # 1. Séparation de l'équation de la croissance de sous-population avant-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dFauto/dt)
+    dFauto  <- (((pFallo + pFauto) * (rf + (sigma_f * fecondity * zeta * gamma_beta_ff))) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dFallo/dt)
+    dFallo  <- (((pBtotal * (sigma_f * fecondity * zeta * gamma_beta_bf)) + If) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+
+    
+    #2. Sépration de l'équation de la croissance de sous-population après-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dBauto/dt)
+    dBauto  <- ((pBtotal * (rb + (sigma_f * fecondity * zeta * gamma_beta_bb))) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dBallo/dt)
+    dBallo  <- ((((pFallo + pFauto) * (sigma_f * fecondity * zeta * gamma_beta_fb)) + Ib) * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    
+    # Croissance totale de l'après-récif (dB/dt)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal)
+    
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
 
+
+
+# GRAPHIQUE
 # Mise en forme pour ggplot
 plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
+  
+  #Renommer les paramètres utilisées
   rename(
     Total = pFtotal,
     Allochthonous = pFallo,
@@ -219,6 +265,8 @@ plot_data <- out %>%
 # Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  
+  #Définition des couleurs
   scale_color_manual(
     values = c(
       "Total" = "black",
@@ -226,91 +274,134 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
       "Autochthonous" = "steelblue"  
     )
   ) +
+  
+  #Définition des titres
   labs(
     title = "Suivi de la population corallienne (Forereef)",
     subtitle = "Perturbation réelle de ±63% aux 7 ans, immigration standard",
     x = "Temps (années)",
     y = "Couverture corallienne"
   ) +
+  
   theme_minimal(base_size = 12)
 
 ```
 
-Le deuxième graphique représente la récupération d'une sous-population à la suite de perturbations survenant aux 7 ans également, mais d'ampleur de 99%. 
+<br>
+<br>
 
-```{r Graph 2, echo=FALSE}
-# Fonction qui représente la variation de mortalité aux 7 ans
+Le deuxième graphique représente la récupération d'une sous-population à la suite de perturbations survenant aux 2 ans également, mais d'ampleur de 63%. 
+
+```{r Graph 2, echo=FALSE, warning=FALSE, message=FALSE}
+#ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(deSolve)
+
+
+# DÉFINITION DE LA FONCTION DE PERTURBATION
+# Temps de simulation
 times <- seq(0,30, by=0.1)
 
-# Fonction avec peak = 5
-taux_perte <- function(t, peak = 1, period = 2, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
+# Perturbation aux 2 ans
+# Fonction avec peak = 5 (amplitude de la perturbation équivalente à une perte continue de 0,50/an appliqué sur [width] ans.)
+taux_perte <- function(t, peak = 1, period = 2, pulse_width = 1) {
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
-    
-    # Donc si le temps est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
 
+# DÉFINITION DES PARAMÈTRES DU MODÈLE DYNAMIQUE
 # Paramètres du modèle
 params <- list(
-  mortal <- 0.6,  # Taux de mortalité constante du backreef pck c difficile la vie.
   
-  rb = 0.05,   # Taux de croissance autochtone de la population backreef
-  rf = 0.15,  # Taux de croissance autochtone de la population forereef
-  sigma_f = 0.5,   # Intensité de la croissance larvaire (829 polypes/colonie)
-  fecondity = 1,   # Fécondité
-  zeta = 1,   # Probabilité de maturation larvaire
+  #Taux de mortalité constante du backreef
+  mortal = 0.6,
+  
+  #Paramètres de reproduction asexuée
+  rb = 0.05,         # Reproduction asexuée de la population backreef
+  rf = 0.15,         # Reproduction asexuée de la population forereef
+  
+  #Paramètres de reproduction sexuée
+  sigma_f = 0.5,     # Intensité de la croissance larvaire 
+  fecondity = 1,     # Fécondité
+  zeta = 1,          # Probabilité de maturation larvaire
   
   # Coefficients d’interactions (γβ)
-  gamma_beta_bb = 0.01,   # Influence de backreef sur backreef
-  gamma_beta_fb = 0.002,    # Influence de forereef sur backreef
-  gamma_beta_ff = 0.2,    # Influence de forereef sur forereef AUTO
-  gamma_beta_bf = 0.1,   # Influence de backreef sur forereef ALLO
+  gamma_beta_bb = 0.01,    # Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,   # Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,     # Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,     # Influence de backreef sur forereef ALLO
   
-  # Apports externes constants
-  Ib = 0.08,   # Immigration du backreef
-  If = 0.09,       # Immigration du forereef
+  # Immigration nette (apports externes constants)
+  Ib = 0.08,     # Immigration du backreef
+  If = 0.09,     # Immigration du forereef
   
   # Capacités de soutien en proportion (basé sur étendue max observée, tiré de l'article)
-  Kb = 0.64,     # Capacité de soutien du backreef 0.64 dans article (observé)
-  Kf = 0.8     # Capacité de soutien du forereef  0.8 dans article
+  Kb = 0.64,  #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8    # Capacité de soutien du forereef  0.8 dans article
 )
 
-# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    pertes_t <- taux_perte(time)
-    
-    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
-    
-    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
-    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
-    
-    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
-  })
-}
 # Conditions initiales  MODELE 2 de nos populations
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
 
 # Intervalle de temps en années
 times <- seq(0, 30, by = 0.1)
 
-# Résolution numérique du système
+
+# CRÉATION DU MODÈLE DYNAMIQUE
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    
+    #Intégration de la fonction de perturbation récurente
+    pertes_t <- taux_perte(time)
+    
+    # 1. Séparation de l'équation de la croissance de sous-population avant-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dFauto/dt)
+    dFauto  <- (((pFallo + pFauto) * (rf + (sigma_f * fecondity * zeta * gamma_beta_ff))) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dFallo/dt)
+    dFallo  <- (((pBtotal * (sigma_f * fecondity * zeta * gamma_beta_bf)) + If) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    
+    
+    #2. Sépration de l'équation de la croissance de sous-population après-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dBauto/dt)
+    dBauto  <- ((pBtotal * (rb + (sigma_f * fecondity * zeta * gamma_beta_bb))) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dBallo/dt)
+    dBallo  <- ((((pFallo + pFauto) * (sigma_f * fecondity * zeta * gamma_beta_fb)) + Ib) * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    
+    # Croissance totale de l'après-récif (dB/dt)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal)
+    
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
 
+
+
+# GRAPHIQUE
 # Mise en forme pour ggplot
 plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
+  
+  #Renommer les paramètres utilisées
   rename(
     Total = pFtotal,
     Allochthonous = pFallo,
@@ -321,6 +412,8 @@ plot_data <- out %>%
 # Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  
+  #Définition des couleurs
   scale_color_manual(
     values = c(
       "Total" = "black",
@@ -328,92 +421,134 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
       "Autochthonous" = "steelblue"  
     )
   ) +
+  
+  #Définition des titres
   labs(
     title = "Suivi de la population corallienne (Forereef)",
     subtitle = "Perturbation réelle de ±63% aux 2 ans, immigration standard",
     x = "Temps (années)",
     y = "Couverture corallienne"
   ) +
+  
   theme_minimal(base_size = 12)
-
 
 ```
 
-Ce troisième graphique représente le rétablissement de la sous-population avec une perturbation survenant tous les 2 ans, et avec une ampleur de 63%.
+<br>
+<br>
 
-```{r Graph 3, echo=FALSE}
-# Fonction qui représente la variation de mortalité aux 7 ans
+Ce troisième graphique représente le rétablissement de la sous-population avec une perturbation survenant tous les 7 ans, et avec une ampleur de 99%.
+
+```{r Graph 3, echo=FALSE, warning=FALSE, message=FALSE}
+#ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(deSolve)
+
+
+# DÉFINITION DE LA FONCTION DE PERTURBATION
+# Temps de simulation
 times <- seq(0,30, by=0.1)
 
-# Pour une vrai chute de 99%, il faut peak=5.
-taux_perte <- function(t, peak = 5, period = 7, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
+# Perturbation aux 7 ans
+# Fonction avec peak = 5 (amplitude de la perturbation équivalente à une perte continue de 0,50/an appliqué sur [width] ans.) pour avoir une vrai chute de 99%
+taux_perte <- function(t, peak = 5, period = 7, pulse_width = 1) {
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
-    
-    # Donc si le temps n'est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
 
+# DÉFINITION DES PARAMÈTRES DU MODÈLE DYNAMIQUE
 # Paramètres du modèle
 params <- list(
-  mortal <- 0.6,  # Taux de mortalité constante du backreef pck c difficile la vie.
   
-  rb = 0.05,   # Taux de croissance autochtone de la population backreef
-  rf = 0.15,  # Taux de croissance autochtone de la population forereef
-  sigma_f = 0.5,   # Intensité de la croissance larvaire (829 polypes/colonie)
-  fecondity = 1,   # Fécondité
-  zeta = 1,   # Probabilité de maturation larvaire
+  #Taux de mortalité constante du backreef
+  mortal = 0.6,
+  
+  #Paramètres de reproduction asexuée
+  rb = 0.05,         # Reproduction asexuée de la population backreef
+  rf = 0.15,         # Reproduction asexuée de la population forereef
+  
+  #Paramètres de reproduction sexuée
+  sigma_f = 0.5,     # Intensité de la croissance larvaire 
+  fecondity = 1,     # Fécondité
+  zeta = 1,          # Probabilité de maturation larvaire
   
   # Coefficients d’interactions (γβ)
-  gamma_beta_bb = 0.01,   # Influence de backreef sur backreef
-  gamma_beta_fb = 0.002,    # Influence de forereef sur backreef
-  gamma_beta_ff = 0.2,    # Influence de forereef sur forereef AUTO
-  gamma_beta_bf = 0.1,   # Influence de backreef sur forereef ALLO
+  gamma_beta_bb = 0.01,    # Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,   # Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,     # Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,     # Influence de backreef sur forereef ALLO
   
-  # Apports externes constants
-  Ib = 0.08,   # Immigration du backreef
-  If = 0.09,       # Immigration du forereef
+  # Immigration nette (apports externes constants)
+  Ib = 0.08,     # Immigration du backreef
+  If = 0.09,     # Immigration du forereef
   
   # Capacités de soutien en proportion (basé sur étendue max observée, tiré de l'article)
-  Kb = 0.64,     # Capacité de soutien du backreef 0.64 dans article (observé)
-  Kf = 0.8     # Capacité de soutien du forereef  0.8 dans article
+  Kb = 0.64,  #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8    # Capacité de soutien du forereef  0.8 dans article
 )
 
-# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    pertes_t <- taux_perte(time)
-    
-    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
-    
-    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
-    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
-    
-    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
-  })
-}
 # Conditions initiales  MODELE 2 de nos populations
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
 
 # Intervalle de temps en années
 times <- seq(0, 30, by = 0.1)
 
-# Résolution numérique du système
+
+# CRÉATION DU MODÈLE DYNAMIQUE
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    
+    #Intégration de la fonction de perturbation récurente
+    pertes_t <- taux_perte(time)
+    
+    # 1. Séparation de l'équation de la croissance de sous-population avant-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dFauto/dt)
+    dFauto  <- (((pFallo + pFauto) * (rf + (sigma_f * fecondity * zeta * gamma_beta_ff))) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dFallo/dt)
+    dFallo  <- (((pBtotal * (sigma_f * fecondity * zeta * gamma_beta_bf)) + If) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    
+    
+    #2. Sépration de l'équation de la croissance de sous-population après-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dBauto/dt)
+    dBauto  <- ((pBtotal * (rb + (sigma_f * fecondity * zeta * gamma_beta_bb))) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dBallo/dt)
+    dBallo  <- ((((pFallo + pFauto) * (sigma_f * fecondity * zeta * gamma_beta_fb)) + Ib) * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    
+    # Croissance totale de l'après-récif (dB/dt)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal)
+    
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
 
+
+
+# GRAPHIQUE
 # Mise en forme pour ggplot
 plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
+  
+  #Renommer les paramètres utilisées
   rename(
     Total = pFtotal,
     Allochthonous = pFallo,
@@ -424,6 +559,8 @@ plot_data <- out %>%
 # Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  
+  #Définition des couleurs
   scale_color_manual(
     values = c(
       "Total" = "black",
@@ -431,92 +568,134 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
       "Autochthonous" = "steelblue"  
     )
   ) +
+  
+  #Définition des titres
   labs(
     title = "Suivi de la population corallienne (Forereef)",
     subtitle = "Perturbation réelle de ±99% aux 7 ans, immigration standard",
     x = "Temps (années)",
     y = "Couverture corallienne"
   ) +
+  
   theme_minimal(base_size = 12)
 
 ```
 
+<br>
+<br>
+
 Le quatrième graphique représente la récupération de la sous-population avec des perturbations survenant tous les 2 ans, et d'ampluer de 99%.
 
-```{r Graph 4, echo=FALSE}
-# Script graphique peak=5 period=2----
-# Fonction qui représente la variation de mortalité aux 7 ans
+```{r Graph 4, echo=FALSE, warning=FALSE, message=FALSE}
+#ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(deSolve)
+
+
+# DÉFINITION DE LA FONCTION DE PERTURBATION
+# Temps de simulation
 times <- seq(0,30, by=0.1)
 
-# Pour une vraie chute de 99%, il faut peak=5.
-taux_perte <- function(t, peak = 5, period = 2, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
+# Perturbation aux 2 ans
+# Fonction avec peak = 5 (amplitude de la perturbation équivalente à une perte continue de 0,50/an appliqué sur [width] ans.) pour avoir une vrai chute de 99%
+taux_perte <- function(t, peak = 5, period = 2, pulse_width = 1) {
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
-    
-    # Donc si le temps est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
 
+# DÉFINITION DES PARAMÈTRES DU MODÈLE DYNAMIQUE
 # Paramètres du modèle
 params <- list(
-  mortal <- 0.6,  # Taux de mortalité constante du backreef pck c difficile la vie.
   
-  rb = 0.05,   # Taux de croissance autochtone de la population backreef
-  rf = 0.15,  # Taux de croissance autochtone de la population forereef
-  sigma_f = 0.5,   # Intensité de la croissance larvaire (829 polypes/colonie)
-  fecondity = 1,   # Fécondité
-  zeta = 1,   # Probabilité de croissance larvaire
+  #Taux de mortalité constante du backreef
+  mortal = 0.6,
   
-  # Coefficients d’interactions (ζ(γβ))
-  gamma_beta_bb = 0.01,   # Influence de backreef sur backreef
-  gamma_beta_fb = 0.002,    # Influence de forereef sur backreef
-  gamma_beta_ff = 0.2,    # Influence de forereef sur forereef AUTO
-  gamma_beta_bf = 0.1,   # Influence de backreef sur forereef ALLO
+  #Paramètres de reproduction asexuée
+  rb = 0.05,         # Reproduction asexuée de la population backreef
+  rf = 0.15,         # Reproduction asexuée de la population forereef
   
-  # Apports externes constants
-  Ib = 0.08,   # Immigration du backreef
-  If = 0.09,       # Immigration du forereef
+  #Paramètres de reproduction sexuée
+  sigma_f = 0.5,     # Intensité de la croissance larvaire 
+  fecondity = 1,     # Fécondité
+  zeta = 1,          # Probabilité de maturation larvaire
+  
+  # Coefficients d’interactions (γβ)
+  gamma_beta_bb = 0.01,    # Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,   # Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,     # Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,     # Influence de backreef sur forereef ALLO
+  
+  # Immigration nette (apports externes constants)
+  Ib = 0.08,     # Immigration du backreef
+  If = 0.09,     # Immigration du forereef
   
   # Capacités de soutien en proportion (basé sur étendue max observée, tiré de l'article)
-  Kb = 0.64,     # Capacité de soutien du backreef 0.64 dans article (observé)
-  Kf = 0.8     # Capacité de soutien du forereef  0.8 dans article
+  Kb = 0.64,  #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8    # Capacité de soutien du forereef  0.8 dans article
 )
 
-# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    pertes_t <- taux_perte(time)
-    
-    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
-    
-    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
-    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
-    
-    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
-  })
-}
 # Conditions initiales  MODELE 2 de nos populations
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
 
 # Intervalle de temps en années
 times <- seq(0, 30, by = 0.1)
 
-# Résolution numérique du système
+
+# CRÉATION DU MODÈLE DYNAMIQUE
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    
+    #Intégration de la fonction de perturbation récurente
+    pertes_t <- taux_perte(time)
+    
+    # 1. Séparation de l'équation de la croissance de sous-population avant-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dFauto/dt)
+    dFauto  <- (((pFallo + pFauto) * (rf + (sigma_f * fecondity * zeta * gamma_beta_ff))) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dFallo/dt)
+    dFallo  <- (((pBtotal * (sigma_f * fecondity * zeta * gamma_beta_bf)) + If) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    
+    
+    #2. Sépration de l'équation de la croissance de sous-population après-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dBauto/dt)
+    dBauto  <- ((pBtotal * (rb + (sigma_f * fecondity * zeta * gamma_beta_bb))) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dBallo/dt)
+    dBallo  <- ((((pFallo + pFauto) * (sigma_f * fecondity * zeta * gamma_beta_fb)) + Ib) * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    
+    # Croissance totale de l'après-récif (dB/dt)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal)
+    
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
 
+
+
+# GRAPHIQUE
 # Mise en forme pour ggplot
 plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
+  
+  #Renommer les paramètres utilisées
   rename(
     Total = pFtotal,
     Allochthonous = pFallo,
@@ -527,6 +706,8 @@ plot_data <- out %>%
 # Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  
+  #Définition des couleurs
   scale_color_manual(
     values = c(
       "Total" = "black",
@@ -534,19 +715,24 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
       "Autochthonous" = "steelblue"  
     )
   ) +
+  
+  #Définition des titres
   labs(
     title = "Suivi de la population corallienne (Forereef)",
     subtitle = "Perturbation réelle de ±99% aux 2 ans, immigration standard",
     x = "Temps (années)",
     y = "Couverture corallienne"
   ) +
+  
   theme_minimal(base_size = 12)
 
 ```
 
-D'autre part, l’article de Torres et al détermine que c’est l’immigration des populations
+<br>
+
+D'autre part, l’article de Torres et al (2024) détermine que c’est l’immigration des populations
 lointaines (100-1000 km) qui soutient la croissance initiale à la suite de
-perturbations ponctuelles d’étoile de mer et d'un cyclone. Un phénomène climatique comme El Niño, en r.chauffant les eaux du Pacifique, risque d’affecter
+perturbations ponctuelles d’étoile de mer et d'un cyclone. Un phénomène climatique comme El Niño, qui réchauffant les eaux du Pacifique, risque d’affecter
 simultanément plusieurs régions récifales, incluant à la fois les
 populations locales et les sources distantes de larves. AUtrement dit, un phénomème climatique peut atteindre toute la métapopulation de coraux, et non seulement une sous-population. Nous avons donc,
 pour cette dernière simulation, baissé l'immigration provenant de la
@@ -558,79 +744,117 @@ l'épisode de 2010. Cette section vise donc à simuler la récupération du
 récif dans l'éventualité d'une perturbation similaire à cette de 2010,
 mais également récurrente.
 
-```{r Graph 5, echo=FALSE, warning=FALSE}
-# Fonction qui représente la variation de mortalité aux 7 ans
+```{r Graph 5, echo=FALSE, warning=FALSE, message=FALSE}
+#ALLER CHERCHER LES PACKAGES NÉCESSAIRES
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(deSolve)
+
+
+# DÉFINITION DE LA FONCTION DE PERTURBATION
+# Temps de simulation
 times <- seq(0,30, by=0.1)
 
-# Pour une vrai chute de 99%, il faut peak=5.
-taux_perte <- function(t, peak = 5, period = 7, pulse_width = 1) {   # Peak=amplitude de la perturbation. C'est une perte continue de 0,50/ans appliqué sur [width] ans.
+# Perturbation aux 7 ans
+# Fonction avec peak = 5 (amplitude de la perturbation équivalente à une perte continue de 0,50/an appliqué sur [width] ans.) pour avoir une vrai chute de 99%
+taux_perte <- function(t, peak = 5, period = 7, pulse_width = 1) {
   if ((t %% period) < pulse_width) { 
     return(peak)
   } else {
-    
-    # Donc si le temps est pas dans la période de perturbation, on retourne 0
     return(0) 
   }
 }
-# Visualisation de cette fonction
+
+
+# Graphique pour visualiser la fonction
 plot(times, sapply(times, taux_perte), type = "l",
      ylab = "Taux de perte", xlab = "Temps", col = "red", lwd = 2)
 
 
+# DÉFINITION DES PARAMÈTRES DU MODÈLE DYNAMIQUE
 # Paramètres du modèle
 params <- list(
-  mortal <- 0.6,  # Taux de mortalité constante du backreef pck c difficile la vie.
   
-  rb = 0.05,   # Taux de croissance autochtone de la population backreef
-  rf = 0.15,  # Taux de croissance autochtone de la population forereef
-  sigma_f = 0.5,   # Intensité de la croissance larvaire (829 polypes/colonie)
-  fecondity = 1,   # Fécondité
-  zeta = 1,   # Probabilité de maturation larvaire
+  #Taux de mortalité constante du backreef
+  mortal = 0.6,
+  
+  #Paramètres de reproduction asexuée
+  rb = 0.05,         # Reproduction asexuée de la population backreef
+  rf = 0.15,         # Reproduction asexuée de la population forereef
+  
+  #Paramètres de reproduction sexuée
+  sigma_f = 0.5,     # Intensité de la croissance larvaire 
+  fecondity = 1,     # Fécondité
+  zeta = 1,          # Probabilité de maturation larvaire
   
   # Coefficients d’interactions (γβ)
-  gamma_beta_bb = 0.01,   # Influence de backreef sur backreef
-  gamma_beta_fb = 0.002,    # Influence de forereef sur backreef
-  gamma_beta_ff = 0.2,    # Influence de forereef sur forereef AUTO
-  gamma_beta_bf = 0.1,   # Influence de backreef sur forereef ALLO
+  gamma_beta_bb = 0.01,    # Influence de backreef sur backreef
+  gamma_beta_fb = 0.002,   # Influence de forereef sur backreef
+  gamma_beta_ff = 0.2,     # Influence de forereef sur forereef AUTO
+  gamma_beta_bf = 0.1,     # Influence de backreef sur forereef ALLO
   
-  # Apports externes constants
-  Ib = 0.01,   # Immigration du backreef
-  If = 0.018,       # Immigration du forereef
+  # Immigration nette (apports externes constants)
+  # Diminution de l'immigration en réponse aux perturbations
+  Ib = 0.01,      # Immigration du backreef
+  If = 0.018,     # Immigration du forereef
   
   # Capacités de soutien en proportion (basé sur étendue max observée, tiré de l'article)
-  Kb = 0.64,     # Capacité de soutien du backreef 0.64 dans article (observé)
-  Kf = 0.8     # Capacité de soutien du forereef  0.8 dans article
+  Kb = 0.64,  #Capacité de soutien du backreef 0.64 dans article (observé)
+  Kf = 0.8    # Capacité de soutien du forereef  0.8 dans article
 )
 
-# MODELE 2 - Équations différentielles selon les équations 4 ici, j'ai enlevé pftotal, et je l'ai remplacé par la somme. 
-model <- function(time, state, parameters) {
-  with(as.list(c(state, parameters)), {
-    pertes_t <- taux_perte(time)
-    
-    dFallo  <- (sigma_f * gamma_beta_bf * fecondity * zeta * pBtotal + If * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
-    dFauto  <- ((pFauto + pFallo) * (rf + sigma_f * gamma_beta_ff * fecondity * zeta) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
-    
-    dBallo  <- (sigma_f * gamma_beta_fb * fecondity * zeta * (pFauto + pFallo) + Ib * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
-    dBauto  <- (pBtotal * (rb + sigma_f * gamma_beta_bb * fecondity * zeta) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
-    dBtotal <- (dBallo + dBauto - mortal * pBtotal) 
-    
-    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
-  })
-}
 # Conditions initiales  MODELE 2 de nos populations
 state <- c(pFallo = 0.01, pFauto = 0.01, pBallo = 0.3, pBauto = 0.1, pBtotal = 0.4)
 
 # Intervalle de temps en années
 times <- seq(0, 30, by = 0.1)
 
-# Résolution numérique du système
+
+# CRÉATION DU MODÈLE DYNAMIQUE
+model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    
+    #Intégration de la fonction de perturbation récurente
+    pertes_t <- taux_perte(time)
+    
+    # 1. Séparation de l'équation de la croissance de sous-population avant-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dFauto/dt)
+    dFauto  <- (((pFallo + pFauto) * (rf + (sigma_f * fecondity * zeta * gamma_beta_ff))) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFauto))
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dFallo/dt)
+    dFallo  <- (((pBtotal * (sigma_f * fecondity * zeta * gamma_beta_bf)) + If) * (1 - (pFauto + pFallo) / Kf)) - (pertes_t * (pFallo))
+    
+    
+    #2. Sépration de l'équation de la croissance de sous-population après-récif en 3 équations:
+    # Croissance du au recrutement autochtone et à la reproduction asexuée (dBauto/dt)
+    dBauto  <- ((pBtotal * (rb + (sigma_f * fecondity * zeta * gamma_beta_bb))) * (1 - pBtotal / Kb)) - (pertes_t * pBauto)
+    
+    # Croissance du au recrutement allochtone et l'immigration nette (dBallo/dt)
+    dBallo  <- ((((pFallo + pFauto) * (sigma_f * fecondity * zeta * gamma_beta_fb)) + Ib) * (1 - pBtotal / Kb)) - (pertes_t * pBallo)
+    
+    # Croissance totale de l'après-récif (dB/dt)
+    dBtotal <- (dBallo + dBauto - mortal * pBtotal)
+    
+    
+    list(c(dFallo, dFauto, dBallo, dBauto, dBtotal))
+  })
+}
+
+
+# RÉSOLUTION NUMÉRIQUE DU MODÈLE
 out <- ode(y = state, times = times, func = model, parms = params)
 out <- as.data.frame(out)
 out$pFtotal <- out$pFauto + out$pFallo  #calcul de la somme
 
+
+
+# GRAPHIQUE
 # Mise en forme pour ggplot
 plot_data <- out %>%
   select(time, pFallo,pFauto,pFtotal) %>%
+  
+  #Renommer les paramètres utilisées
   rename(
     Total = pFtotal,
     Allochthonous = pFallo,
@@ -641,6 +865,8 @@ plot_data <- out %>%
 # Graphique
 ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
   geom_line(size = 1.4) +
+  
+  #Définition des couleurs
   scale_color_manual(
     values = c(
       "Total" = "black",
@@ -648,34 +874,38 @@ ggplot(plot_data, aes(x = time, y = Value, color = Source)) +
       "Autochthonous" = "steelblue"  
     )
   ) +
+  
+  #Définition des titres
   labs(
     title = "Suivi de la population corallienne (Forereef)",
     subtitle = "Perturbation réelle de ±99% aux 7 ans, immigration -80%",
     x = "Temps (années)",
     y = "Couverture corallienne"
   ) +
+  
   theme_minimal(base_size = 12)
-
 
 ```
 
+<br>
+
 Voici un tableau résumé des couvertures coralliennes atteintes dans chaque simulation.
 
-| Col1                                  | Période de 7 ans | Période de 2 ans |
+|                                   | Période de 7 ans | Période de 2 ans |
 |-----------------------------|----------------------|----------------------|
 | Perte réelle 63%                      | 72%              | 27%              |
 | Perte réelle 99%                      | 59%              | 11.5%            |
 | Perte réelle 99% + baisse immigration | 23%              |  -               |
 
-
+--------------------------------------------------------------------------------
 
 ## **Discussion**
 
-Avec les changements climatiques et phénomènes de débalancements environnementaux se faisant de plus en présents, nous nous sommes intéressés à comment les sous-populations de coraux sont en mesure de se rétablir selon différents paramètres. Nous nous sommes intéressés à la différence entre la fréquence des perturbations, et leur ampleur également. Notre nouveau modèle consistait à regarder comment une sous-population de corail pouvait se rétablir à travers un environnement où il y a des perturbations répétitives et d’ampleur différentes. Nous avons donc testé plusieurs duos de paramètres afin de comprendre et de différencier la manière dont la population se rétablit à travers le temps.
+Avec les changements climatiques et les phénomènes de débalancements environnementaux qui se font de plus en présents, nous nous sommes intéressés à comment les sous-populations de coraux sont en mesure de se rétablir selon différents paramètres fixes. Nous nous sommes également intéressés à la différence entre la fréquence des perturbations, et leur ampleur. Notre nouveau modèle consistait à regarder comment une sous-population de corail pouvait se rétablir à travers un environnement où il y a des perturbations répétitives et d’ampleur différentes. Nous avons donc testé plusieurs duos de paramètres afin de comprendre et de différencier la manière dont la population se rétablit à travers le temps.
 
-Tout d’abord, il est important de mentionner que de manière générale, dans les graphiques que nous avons modélisés, la population se rétablit de manière très rapide. Il en ainsi puisque nos équations sont basées sur l’article de Torres et al (2025), et ces chercheurs ont modélisé avec une sous-population qui est en mesure de récupérer très rapidement après une perturbation.
+Tout d’abord, il est important de mentionner que de manière générale, dans les graphiques que nous avons modélisés, la population se rétablit de manière très rapide. Il en ainsi puisque nos équations sont basées sur l’article de Torres et al (2024), et ces chercheurs ont modélisé avec une sous-population qui est en mesure de récupérer très rapidement après une perturbation.
 
-Le premier graphique indique le rétablissement de la sous-population lorsqu’une perturbation se produit à chaque sept ans, et où la perturbation est de moyenne ampleur, soit qu’elle enlève environ 63% des polypes présents. Nous pouvons apercevoir que la sous-population est en mesure de rétablir jusqu’à 72% de sa capacité maximale. Nous pouvons apercevoir qu’au tout début, dès les premières perturbations, c’est la population allochtone qui soutient les sous-populations puisqu’elle reçoit des polypes migrateurs, ce qui l’aide à se rétablir de manière très rapide. Or, après quelques perturbations, c’est plutôt l’apport autochtone qui vient soutenir davantage cette sous-population; l’apport allochtone est encore présent, mais de moins grande importance. En effet, comme dans l’article de Torres et al (2025), les pentes de récupération de la sous-population sur la figure 3a peuvent nous indiquer que c’est l’apport allochtone qui grandit généralement de manière plus fréquente après une perturbation. Or, plus l’on avance dans le temps, plus nous pouvons constater qu’il y a une augmentation de l’apport autochtone, et une diminution de l’apport allochtone. Les courbes d’autorecrutement et d’immigration de la figure 3c de l’article de Torres et al (2025) peuvent expliquer en partie ce phénomène. Dans cette figure, nous pouvons apercevoir que plus les années avancent, plus l’immigration diminue, alors que l’autorecrutement augmente. Cependant, la figure 3c représente la récupération de la sous-population seulement après une seule perturbation, alors que notre modèle présente des perturbations répétitives. Le changement de la source première à la récupération peut s’expliquer du fait que lorsque la sous-population totale atteint un seuil, hypothétiquement situé autour de 60%, cela permet à la population autochtone de recoloniser et de subvenir à elle-même sans apport allochtone nécessairement. Ainsi, dans les premières perturbations, l’apport allochtone est de plus grande importance, mais c’est rapidement l’apport autochtone qui va dominer dans les années futures puisque la perturbation n’est pas assez grande pour que la sous-population ne soit pas en mesure de récupérer par elle-même.
+Le premier graphique indique le rétablissement de la sous-population lorsqu’une perturbation se produit à chaque sept ans, et où la perturbation est de moyenne ampleur, soit qu’elle enlève environ 63% des polypes présents. Nous pouvons apercevoir que la sous-population est en mesure de rétablir jusqu’à 72% de sa capacité maximale. Nous pouvons apercevoir qu’au tout début, dès les premières perturbations, c’est la population allochtone qui soutient les sous-populations puisqu’elle reçoit des polypes migrateurs, ce qui l’aide à se rétablir de manière très rapide. Or, après quelques perturbations, c’est plutôt l’apport autochtone qui vient soutenir davantage cette sous-population; l’apport allochtone est encore présent, mais de moins grande importance. En effet, comme dans l’article de Torres et al (2024), les pentes de récupération de la sous-population sur la figure 3a peuvent nous indiquer que c’est l’apport allochtone qui grandit généralement de manière plus fréquente après une perturbation. Or, plus l’on avance dans le temps, plus nous pouvons constater qu’il y a une augmentation de l’apport autochtone, et une diminution de l’apport allochtone. Les courbes d’autorecrutement et d’immigration de la figure 3c de l’article de Torres et al (2024) peuvent expliquer en partie ce phénomène. Dans cette figure, nous pouvons apercevoir que plus les années avancent, plus l’immigration diminue, alors que l’autorecrutement augmente. Cependant, la figure 3c représente la récupération de la sous-population seulement après une seule perturbation, alors que notre modèle présente des perturbations répétitives. Le changement de la source première à la récupération peut s’expliquer du fait que lorsque la sous-population totale atteint un seuil, hypothétiquement situé autour de 60%, cela permet à la population autochtone de recoloniser et de subvenir à elle-même sans apport allochtone nécessairement. Ainsi, dans les premières perturbations, l’apport allochtone est de plus grande importance, mais c’est rapidement l’apport autochtone qui va dominer dans les années futures puisque la perturbation n’est pas assez grande pour que la sous-population ne soit pas en mesure de récupérer par elle-même.
 
 Ensuite, la deuxième figure représente le suivi de la population où il y a toujours des perturbations à chaque sept ans, mais où la perturbation enlève 99% de la sous-population. Nous pouvons observer quelques petites différences du graphique précédent. Tout d’abord, la courbe totale de la sous-population remonte à une couverture coralienne légèrement plus faible que lorsque la perturbation enlève 63% des polypes, soit jusqu’à un recouvrement de 59%. Cette observation est relativement normale puisqu’avec de plus grandes perturbations, la sous-population n’est pas nécessairement capable de revenir complètement à sa capacité. En revanche, contrairement au cas où les perturbations sont moins grandes, ce cas-ci démontre que c’est toujours l’apport allochtone qui contribue majoritairement à la récupération de la sous-population à travers le temps. De plus, l’apport autochtone baisse jusqu’à pratiquement 0, mais remonte tout de même à travers les années. Ce qui pourrait expliquer cette différence avec ce premier graphique est qu’avec une perturbation intense, la population devient tellement petite que c’est pratiquement seulement l’immigration qui vient aider la population. C’est avec le recrutement des larves ayant migrées qu’à ce moment, la sous-population est donc en mesure de s’autorecruter, ou encore, de faire de la reproduction asexuée en plus grand nombre, ce qui pourrait ensuite augmenter son apport autochtone. Ainsi, l’apport allochtone est définitivement plus grand que celui autochtone puisque la perturbation est si forte que la sous-population n’est pas en mesure d’atteindre un seuil où elle peut facilement récupérer par elle-même seulement.
 
@@ -689,14 +919,6 @@ En conclusion, afin d’amener une autre perspective de recherche sur la récup�
 
 Notre modélisation se concentrait sur des paramètres constants à travers à le temps. Afin de créer un modèle se rapprochant le plus de la réalité possible, il serait intéressant de modéliser une sous-population coralienne où les paramètres changent à travers le temps. Cette nouvelle approche permettrait potentiellement de mieux prédire la réaction des métapopulations de coraux dans les années futures où les changements climatiques et autres débalancements environnementaux se feront de plus en plus présents.
 
-
+--------------------------------------------------------------------------------
 
 ## **Références**
-
-CopyEdit
-
-`# Insertion automatique des références avec BibTeX bibliography: Nom_de_groupe.bib`
-
-```{r}
-# Référence
-```
